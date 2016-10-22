@@ -1,0 +1,16 @@
+.am-footer-default a {
+  color: #555555;
+}
+.am-footer-default .am-footer-miscs {
+  color: #999999;
+  font-size: 13px;
+}
+.am-footer-default .am-footer-miscs p {
+  margin: 5px 0;
+}
+@media only screen and (min-width:641px) {
+  .am-footer-default .am-footer-miscs p {
+    display: inline-block;
+    margin: 5px;
+  }
+}

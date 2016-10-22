@@ -1,0 +1,556 @@
+[ 2016-10-21T17:15:12+08:00 ] 42.120.75.3 /weixin/APP/VipCenter/index/action/center/openid/b3c3UHBqdkg0VzFDMDNxM0c3QWRydVc0MjZTZw==/weixinID/ODg=
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000097s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000037s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000073s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: select rowno from
+			  (select Vip_openid,
+					  Vip_id,
+					  Vip_integral,
+					  (@rowno:=@rowno+1) as rowno
+			  from Vip,
+			  (select (@rowno:=0)) b
+			where WEIXIN_ID = 88
+			AND Vip_isDeleted = 0
+			order by Vip_integral desc,
+			Vip_createtime asc) c
+			where Vip_openid ='ow7PpjvH4W1C03q3G7AdruW426Sg' [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000059s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000100s ]
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: thisVipIntegral /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004115s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004150s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000040s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000069s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000038s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000069s ]
+
+[ 2016-10-21T17:15:14+08:00 ] 42.120.75.3 /weixin/APP/VipCenter/index/action/VipInfoShow/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000091s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000037s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000073s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `iphoneEvent` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `iphoneEvent` WHERE `ipE_referee_vipID` = '10000855' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `bill` [ RunTime:0.0004s ]
+SQL: SELECT SUM(Bill_integral) AS tp_sum FROM `bill` WHERE `Bill_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Bill_type` = '004' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `adviceInfo` [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `adviceInfo` WHERE `WEIXIN_ID` = 88 AND `ADVICE_OPENID` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `ADVICE_EVENT` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `scratchcard_user` [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `scratchcard_user` WHERE `scratchcard_userOpenid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `scratchcard_userIsAllow` = 1 AND `scratchcard_id` = 159 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000048s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000093s ]
+NOTIC: [8] Undefined variable: VipInfo /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 31 行.
+NOTIC: [8] Undefined variable: weixinName /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 36 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004054s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004091s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000035s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000064s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000036s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000071s ]
+
+[ 2016-10-21T17:15:36+08:00 ] 101.226.62.86 /weixin/APP/Index/index/weixinID/88?signature=b310f7b311bb6beee201450ac4171ae7f2c7cd7a&timestamp=1477041336&nonce=203433363&openid=ow7PpjvH4W1C03q3G7AdruW426Sg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000089s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000031s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000077s ]
+SQL: SHOW COLUMNS FROM `admin_to_weiid` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `admin_to_weiid` WHERE `weixinStatus` = 1 AND `id` = 88 LIMIT 1   [ RunTime:0.0001s ]
+NOTIC: [8] Undefined index: msg_signature /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 74 行.
+NOTIC: [2] file_put_contents(log.xml): failed to open stream: Permission denied /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 657 行.
+SQL: SHOW COLUMNS FROM `hongbaoInfo` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `hongbaoInfo` WHERE `WEIXIN_ID` = '88' AND `hongbao_Status` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `replyInfo` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `replyInfo` WHERE `hongbao_id` = '39' LIMIT 1   [ RunTime:0.0001s ]
+NOTIC: [2] file_put_contents(log.xml): failed to open stream: Permission denied /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 657 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000037s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000071s ]
+
+[ 2016-10-21T17:15:40+08:00 ] 42.120.75.3 /weixin/APP/VipCenter/index/action/center/openid/b3c3UHBqdkg0VzFDMDNxM0c3QWRydVc0MjZTZw==/weixinID/ODg=
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000088s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000047s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000096s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0007s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: select rowno from
+			  (select Vip_openid,
+					  Vip_id,
+					  Vip_integral,
+					  (@rowno:=@rowno+1) as rowno
+			  from Vip,
+			  (select (@rowno:=0)) b
+			where WEIXIN_ID = 88
+			AND Vip_isDeleted = 0
+			order by Vip_integral desc,
+			Vip_createtime asc) c
+			where Vip_openid ='ow7PpjvH4W1C03q3G7AdruW426Sg' [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000116s ]
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: thisVipIntegral /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004927s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004964s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000041s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000070s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000036s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000067s ]
+
+[ 2016-10-21T17:15:42+08:00 ] 42.120.75.3 /weixin/APP/VipCenter/index/action/VipInfoShow/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000122s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000050s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000102s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0008s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `iphoneEvent` [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `iphoneEvent` WHERE `ipE_referee_vipID` = '10000855' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `bill` [ RunTime:0.0004s ]
+SQL: SELECT SUM(Bill_integral) AS tp_sum FROM `bill` WHERE `Bill_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Bill_type` = '004' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `adviceInfo` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `adviceInfo` WHERE `WEIXIN_ID` = 88 AND `ADVICE_OPENID` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `ADVICE_EVENT` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `scratchcard_user` [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `scratchcard_user` WHERE `scratchcard_userOpenid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `scratchcard_userIsAllow` = 1 AND `scratchcard_id` = 159 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000061s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000105s ]
+NOTIC: [8] Undefined variable: VipInfo /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 31 行.
+NOTIC: [8] Undefined variable: weixinName /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 36 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003754s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003791s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000034s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000064s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000032s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000062s ]
+
+[ 2016-10-21T17:17:16+08:00 ] 42.120.75.3 /weixin/APP/VipCenter/index/action/center/openid/b3c3UHBqdkg0VzFDMDNxM0c3QWRydVc0MjZTZw==/weixinID/ODg=
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000100s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000050s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000086s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: select rowno from
+			  (select Vip_openid,
+					  Vip_id,
+					  Vip_integral,
+					  (@rowno:=@rowno+1) as rowno
+			  from Vip,
+			  (select (@rowno:=0)) b
+			where WEIXIN_ID = 88
+			AND Vip_isDeleted = 0
+			order by Vip_integral desc,
+			Vip_createtime asc) c
+			where Vip_openid ='ow7PpjvH4W1C03q3G7AdruW426Sg' [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000083s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000152s ]
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: thisVipIntegral /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005228s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005264s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000045s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000075s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000046s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000077s ]
+
+[ 2016-10-21T17:17:17+08:00 ] 42.120.75.3 /weixin/APP/VipCenter/index/action/VipInfoShow/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000093s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000034s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000069s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `iphoneEvent` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `iphoneEvent` WHERE `ipE_referee_vipID` = '10000855' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `bill` [ RunTime:0.0004s ]
+SQL: SELECT SUM(Bill_integral) AS tp_sum FROM `bill` WHERE `Bill_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Bill_type` = '004' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `adviceInfo` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `adviceInfo` WHERE `WEIXIN_ID` = 88 AND `ADVICE_OPENID` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `ADVICE_EVENT` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `scratchcard_user` [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `scratchcard_user` WHERE `scratchcard_userOpenid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `scratchcard_userIsAllow` = 1 AND `scratchcard_id` = 159 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000044s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000088s ]
+NOTIC: [8] Undefined variable: VipInfo /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 31 行.
+NOTIC: [8] Undefined variable: weixinName /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 36 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003921s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003958s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000033s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000113s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000035s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000068s ]
+
+[ 2016-10-21T17:17:26+08:00 ] 101.226.62.86 /weixin/APP/Index/index/weixinID/88?signature=95226300a279e4b23e22497f9adebb9fc15132c8&timestamp=1477041446&nonce=1598913743&openid=ow7PpjvH4W1C03q3G7AdruW426Sg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000119s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000046s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000102s ]
+SQL: SHOW COLUMNS FROM `admin_to_weiid` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `admin_to_weiid` WHERE `weixinStatus` = 1 AND `id` = 88 LIMIT 1   [ RunTime:0.0001s ]
+NOTIC: [8] Undefined index: msg_signature /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 74 行.
+NOTIC: [2] file_put_contents(log.xml): failed to open stream: Permission denied /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 657 行.
+SQL: SHOW COLUMNS FROM `hongbaoInfo` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `hongbaoInfo` WHERE `WEIXIN_ID` = '88' AND `hongbao_Status` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `replyInfo` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `replyInfo` WHERE `hongbao_id` = '39' LIMIT 1   [ RunTime:0.0001s ]
+NOTIC: [2] file_put_contents(log.xml): failed to open stream: Permission denied /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 657 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000055s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000091s ]
+
+[ 2016-10-21T17:17:30+08:00 ] 42.120.75.3 /weixin/APP/VipCenter/index/action/center/openid/b3c3UHBqdkg0VzFDMDNxM0c3QWRydVc0MjZTZw==/weixinID/ODg=
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000100s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000032s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000067s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0007s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: select rowno from
+			  (select Vip_openid,
+					  Vip_id,
+					  Vip_integral,
+					  (@rowno:=@rowno+1) as rowno
+			  from Vip,
+			  (select (@rowno:=0)) b
+			where WEIXIN_ID = 88
+			AND Vip_isDeleted = 0
+			order by Vip_integral desc,
+			Vip_createtime asc) c
+			where Vip_openid ='ow7PpjvH4W1C03q3G7AdruW426Sg' [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000070s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000121s ]
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: thisVipIntegral /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004136s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004171s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000035s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000064s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000047s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000088s ]
+
+[ 2016-10-21T17:17:32+08:00 ] 42.120.75.3 /weixin/APP/VipCenter/index/action/VipInfoShow/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000088s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000033s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000068s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0007s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `iphoneEvent` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `iphoneEvent` WHERE `ipE_referee_vipID` = '10000855' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `bill` [ RunTime:0.0004s ]
+SQL: SELECT SUM(Bill_integral) AS tp_sum FROM `bill` WHERE `Bill_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Bill_type` = '004' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `adviceInfo` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `adviceInfo` WHERE `WEIXIN_ID` = 88 AND `ADVICE_OPENID` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `ADVICE_EVENT` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `scratchcard_user` [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `scratchcard_user` WHERE `scratchcard_userOpenid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `scratchcard_userIsAllow` = 1 AND `scratchcard_id` = 159 LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000055s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000131s ]
+NOTIC: [8] Undefined variable: VipInfo /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 31 行.
+NOTIC: [8] Undefined variable: weixinName /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 36 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004394s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004476s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000046s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000076s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000045s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000090s ]
+
+[ 2016-10-21T17:31:26+08:00 ] 101.226.62.86 /weixin/APP/Index/index/weixinID/88?signature=1c869ebd2fd1f993d45178273b5ef8b0ea20f29d&timestamp=1477042286&nonce=1590002307&openid=ow7PpjvH4W1C03q3G7AdruW426Sg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000143s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000053s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000291s ]
+SQL: SHOW COLUMNS FROM `admin_to_weiid` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `admin_to_weiid` WHERE `weixinStatus` = 1 AND `id` = 88 LIMIT 1   [ RunTime:0.0001s ]
+NOTIC: [8] Undefined index: msg_signature /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 74 行.
+NOTIC: [2] file_put_contents(log.xml): failed to open stream: Permission denied /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 657 行.
+SQL: SHOW COLUMNS FROM `hongbaoInfo` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `hongbaoInfo` WHERE `WEIXIN_ID` = '88' AND `hongbao_Status` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `replyInfo` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `replyInfo` WHERE `hongbao_id` = '39' LIMIT 1   [ RunTime:0.0001s ]
+NOTIC: [2] file_put_contents(log.xml): failed to open stream: Permission denied /data/wwwroot/default/weixin/Application/APP/Controller/IndexController.class.php 第 657 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000050s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000086s ]
+
+[ 2016-10-21T17:31:34+08:00 ] 42.120.75.5 /weixin/APP/VipCenter/index/action/center/openid/b3c3UHBqdkg0VzFDMDNxM0c3QWRydVc0MjZTZw==/weixinID/ODg=
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000090s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000034s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000071s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0008s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: select rowno from
+			  (select Vip_openid,
+					  Vip_id,
+					  Vip_integral,
+					  (@rowno:=@rowno+1) as rowno
+			  from Vip,
+			  (select (@rowno:=0)) b
+			where WEIXIN_ID = 88
+			AND Vip_isDeleted = 0
+			order by Vip_integral desc,
+			Vip_createtime asc) c
+			where Vip_openid ='ow7PpjvH4W1C03q3G7AdruW426Sg' [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000059s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000103s ]
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: thisVipIntegral /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004265s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004313s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000058s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000102s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000034s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000067s ]
+
+[ 2016-10-21T17:31:35+08:00 ] 42.120.75.5 /weixin/APP/VipCenter/index/action/VipInfoShow/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000088s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000033s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000069s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0007s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `iphoneEvent` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `iphoneEvent` WHERE `ipE_referee_vipID` = '10000855' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `bill` [ RunTime:0.0004s ]
+SQL: SELECT SUM(Bill_integral) AS tp_sum FROM `bill` WHERE `Bill_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Bill_type` = '004' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `adviceInfo` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `adviceInfo` WHERE `WEIXIN_ID` = 88 AND `ADVICE_OPENID` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `ADVICE_EVENT` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `scratchcard_user` [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `scratchcard_user` WHERE `scratchcard_userOpenid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `scratchcard_userIsAllow` = 1 AND `scratchcard_id` = 159 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000048s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000096s ]
+NOTIC: [8] Undefined variable: VipInfo /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 31 行.
+NOTIC: [8] Undefined variable: weixinName /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 36 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003741s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003779s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000038s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000066s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000033s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000067s ]
+
+[ 2016-10-21T17:32:02+08:00 ] 42.120.75.5 /weixin/APP/VipCenter/index/action/center/openid/b3c3UHBqdkg0VzFDMDNxM0c3QWRydVc0MjZTZw==/weixinID/ODg=
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000087s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000052s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000090s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: select rowno from
+			  (select Vip_openid,
+					  Vip_id,
+					  Vip_integral,
+					  (@rowno:=@rowno+1) as rowno
+			  from Vip,
+			  (select (@rowno:=0)) b
+			where WEIXIN_ID = 88
+			AND Vip_isDeleted = 0
+			order by Vip_integral desc,
+			Vip_createtime asc) c
+			where Vip_openid ='ow7PpjvH4W1C03q3G7AdruW426Sg' [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000074s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000131s ]
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: thisVipIntegral /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 69 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 82 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 95 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/37f191e363a323a0b382773b7581ff66.php 第 100 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004362s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004397s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000037s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000071s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000031s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000062s ]
+
+[ 2016-10-21T17:32:05+08:00 ] 42.120.75.5 /weixin/APP/VipCenter/index/action/VipInfoShow/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000139s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000057s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000120s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0009s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `iphoneEvent` [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `iphoneEvent` WHERE `ipE_referee_vipID` = '10000855' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `bill` [ RunTime:0.0007s ]
+SQL: SELECT SUM(Bill_integral) AS tp_sum FROM `bill` WHERE `Bill_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Bill_type` = '004' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `adviceInfo` [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `adviceInfo` WHERE `WEIXIN_ID` = 88 AND `ADVICE_OPENID` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `ADVICE_EVENT` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `scratchcard_user` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `scratchcard_user` WHERE `scratchcard_userOpenid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `scratchcard_userIsAllow` = 1 AND `scratchcard_id` = 159 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000043s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000099s ]
+NOTIC: [8] Undefined variable: VipInfo /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 31 行.
+NOTIC: [8] Undefined variable: weixinName /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 36 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003835s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.003874s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000158s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000376s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000053s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000104s ]
+
+[ 2016-10-21T17:38:33+08:00 ] 42.120.75.2 /weixin/APP/VipCenter/index/action/VipInfoShow/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000093s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000037s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000073s ]
+SQL: SHOW COLUMNS FROM `Vip` [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `Vip` WHERE `Vip_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Vip_isDeleted` = 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `iphoneEvent` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `iphoneEvent` WHERE `ipE_referee_vipID` = '10000855' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `bill` [ RunTime:0.0004s ]
+SQL: SELECT SUM(Bill_integral) AS tp_sum FROM `bill` WHERE `Bill_openid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `Bill_type` = '004' LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `adviceInfo` [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `adviceInfo` WHERE `WEIXIN_ID` = 88 AND `ADVICE_OPENID` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `ADVICE_EVENT` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `scratchcard_user` [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `scratchcard_user` WHERE `scratchcard_userOpenid` = 'ow7PpjvH4W1C03q3G7AdruW426Sg' AND `WEIXIN_ID` = 88 AND `scratchcard_userIsAllow` = 1 AND `scratchcard_id` = 159 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000106s ]
+NOTIC: [8] Undefined variable: VipInfo /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 31 行.
+NOTIC: [8] Undefined variable: weixinName /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 36 行.
+NOTIC: [8] Undefined variable: openid /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+NOTIC: [8] Undefined variable: weixinID /data/wwwroot/default/weixin/Application/Runtime/Cache/APP/032fa62597baec46a9db372bf2c780e5.php 第 80 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004131s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004168s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000042s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000070s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000084s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000116s ]
+
