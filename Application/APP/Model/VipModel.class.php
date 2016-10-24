@@ -109,6 +109,20 @@ class VipModel {
 
 	}
 
+	public function getVipAdress(){
+		$where['Vip_openid'] = $this->openid;
+		$where['WEIXIN_ID'] = $this->weixinID;
+		$where['Vip_isDeleted'] = 0;
+
+		$data = M()->table('Vip')->field('Vip_address')->where($where)->find();
+
+		if(false === $data){
+			return false;
+		}
+
+		return $data['Vip_address'];
+	}
+
 	/**
 	 * 更新Vip
 	 * @param $data
@@ -117,9 +131,13 @@ class VipModel {
 	 */
 	public function updateVip($data,$where){
 
-		if( false === M()->table('Vip')->where($where)->save($data)){
+		$data = M()->table('Vip')->where($where)->save($data);
+		if( false === $data){
 			return false;
 		}
+
+		//更新Session
+		$_SESSION['vipInfo'] = self::vipInfo();
 
 		return true;
 

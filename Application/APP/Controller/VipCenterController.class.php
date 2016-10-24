@@ -58,7 +58,10 @@ class VipCenterController extends CommonController {
      * 补填地区信息
      */
     private function VipAddress(){
-        $this->assign('theVip',$_SESSION['vipInfo']);
+
+        $data = D('Vip')->vipInfo();
+
+        $this->assign('theVip',$data);
         $this->display('VipCenter/VipAddress');
 
     }
@@ -78,7 +81,7 @@ class VipCenterController extends CommonController {
         }
 
         //防止多次提交
-        if( 0 != intval($_SESSION['vipInfo']['Vip_address'])){
+        if( 0 != D('Vip')->getVipAdress()){
 
             $arr['success'] = 2;
             $arr['msg'] = '您已经填写过地区了';
@@ -96,9 +99,6 @@ class VipCenterController extends CommonController {
         $where['Vip_isDeleted'] = 0;
 
         if(D('Vip')->updateVip($data,$where)){
-
-            //更新会员信息session
-            $_SESSION['vipInfo'] = D('Vip')->vipInfo();
 
             $arr['success'] = 1;
             $arr['msg'] = '提交成功,3秒后跳转！';
@@ -189,11 +189,7 @@ class VipCenterController extends CommonController {
                 $updateVipWhere['Vip_openid'] = $_SESSION['openid'];
                 $updateVipWhere['WEIXIN_ID'] = $_SESSION['weixinID'];
 
-                if(D('Vip')->updateVip($updateVipData,$updateVipWhere)){
-                    //更新会员信息session
-                    $_SESSION['vipInfo'] = D('Vip')->vipInfo();
-                }
-
+                D('Vip')->updateVip($updateVipData,$updateVipWhere);
 
                 //追加积分变动时写入记录表中 功能
                 $newData['openid'] = $_SESSION['openid'];
@@ -251,6 +247,7 @@ class VipCenterController extends CommonController {
      */
     private function VipInfoShow(){
 
+        //$_SESSION['vipInfo'] = D('Vip')->vipInfo();
         //获得印章总数
         $flowerCount = D('Common')->getAllSealCount($_SESSION['vipInfo']['Vip_id']);
 

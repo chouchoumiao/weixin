@@ -32,7 +32,7 @@ $(function(){
                     myOKMsg.show();
                     $('#baseInfo').hide();
                     setTimeout(function () {
-                        location.href = ROOT+"/APP/VipCenter/index/action/VipInfoShow";
+                        window.parent.location = ROOT+"/APP/VipCenter/index/action/VipInfoShow";
                     },3000);
                 }else if(json.msg == 2){
                     var myMsg = $('#myMsg');
@@ -40,7 +40,7 @@ $(function(){
                     myMsg.show();
                     $('#baseInfo').hide();
                     setTimeout(function () {
-                        location.href = ROOT+"/APP/VipCenter/index/action/VipInfoShow";
+                        window.parent.location = ROOT+"/APP/VipCenter/index/action/VipInfoShow";
                     },3000);
                 }else {
                     var myMsg = $('#myMsg');

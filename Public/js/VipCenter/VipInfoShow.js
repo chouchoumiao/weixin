@@ -58,7 +58,7 @@ $(function(){
                 $("#referrerSubmitDoing").hide();
                 alert(json.msg);
                 if(json.success == 0){
-                    window.location='VipCennter.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID ?>';
+                    window.location= ROOT+"/APP/VipCenter/index/action/VipCennter";
                 }else{
                     $("#referrerSubmit").show();
                 }
