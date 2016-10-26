@@ -60,7 +60,7 @@
 
                     <notempty name="count">
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block" onclick = "location.href='../95_scratchcard/scratchcard.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID?>'">建言献策抽奖{$count}次</button>
+                            <button type="button" class="btn btn-primary btn-block" id="goToscratchcardBtn">建言献策抽奖{$count}次</button>
                         </div>
                     </notempty>
 
@@ -99,5 +99,5 @@
 
 <include file = './js_layout'/>
 <block name="vipCenter_JS">
-    <script src="__PUBLIC__/js/VipCenter/VipInfoShow.js?v=20170102"></script>
+    <script src="__PUBLIC__/js/VipCenter/VipInfoShow.js?v=20170104"></script>
 </block>

@@ -15,6 +15,15 @@ $(function(){
         location.href= ROOT+"/APP/VipCenter/index/action/VipAddress";
     });
 
+    /**
+     * 点击按钮进入刮刮卡画面
+     */
+    $("#goToscratchcardBtn").click(function() {
+
+        //跳转到中奖信息详细画面，需要修改
+        location.href= ROOT+"/APP/Scratchcard/index/action/scratchcard";
+    });
+
 
     $("#referrerBtn").click(function(){
         $("#baseInfo").hide();
