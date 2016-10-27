@@ -30,19 +30,18 @@ class ScratchcardController extends CommonController {
 
     private function scratchcard(){
         
-        //是会员的情况下，进行奖品主信息查询
-        
         //取得当前时间有效的刮刮卡Main信息
-        $nowDate = date("Y-m-d",time());
-        $sql = "SELECT * FROM  scratchcard_main
-                WHERE scratchcard_beginDate <= '$nowDate'
-                AND scratchcard_endDate >= '$nowDate'
-                AND scratchcard_isDeleted = 0
-                AND WEIXIN_ID = $weixinID
-                ORDER BY scratchcard_id DESC";
-        $scratchcardMainInfo = getlineBySql($sql);
-                
+        $data = D('Scratchcard')->getScratchcardMain();
+
+        if($data){
+            $this->assign('data',$data);
+            $this->assign('detail_name',json_decode($data['scratchcard_detail_name']));
+            $this->assign('detail_description',json_decode($data['scratchcard_detail_description']));
+            $this->assign('detail_count',json_decode($data['scratchcard_detail_count']));
+        }
+
         $this->display('Scratchcard');
+        
     }
 
 }

@@ -18,6 +18,27 @@ class ScratchcardModel {
 		$this->weixinID = $_SESSION['weixinID'];
 	}
 
+	/**
+	 * 获得当前公众号的刮刮卡活动信息
+	 * @return bool
+	 */
+	public function getScratchcardMain(){
+		$nowDate = date("Y-m-d",time());
+
+		$where['scratchcard_beginDate'] = array('elt',$nowDate);
+		$where['scratchcard_endDate'] = array('egt',$nowDate);
+		$where['scratchcard_isDeleted'] = 0;
+		$where['WEIXIN_ID'] = $this->weixinID;
+
+		$data = M()->table('scratchcard_main')->where($where)->order('scratchcard_id DESC')->find();
+
+		if(false === $data){
+			return false;
+		}
+
+		return $data;
+	}
+
 	
 
 }
