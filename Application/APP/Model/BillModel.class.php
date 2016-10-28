@@ -59,7 +59,19 @@ class BillModel {
 		}
 
 		return $data;
+	}
 
+	/**
+	 * 追加新的中奖记录
+	 * @param $data
+	 * @return bool
+	 */
+	public function addBill($data){
+		if( false === $this->obj->add($data)){
+			return false;
+		}
+
+		return true;
 	}
 
 

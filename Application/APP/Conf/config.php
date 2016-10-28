@@ -3,6 +3,9 @@
 //允许的省份
 define('ALLOW_PROVINCE','浙江');
 
+//答题刮刮卡的活动ID
+define('DATI_GUAGUAKA_EVENT_ID',159);
+
 return array(
 	//'配置项'=>'配置值'
 

@@ -262,7 +262,7 @@ class VipCenterController extends CommonController {
         $adviceCount = D('Common')->getAdviceCount();
 
         //取得答题刮刮卡获得的使用次数
-        $scratchcardedTimes = D('Common')->getAnswerScratchcardCount();
+        $scratchcardedTimes = D('Common')->getScratchcardUserCount();
 
         $count = $adviceCount - $scratchcardedTimes;
 

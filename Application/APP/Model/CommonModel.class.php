@@ -57,13 +57,18 @@ namespace APP\Model;
          * 取得答题刮刮卡获得的使用次数
          * @return mixed
          */
-        public function getAnswerScratchcardCount(){
+        public function getScratchcardUserCount(){
             $where['scratchcard_userOpenid'] = $this->openid;
             $where['WEIXIN_ID'] = $this->weixinID;
             $where['scratchcard_userIsAllow'] = 1;
-            $where['scratchcard_id'] = 159;
+            $where['scratchcard_id'] = DATI_GUAGUAKA_EVENT_ID;
 
-            return M()->table('scratchcard_user')->where($where)->count();
+            $data = M()->table('scratchcard_user')->field('scratchcard_userCount')->where($where)->find();
+            if(false === $data){
+                return false;
+            }
+
+            return $data['scratchcard_userCount'];
 
         }
 
