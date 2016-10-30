@@ -103,11 +103,11 @@ class ScratchcardModel {
 //	}
 
 	/**
-	 * 根据传入的人ID，判断当前用户是否有刮刮卡的机会次数
+	 * 根据传入的人ID，判断当前用户进行刮奖的次数
 	 * @param $id
 	 * @return bool
 	 */
-	public function getScratchcardCountByID($id){
+	public function getScratchcardUserCountByID($id){
 
 		$where['scratchcard_userIsAllow'] = 1;
 		$where['scratchcard_userOpenid'] = $this->openid;

@@ -31,10 +31,14 @@ class ScratchcardController extends CommonController {
 
     }
 
+    /**
+     * 进行刮奖逻辑
+     */
     private function scratchcard(){
         $NowDate = date("Y-m-d",time());
         $nowTime  = date("Y-m-d H:i:s",time());
 
+        //根据得到的刮刮卡ID进行查询该活动信息
         $scratchcard_id = intval(addslashes($_POST['scratchcard_id']));
 
         $data = D('Scratchcard')->getScratchcardDataByID($scratchcard_id);
@@ -47,23 +51,21 @@ class ScratchcardController extends CommonController {
 
         //判断是否还有刮奖次数
         //取得建言献策的抽奖次数
-
         $adviceCount = D('Advice')->getAdviceCount();
 
         if(intval($adviceCount) <= 0 ){
             $arr["status"]= "NoEnoughIntegral";
-
             echo json_encode($arr);
             exit;
         }
 
         //取得刮刮卡使用次数
-        $times = D('Scratchcard')->getScratchcardCountByID($scratchcard_id);
+        $times = D('Scratchcard')->getScratchcardUserCountByID($scratchcard_id);
 
         $isFirst = 0;
         //初次进行刮刮卡活动的追加记录
         if($times <= 0){
-            D('Scratchcard')->addScratchcard();
+            D('Scratchcard')->addScratchcard($scratchcard_id);
             $scratchcardedTimes = 0;
             $isFirst = 1;
         }else{

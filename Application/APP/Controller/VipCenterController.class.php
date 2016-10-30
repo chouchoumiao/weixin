@@ -264,7 +264,7 @@ class VipCenterController extends CommonController {
         //取得答题刮刮卡获得的使用次数
         $scratchcardedTimes = D('Common')->getScratchcardUserCount();
 
-        $count = $adviceCount - $scratchcardedTimes;
+        $count = intval($adviceCount) - intval($scratchcardedTimes);
 
         if($count>0){
             $this->assign('count',$count);
@@ -299,10 +299,9 @@ class VipCenterController extends CommonController {
         $thisVipSignedDayTime = $_SESSION['vipInfo']['Vip_isSignedDayTime'];
         $thisSignedDate = date("Y-m-d",time());
 
-        if ((strtotime($thisSignedDate) - strtotime($thisVipSignedDayTime))/86400 >= 1){
-            $isSigned = 0;
-        }else{
-            $isSigned = 1;
+        //判断当前日期和最新的日期是否超过一天,超过一天则显示可以签到,不然显示已经签到过了
+        if ((strtotime($thisSignedDate) - strtotime($thisVipSignedDayTime))/86400 < 1){
+            $this->assign('isSigned',true);
         }
 
         $sql = "select rowno from
@@ -324,7 +323,6 @@ class VipCenterController extends CommonController {
 
        $this->assign('vipInfo',$_SESSION['vipInfo']);
        $this->assign('getIntegralRank',$getIntegralRank);
-       $this->assign('isSigned',$isSigned);
 
        $this->display('VipCenter');
 
