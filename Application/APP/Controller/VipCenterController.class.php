@@ -23,6 +23,8 @@ class VipCenterController extends CommonController {
         //根据传入的事件进入对应各页面的显示处理
         $action = strval($_GET['action']);
 
+        $_SESSION['vipInfo'] = D('Vip')->vipInfo();
+
         if(isset($action) && ('' != $action)){
 
             switch ($action){
@@ -41,17 +43,94 @@ class VipCenterController extends CommonController {
                 case 'VipAddress':
                     $this->VipAddress();
                     break;
-
                 case 'VipAddressData':
                     $this->VipAddressData();
                     break;
+                case 'VipdaliyShow':
+                    $this->VipdaliyShow();
+                    break;
+                case 'VipdaliyData':
+                    $this->VipdaliyData();
+                    break;
 
                 default:
-                    echo "非法操作";
+                    $this->center();
                     break;
             }
         }
 
+    }
+
+    /**
+     * 进行签到
+     */
+    private function VipdaliyData(){
+
+        //取得该会员最新签到日期和积分数
+        $signedDay = $_SESSION['vipInfo']['Vip_isSignedDayTime'];
+        $integral = intval($_SESSION['vipInfo']['Vip_integral']);
+
+        $nowDate = date("Y-m-d",time());
+        if($signedDay == $nowDate){
+            $arr['success'] = 0;
+            $arr['msg'] = '你已经签到过啦!';
+            echo json_encode($arr);
+//            ToolModel::goBack('你已经签到过啦!');
+            exit;
+        }
+
+        $plusIntegral = $_SESSION['config']['CONFIG_INTEGRALSETDAILY'];
+
+        if( (isset($_POST['signidText'])) && ('' != I('post.signidText') )){
+
+            $count = D('Common')->getCountBySignidText(I('post.signidText'));
+
+            if(!$count || ($count <= 0)){
+                $arr['success'] = 0;
+                $arr['msg'] = '签到码错误，请重新输入';
+                echo json_encode($arr);
+                exit;
+//                ToolModel::goBack('签到码错误，请重新输入');
+//                exit;
+            }
+
+            $plusIntegral = $_SESSION['config']['CONFIG_DAILYPLUS'];
+        }
+
+        $newIntegral = $integral + $plusIntegral;
+
+        //更新会员积分
+        D('Vip')->updateIntegral($newIntegral);
+
+
+        //追加积分变动时写入记录表中 功能
+        $insertData['openid'] = $_SESSION['openid'];
+        $insertData['event'] = '签到';
+        $insertData['totalIntegral'] = $integral;
+        $insertData['integral'] = $plusIntegral;
+        $insertData['insertTime'] = date("Y-m-d H:i:s",time());
+
+        if(D('Common')->addIntegralRecord($insertData)){
+
+            $arr['success'] = 1;
+            $arr['msg'] = '签到成功，'.$_SESSION['config']['CONFIG_VIP_NAME'].'加: '.$plusIntegral;
+
+//            ToolModel::goToUrl('签到成功，'.$_SESSION['config']['CONFIG_VIP_NAME'].'加: '.$plusIntegral,__ROOT__."/APP/VipCenter/index/action/center/");
+        }else{
+            $arr['success'] = 0;
+            $arr['msg'] = '签到失败';
+//            ToolModel::goToUrl('签到失败，',__ROOT__."/APP/VipCenter/index/action/center/");
+        }
+        echo json_encode($arr);
+        exit;
+
+    }
+
+    /**
+     * 显示签到的页面
+     */
+    private function VipdaliyShow(){
+        $this->display('VipCenter/Vipdaliy');
     }
 
     /**

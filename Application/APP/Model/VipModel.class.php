@@ -140,7 +140,30 @@ class VipModel {
 		$_SESSION['vipInfo'] = self::vipInfo();
 
 		return true;
+	}
 
+	/**
+	 * 格局传入的新积分，更新会员表，并更新session
+	 * @param $newIntegral
+	 * @return bool
+	 */
+	public function updateIntegral($newIntegral){
+
+        $data['Vip_integral'] = $newIntegral;
+        $data['Vip_isSignedDayTime'] = date("Y-m-d",time());;
+        $data['Vip_edittime'] = date("Y-m-d H:i:s",time());
+
+		$where['Vip_openid'] = $this->openid;
+		$where['WEIXIN_ID'] = $this->weixinID;
+
+		$data = M()->table('Vip')->where($where)->save($data);
+		if( false === $data){
+			return false;
+		}
+
+		//更新Session
+		$_SESSION['vipInfo'] = self::vipInfo();
+		return true;
 	}
 
 }

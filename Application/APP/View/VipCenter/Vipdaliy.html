@@ -1,0 +1,36 @@
+<extend name="VipCenter_layout" />
+
+<block name="vipCenter_CSS">
+    <link href="//cdn.bootcss.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/flat-ui/2.2.2/css/flat-ui.min.css" rel="stylesheet">
+</block>
+<block name="vipCenter_body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id = "main">
+                <h5>会员签到</h5>
+                <div class="alert alert-info" id = "baseTitle">
+                    <p class="text-primary">直接签到可获得1个{$_SESSION['config']['CONFIG_VIP_NAME']}，输入签到码签到可获得5个{$_SESSION['config']['CONFIG_VIP_NAME']}，签到码详见路桥发布最新一期文章下方</p>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">签到码</span>
+                        <input type="text" class="form-control input-lg" placeholder = "输签到码多得{$_SESSION['config']['CONFIG_VIP_NAME']}喔" id = "signIn">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-warning btn-block" id = "signInNoCodeBtn">不输入签到码直接签到</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-success btn-block" id = "signInWithCodeBtn">输入签到码签到</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</block>
+
+<include file = './js_layout'/>
+<block name="vipCenter_JS">
+    <script src="__PUBLIC__/js/VipCenter/Vipdaliy.js?v=20170109"></script>
+</block>

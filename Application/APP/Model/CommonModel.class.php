@@ -103,4 +103,19 @@ namespace APP\Model;
         }
 
 
+        public function getCountBySignidText($signidText){
+
+            $where['WEIXIN_ID'] = $this->weixinID;
+            $where['dailyCode'] = $signidText;
+            $where['flag'] = 1;
+
+            $count = M()->table('vipDailySet')->where($where)->count();
+
+            if(false === $count){
+                return false;
+            }
+            return intval($count);
+        }
+
+
     }
