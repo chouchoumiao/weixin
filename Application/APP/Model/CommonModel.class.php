@@ -14,6 +14,25 @@ namespace APP\Model;
             $this->weixinID = $_SESSION['weixinID'];
         }
 
+
+        /**
+         * 根据传入的微信ID得到该公众号信息，最外主页面用
+         * @param $id
+         * @return bool|mixed
+         */
+        public function getAdminInfoByWeixinID($id){
+            $where['weixinStatus'] = 1;
+            $where['id'] = $id;
+
+            $data =  M('admin_to_weiid')->where($where)->find();
+
+            if(false === $data){
+                return false;
+            }
+
+            return $data;
+        }
+
         /**
          * 获得该微信公众号的基本设置
          * @return array|mixed
