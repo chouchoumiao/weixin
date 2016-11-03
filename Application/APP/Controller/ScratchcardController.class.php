@@ -35,7 +35,6 @@ class ScratchcardController extends CommonController {
      * 进行刮奖逻辑
      */
     private function scratchcard(){
-        $NowDate = date("Y-m-d",time());
         $nowTime  = date("Y-m-d H:i:s",time());
 
         //根据得到的刮刮卡ID进行查询该活动信息
@@ -89,7 +88,6 @@ class ScratchcardController extends CommonController {
         $thisIntegral = 0;
 
         //设置SN码
-        $openidCn = "";
         $openidCn = substr($_SESSION['openid'],-4)."03";
 
         //设置尚未中奖的flag = NO
@@ -111,7 +109,7 @@ class ScratchcardController extends CommonController {
                     $arr["expirationDate"] = $data['scratchcard_expirationDate'];
 
                     //中奖后新追加Bill交易表
-                    $mainMaxTimes = $data['scratchcard_times'];
+                    //$mainMaxTimes = $data['scratchcard_times'];
 
                     $insertData['WEIXIN_ID'] = $_SESSION['weixinID'];
                     $insertData['Bill_type'] = '003';

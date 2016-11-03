@@ -84,7 +84,7 @@ namespace APP\Model;
 
         /**
          * 删除指定文件
-         * @param $img 绝对路径文件
+         * @param $img
          * @return bool
          */
         static function delImg($img){
@@ -181,7 +181,7 @@ namespace APP\Model;
                 'maxSize'    =>    C('FILE_SIZE'),
                 'rootPath'	 =>    './Public',
                 'savePath'   =>    '/Uploads/'.$folderName.'/'.$day.'/',
-                'saveName'   =>    array('uniqid',$_SESSION['openid'].'_'),
+                'saveName'   =>    array('uniqid',rand(1000000,9999999).'_'),
                 'exts'       =>    C('MEDIA_TYPE_ARRAY'),
                 'autoSub'    =>    false,
                 'subName'    =>    array('date','Ymd'),
@@ -212,6 +212,14 @@ namespace APP\Model;
                     $retArr['size'] = $file['size'];
                     $retArr['fileName'] = $file['name'];
                     $retArr['saveName'] = $file['savename'];
+
+                    //获得上传的路径地址
+                    $retArr['savePath'] = $config['savePath'];
+
+                    //取得不带后缀名的文件名称
+                    $imgNameArr = explode('.',$file['savename']);
+                    $retArr['imgName'] = $imgNameArr[0];
+
                     return $retArr;
                 }
                 else{
@@ -220,41 +228,23 @@ namespace APP\Model;
                     return $retArr;
                 }
             }
+            return false;
         }
 
         /**
-         * 生成图片缩略图
-         * @param $src      原图地址
-         * @param $savePath 缩略图保存地址
-         * @param int $width 缩略图宽
-         * @param int $height 缩略图高
-         * @return bool
+         * 生成缩略图
+         * @param $imgPath
+         * @param $thumbPath
+         * @param int $width    默认150
+         * @param int $height   默认150
          */
-        function buildThumb($src, $savePath, $width = 151, $height = 70)
-        {
-            $arr = getimagesize($src);
-            if (!is_array($arr)) {
-                return false;
-            }
-            //1,2,3 分别为gif,jpg,png
-            if ($arr[2] > 4) {
-                return false;
-            }
-            $func = imagecreatefrom;
-            switch ($arr[2]) {
-                case 1 : $func .= gif; break;
-                case 2 : $func .= jpeg; break;
-                case 3 : $func .= png; break;
-                default : $func .= jpeg;
-            }
-            $srcIm = $func($src);
-            $im = imagecreatetruecolor($width, $height);
-            imagecopyresized($im, $srcIm, 0, 0, 0, 0, $width, $height, $arr[0], $arr[1]);
-            imagejpeg($im, $savePath);
-            imagedestroy($srcIm);
-            imagedestroy($im);
+        static  function setThumb($imgPath,$thumbPath,$width=150,$height=150){
+            //设置缩略图
+            $image = new \Think\Image();
+            $image->open($imgPath);
+            // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.jpg
+            $image->thumb($width, $height)->save($thumbPath);
         }
-
 
         /**
          * 取得当前公众号的基本设置，如果未设置则初始化
@@ -322,7 +312,7 @@ namespace APP\Model;
                         break;
                 }
             }
-            return self::getSubString($str,3);;
+            return self::getSubString($str,3);
         }
 
 

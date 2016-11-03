@@ -2,7 +2,12 @@
 
 //允许的省份
 define('ALLOW_PROVINCE','浙江');
-define('UPLOADS_PATH',$_SERVER['DOCUMENT_ROOT'].'/weixin/Public/Uploads/');
+
+//公众文件夹路径
+define('PUBLIC_PATH',$_SERVER['DOCUMENT_ROOT'].'/weixin/Public');
+
+//分享有礼的文件夹名称
+define('FOLDER_NAME_FORWARDINGGIFT','ForwardingGift');
 
 //答题刮刮卡的活动ID
 define('DATI_GUAGUAKA_EVENT_ID',159);
