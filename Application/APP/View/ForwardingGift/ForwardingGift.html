@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>刮刮卡</title>
+
+    <link href="//cdn.bootcss.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/flat-ui/2.2.2/css/flat-ui.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--图标-->
+    <!--<link rel="icon" type="image/x-icon" href="__PUBLIC__/img/favicon.ico">-->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id = "main">
+            <div id = "baseInfo">
+                <h5>分享有礼</h5>
+
+                <form name="customersUpdateForm" method="POST" action="__ROOT__/APP/ForwardingGift/index/action/forwardingGiftData" enctype="multipart/form-data">
+                    <div class="alert alert-info" id = "baseTitle">
+                        <p class="text-primary">将”路桥发布“最新一期任何一篇文章进行分享，并截图上传，待审核后，每日最多送20个<?php echo $weixinName;?>。</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="up_img">点击下方图标进行照片上传 :</label>
+                        <input type="file" id="up_img" name="up_img" style = "display:none" accept="image/*"/>
+                        <div id="imgdiv">
+                            <img id="imgShow" src="__PUBLIC__/img/upload.jpg" class="img-rounded" width="150"/>
+                        </div>
+                        <p class="text-danger"><small>支持jpg,png，请上传小于5M的图片</small></p>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block" id = "referrerSubmit" onclick = "return CheckForm();">提交</button>
+                    </div>
+                    <div class="form-group" id= "doingDiv" style = "display:none">
+                        <button type="button" class="btn btn-block disabled" id = "referrerSubmitDoing">正在提交。。。</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-warning btn-block" id = "resultSearch">查询结果</button>
+                    </div>
+                </form>
+            </div>
+            <div id = "searchInfo" style = "display:none">
+                <br>
+                <a class="btn btn-warning btn-block" role="button" data-toggle="collapse" data-target="#OK" aria-expanded="false" aria-controls="collapseExample">
+                    点击查看审核通过内容
+                </a>
+                <div class="collapse" id="OK">
+                    <empty name="OKInfo">
+                        <div class="well well-sm">
+                            <span class="text-warning"><small>没有数据</small></span>
+                        </div>
+                    <else/>
+                        <foreach name="OKInfo" item="vo">
+                            <div class="well">
+                                <span class="text-warning"><small>提交时间：{$vo['FORWARDINGGIFT_CREATETIME']}</small></span><br>
+                                <span class="text-warning"><small>审核时间：{$vo['FORWARDINGGIFT_EDITETIME']}</small></span><br>
+                                <span class="text-warning"><small>获得{$_SESSION['config']['CONFIG_VIP_NAME']}：{$vo['FORWARDINGGIFT_INTEGRAL']}</small></span>
+                            </div>
+                        </foreach>
+                    </empty>
+                </div>
+                <br>
+                <a class="btn btn-danger btn-block" role="button" data-toggle="collapse" data-target="#NG" aria-expanded="false" aria-controls="collapseExample">
+                    点击查看审核未通过内容
+                </a>
+                <div class="collapse" id="NG">
+                    <empty name="NGInfo">
+                        <div class="well well-sm">
+                            <span class="text-danger"><small>没有数据</small></span><br>
+                        </div>
+                    <else/>
+                        <foreach name="NGInfo" item="vo">
+                            <div class="well">
+                                <span class="text-danger"><small>提交时间：{$vo['FORWARDINGGIFT_CREATETIME']}</small></span><br>
+                                <span class="text-danger"><small>审核时间：{$vo['FORWARDINGGIFT_EDITETIME']}</small></span><br>
+                                <span class="text-danger"><small>不通过原因：{$vo['FORWARDINGGIFT_REPLY']}</small></span>
+                            </div>
+                        </foreach>
+                    </empty>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
+            <br>
+            <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
+        </div>
+    </div>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/flat-ui/2.2.2/js/flat-ui.min.js"></script>
+<script src="__PUBLIC__/js/wx.js"></script>
+<script src="__PUBLIC__/js/common.js"></script>
+<script src="__PUBLIC__/js/function.js"></script>
+<script src="__PUBLIC__/js/uploadPreview.js"></script>
+
+<script src="__PUBLIC__/js/ForwardingGift/forwardingGift.js"></script>
+
+</body>
+</html>
+

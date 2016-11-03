@@ -169,6 +169,27 @@ namespace APP\Model;
         }
 
         /**
+         * 图片上传的一般设置
+         * 需传入文件夹的名称 (默认为public/Uploads/+文件夹名称)
+         * @param $folderName
+         * @return array
+         */
+        static function imgUploadConfig($folderName){
+            $day =  date('Ymd',time());
+            //图片上传设置
+            $config = array(
+                'maxSize'    =>    C('FILE_SIZE'),
+                'rootPath'	 =>    './Public',
+                'savePath'   =>    '/Uploads/'.$folderName.'/'.$day.'/',
+                'saveName'   =>    array('uniqid',$_SESSION['openid'].'_'),
+                'exts'       =>    C('MEDIA_TYPE_ARRAY'),
+                'autoSub'    =>    false,
+                'subName'    =>    array('date','Ymd'),
+            );
+            return $config;
+        }
+
+        /**
          * 上传图片
          * @param $config
          * @return mixed   正确则返回路径名称 错误则返回错误信息
@@ -199,6 +220,39 @@ namespace APP\Model;
                     return $retArr;
                 }
             }
+        }
+
+        /**
+         * 生成图片缩略图
+         * @param $src      原图地址
+         * @param $savePath 缩略图保存地址
+         * @param int $width 缩略图宽
+         * @param int $height 缩略图高
+         * @return bool
+         */
+        function buildThumb($src, $savePath, $width = 151, $height = 70)
+        {
+            $arr = getimagesize($src);
+            if (!is_array($arr)) {
+                return false;
+            }
+            //1,2,3 分别为gif,jpg,png
+            if ($arr[2] > 4) {
+                return false;
+            }
+            $func = imagecreatefrom;
+            switch ($arr[2]) {
+                case 1 : $func .= gif; break;
+                case 2 : $func .= jpeg; break;
+                case 3 : $func .= png; break;
+                default : $func .= jpeg;
+            }
+            $srcIm = $func($src);
+            $im = imagecreatetruecolor($width, $height);
+            imagecopyresized($im, $srcIm, 0, 0, 0, 0, $width, $height, $arr[0], $arr[1]);
+            imagejpeg($im, $savePath);
+            imagedestroy($srcIm);
+            imagedestroy($im);
         }
 
 

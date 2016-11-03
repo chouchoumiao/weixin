@@ -19,6 +19,29 @@ class VipModel {
 
 	}
 
+    /**
+     * 取得limit名的会员信息
+     * @param $limit
+     * @return bool
+     */
+	public function getVipInfoByLimit($limit){
+
+        $field = 'Vip_name,Vip_integral';
+
+        $where['WEIXIN_ID'] = $this->weixinID;
+        $where['Vip_isDeleted'] = 0;
+
+        $order = 'Vip_integral DESC,Vip_createtime ASC';
+
+        $data = M()->table('Vip')->field($field)->where($where)->order($order)->limit($limit)->select();
+
+        if(false === $data){
+            return false;
+        }
+        return $data;
+
+    }
+
 	/**
 	 * 查询当前用户是否是会员
 	 * @return bool

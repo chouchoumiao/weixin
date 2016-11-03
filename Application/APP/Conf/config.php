@@ -2,6 +2,7 @@
 
 //允许的省份
 define('ALLOW_PROVINCE','浙江');
+define('UPLOADS_PATH',$_SERVER['DOCUMENT_ROOT'].'/weixin/Public/Uploads/');
 
 //答题刮刮卡的活动ID
 define('DATI_GUAGUAKA_EVENT_ID',159);
@@ -47,4 +48,14 @@ return array(
         9 => '金清镇',
         99 => '其他地区'
     ),
+
+    //文件上传默认大小:5M
+    'FILE_SIZE' => 5242880,
+
+
+    //图片资源可上传的后缀
+    'MEDIA_TYPE_ARRAY'=> array(
+        'jpg','png','jpeg','gif'
+    ),
+
 );

@@ -10,4 +10,9 @@ $(function(){
     $("#mask").click(function(){
         $("#mask").hide();
     });
+
+    //点击更多活动
+    $("#moreInfo").click(function(){
+        alert("更多玩法，推出中...")
+    });
 });

@@ -52,6 +52,12 @@ class VipCenterController extends CommonController {
                 case 'VipdaliyData':
                     $this->VipdaliyData();
                     break;
+                case 'vipInfoListSearch':
+                    $this->vipInfoListSearch();
+                    break;
+                case 'vipCennterToGame':
+                    $this->vipCennterToGame();
+                    break;
 
                 default:
                     $this->center();
@@ -61,6 +67,31 @@ class VipCenterController extends CommonController {
 
     }
 
+    public function vipCennterToGame(){
+        $getIntegralRank = $this->getNowIntegralRank();
+
+        $this->assign('vipInfo',$_SESSION['vipInfo']);
+        $this->assign('getIntegralRank',$getIntegralRank);
+
+        $this->display('VipCenter/VipCennterToGame');
+    }
+
+    /**
+     * 排行榜
+     * 显示前20名的会员信息
+     */
+    private function vipInfoListSearch(){
+        $limitNo = 20;
+
+        $data = D('Vip')->getVipInfoByLimit($limitNo);
+
+        if($data){
+            $this->assign('data',$data);
+            $this->display('VipCenter/VipInfoListSearch');
+        }
+
+
+    }
     /**
      * 进行签到
      */
@@ -383,6 +414,22 @@ class VipCenterController extends CommonController {
             $this->assign('isSigned',true);
         }
 
+
+       $getIntegralRank = $this->getNowIntegralRank();
+
+       $this->assign('vipInfo',$_SESSION['vipInfo']);
+       $this->assign('getIntegralRank',$getIntegralRank);
+
+       $this->display('VipCenter');
+
+
+    }
+
+    /**
+     * 获取当前用户的总积分排名
+     * @return mixed
+     */
+    private function getNowIntegralRank(){
         $sql = "select rowno from
 			  (select Vip_openid,
 					  Vip_id,
@@ -396,16 +443,9 @@ class VipCenterController extends CommonController {
 			Vip_createtime asc) c
 			where Vip_openid ='".$_SESSION['openid']."'";
 
-       $ret = M()->table('Vip')->query($sql);
+        $ret = M()->table('Vip')->query($sql);
 
-       $getIntegralRank = $ret[0]['rowno'];
-
-       $this->assign('vipInfo',$_SESSION['vipInfo']);
-       $this->assign('getIntegralRank',$getIntegralRank);
-
-       $this->display('VipCenter');
-
-
+        return $ret[0]['rowno'];
     }
 
 }

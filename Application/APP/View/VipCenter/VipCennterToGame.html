@@ -1,0 +1,95 @@
+<extend name="VipCenter_layout" />
+
+<block name="vipCenter_CSS">
+    <link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/footer.css" rel="stylesheet" type="text/css">
+</block>
+<block name="vipCenter_body">
+    <div id="mappContainer">
+        <section id="card_ctn">
+            <div class="bk1"></div>
+            <div class="cont">
+                <div class="card">
+                    <div class="front">
+                        <figure class="fg" style="background-image:url(__PUBLIC__/img/VipCenter/vipCard.png);">
+                            <figcaption class="fc">
+                                <span class="cname" style="color:#957426;"></span>
+                                <span class="t" style="color:#aaa;text-shadow:#000 0 -1px;"></span>
+                                <span class="n" style="color: rgb(210, 210, 210); text-shadow: rgb(0, 0, 0) 0px -1px; ">NO.{$vipInfo['Vip_id']}</span>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="back">
+                        <figure class="fg" style="background-image:url(__PUBLIC__/img/VipCenter/4b.jpg);">
+                            <div class="info">
+                                <p class="addr">地址：路桥区委宣传部</p>
+                                <p class="tel"><a class="autotel" onclick="return false;" href="javascript:void(0);">0576-89207054</a></p>
+                            </div>
+                            <p class="keywords">路 桥 发 布 中 心</p>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="vip" style="">
+            <small><b><em>亲爱的会员,您的目前{$_SESSION['config']['CONFIG_VIP_NAME']}数为:{$vipInfo['Vip_integral']}</em></b></small>
+            <small><em>{$vipInfo['Vip_name']}排名为: 第 {$getIntegralRank} 名</em></small>
+            <div class = "link">
+                <div class="leftIcon">
+                    <a href="../02_integralCity/integralCity.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID?>">
+                        <img class = "leftImg" src="__PUBLIC__/img/VipCenter/duihuan.png">
+                    </a>
+                    <p>{$_SESSION['config']['CONFIG_VIP_NAME']}兑换</p>
+                </div>
+                <div class="rightIcon">
+                    <a href="../95_scratchcard/scratchcard.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID?>">
+                        <img class = "leftImg" src="__PUBLIC__/img/VipCenter/choujiang.png">
+                    </a>
+                    <p>{$_SESSION['config']['CONFIG_VIP_NAME']}抽奖</p>
+                </div>
+            </div>
+            </br>
+            <div class = "link">
+                <div class="leftIcon">
+                    <a href="../08_iphonEvent/iphoneEvent.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID?>">
+                        <img class = "leftImg" src="__PUBLIC__/img/VipCenter/duihuan.png">
+                    </a>
+                    <p>印章排行</p>
+                </div>
+                <div class="rightIcon">
+                    <a href="../08_iphonEvent/flowerCity.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID?>">
+                        <img class = "leftImg" src="__PUBLIC__/img/VipCenter/choujiang.png">
+                    </a>
+                    <p>印章兑奖</p>
+                </div>
+            </div>
+            </br>
+            <div class = "link">
+                <div class="leftIcon">
+                    <a onclick="return false;" href="javascript:void(0)">
+                        <img id = "moreInfo" class = "leftImg" src="__PUBLIC__/img/VipCenter/more.png">
+                    </a>
+                    <p>更多</p>
+                </div>
+                <div class="rightIcon">
+                </div>
+            </div>
+        </div>
+        <!-- Footer start -->
+        <footer class="am-footer am-footer-default">
+            <div class="am-footer-miscs">
+                <p>由
+                    <a onclick="return false;" href="javascript:void(0)" title="路桥区网络新闻中心" target="_blank" class="">路桥区网络新闻中心</a>提供技术支持</p>
+                <p>CopyRight@2015 路桥发布</p>
+            </div>
+        </footer>
+        <!-- Footer end -->
+    </div>
+</block>
+<include file = './js_layout'/>
+
+<block name="vipCenter_JS">
+    <script src="__PUBLIC__/js/VipCenter/VipCenter.js?v=20160102"></script>
+    <script src="__PUBLIC__/js/VipCenter/_meishi_wei_html5_v3.2.9.js"></script>
+</block>

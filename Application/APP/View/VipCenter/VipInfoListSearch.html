@@ -1,0 +1,30 @@
+<extend name="VipCenter_layout" />
+
+<block name="vipCenter_CSS">
+    <link href="//cdn.bootcss.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/flat-ui/2.2.2/css/flat-ui.min.css" rel="stylesheet">
+</block>
+<block name="vipCenter_body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <empty name="data">
+                <div class="well">
+                    <span class="text-danger"><small>没有数据</small></span>
+                </div>
+                <else/>
+                    <foreach name="data" item="vo" key="k">
+                        <div class="well well-sm">
+                            <span class="text-warning"><small>排名：{$k+1}</small></span><br>
+                            <span class="text-warning"><small>姓名：{$vo['Vip_name']}</small></span><br>
+                            <span class="text-warning"><small>{$_SESSION['config']['CONFIG_VIP_NAME']}：{$vo['Vip_integral']}</small></span>
+                        </div>
+                    </foreach>
+                </empty>
+            </div>
+        </div>
+    </div>
+</block>
+
+<include file = './js_layout'/>
