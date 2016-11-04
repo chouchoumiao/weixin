@@ -7,6 +7,7 @@
  */
 
 namespace APP\Controller;
+use APP\Model\ToolModel;
 use Think\Controller;
 use APP\Model\VipModel;
 
@@ -21,6 +22,7 @@ class CommonController extends Controller{
      * 构造方法
      */
     public function __construct(){
+
 
         //使用__construct方法时，需先调用父类的__construct方法先
         parent::__construct();
@@ -41,6 +43,9 @@ class CommonController extends Controller{
 
         }
 
+        //取得该公众号的基础信息，写入session
+        $_SESSION['config'] = D('Common')->getCon();
+
         //如果当前的Controller是在需要判断会员的列表中，则进行是否会员判断，如果不是则显示会员绑定按钮
         if( in_array(CONTROLLER_NAME,C('IS_VIP_ACTION_ARR')) ){
 
@@ -52,22 +57,15 @@ class CommonController extends Controller{
             //判断是否是会员
             if( !($this->VipModel->isVip()) ){
 
-                echoWarning('必须是会员才能使用该功能，请先注册为会员！');
-
-                linkToVipBD();
-
+                ToolModel::doAlert('必须是会员才能使用该功能，请先注册为会员！');
+                $this->display('VipCenter/VipBD');
                 exit;
             }
+        }
 
-            //将会员信息存入session
-            if(!isset($_SESSION['vipInfo']) || ('' == $_SESSION['vipInfo'])){
-                $_SESSION['vipInfo'] = $this->VipModel->vipInfo();
-            }
-
-            //取得该公众号的基础信息，写入session
-            $_SESSION['config'] = D('Common')->getCon();
-
-
+        //将会员信息存入session
+        if(!isset($_SESSION['vipInfo']) || ('' == $_SESSION['vipInfo'])){
+            $_SESSION['vipInfo'] = $this->VipModel->vipInfo();
         }
 
     }

@@ -787,24 +787,25 @@ function echoInfo($msg){
 /**
  *  进入会员绑定按钮
  */
-function linkToVipBD(){
-    echo '<html>
-        <head>
-        <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-        <style>
-        .wrap{margin:0 auto;width:80%;text-align: center;}
-        </style>
-        </head>
-        <body>
-            <div class="wrap">
-                <br/>
-                <a href="#" class="btn btn-success" role="button">赶紧注册会员吧</a>
-            </div>
-            
-        </body>
-    </html>';
-}
+//function linkToVipBD($url){
+//
+//    echo '<html>
+//        <head>
+//        <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+//        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+//        <style>
+//        .wrap{margin:0 auto;width:80%;text-align: center;}
+//        </style>
+//        </head>
+//        <body>
+//            <div class="wrap">
+//                <br/>
+//                <a href='.$url.' class="btn btn-success" role="button">赶紧注册会员吧</a>
+//            </div>
+//        </body>
+//
+//    </html>';
+//}
 
 /**
  * 对变量进行 JSON 编码

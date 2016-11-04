@@ -44,6 +44,14 @@ namespace APP\Model;
         }
 
         /**
+         * 弹出对话框
+         * @param $msg
+         */
+        static function doAlert($msg){
+            echo "<script>alert('$msg');</script>";
+        }
+
+        /**
          * 错误返回
          * @param $msg
          */

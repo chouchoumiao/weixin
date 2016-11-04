@@ -1,0 +1,58 @@
+<extend name="VipCenter_layout" />
+<block name="vipCenter_CSS">
+    <link href="//cdn.bootcss.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/flat-ui/2.2.2/css/flat-ui.min.css" rel="stylesheet">
+</block>
+<block name="vipCenter_body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id = "main">
+                <div id = "baseInfo">
+                    <div class="alert alert-info" id = "baseTitle">
+                        <p class="text-primary">注册“路桥发布”会员，参与每日签到、邀请好友、转发有礼等活动可获得“{$_SESSION['config']['CONFIG_VIP_NAME']}”，可兑换，可抽奖，好礼多多！</p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">昵称</span>
+                            <input type="text" class="form-control input-lg" placeholder = "请输入您的姓名或者昵称" id = "textinputName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">手机</span>
+                            <input type="text" class="form-control input-lg" placeholder = "兑奖时需出示" id = "textinputTel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="center">
+                            <input type="checkbox" checked data-toggle="switch" data-on-color="info" data-off-color="danger" data-on-text="男" data-off-text="女" id="custom-switch-08" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">推荐人卡号</span>
+                            <input type="text" class="form-control input-lg" placeholder = "不输默认为无推荐人" id = "thisVip_referrer">
+                        </div>
+                        <span>注：如果存在推荐人，请输入推荐人的会员卡号，绑定成功的话，您和推荐人都可以获得额外的{$_SESSION['config']['CONFIG_VIP_NAME']}哟！</span>
+                    </div>
+                    <button type="button" class="btn btn-success btn-block" id = "referrerSubmit">提交</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block disabled" id = "referrerSubmitDoing" style="display:none">正在提交。。。</button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
+                <br>
+                <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
+                <button type="button" class="btn btn-primary btn-block" id = "OKBtn" style = "display:none">点击进入</button>
+            </div>
+        </div>
+    </div>
+</block>
+<include file = './js_layout'/>
+<block name="vipCenter_JS">
+    <script type="text/javascript" src="__PUBLIC__/js/application.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/VipCenter/VipBD.js?v=20170108"></script>
+</block>

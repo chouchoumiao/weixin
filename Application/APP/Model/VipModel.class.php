@@ -51,10 +51,12 @@ class VipModel {
 		$where['WEIXIN_ID'] = $this->weixinID;
 		$where['Vip_isDeleted'] = 0;
 
-		if( false === (M()->table('Vip')->where($where)->count()) ){
+        $count = M()->table('Vip')->where($where)->count();
+
+		if( false === ($count) ){
 			return false;
 		}
-		return true;
+		return intval($count);
 
 	}
 
