@@ -20,6 +20,38 @@ class VipModel {
 	}
 
     /**
+     * 查询传入的ID号查询该会员是否已经存在
+     * @param $referrerId
+     * @return bool
+     */
+    public function getReferrerInfo($referrerId){
+
+        $where['Vip_id'] = $referrerId;
+        $where['Vip_isDeleted'] = 0;
+        $where['WEIXIN_ID'] = $this->weixinID;
+
+        return M()->table('Vip')->where($where)->find();
+    }
+
+    /**
+     * 查询传入的手机号是否已经存在
+     * @param $tel
+     * @return bool
+     */
+    public function isTelExist($tel){
+
+        $where['Vip_tel'] = $tel;
+        $where['Vip_isDeleted'] = 0;
+        $where['WEIXIN_ID'] = $this->weixinID;
+
+        if(M()->table('Vip')->where($where)->find()){
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
      * 取得limit名的会员信息
      * @param $limit
      * @return bool
@@ -51,12 +83,12 @@ class VipModel {
 		$where['WEIXIN_ID'] = $this->weixinID;
 		$where['Vip_isDeleted'] = 0;
 
-        $count = M()->table('Vip')->where($where)->count();
+        $data = M()->table('Vip')->where($where)->find();
 
-		if( false === ($count) ){
-			return false;
+		if($data){
+			return true;
 		}
-		return intval($count);
+		return false;
 
 	}
 

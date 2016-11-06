@@ -58,21 +58,12 @@ class VipCenterController extends CommonController {
                 case 'vipCennterToGame':
                     $this->vipCennterToGame();
                     break;
-                case 'vipBD':
-                    $this->vipBD();
-                    break;
-
                 default:
                     $this->center();
                     break;
             }
         }
 
-    }
-
-
-    public function vipBD(){
-        $this->display('VipCenter/VipBD');
     }
 
     public function vipCennterToGame(){

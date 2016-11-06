@@ -55,7 +55,7 @@ class CommonController extends Controller{
             }
 
             //判断是否是会员
-            if( !($this->VipModel->isVip()) ){
+            if( !$this->VipModel->isVip() ){
 
                 ToolModel::doAlert('必须是会员才能使用该功能，请先注册为会员！');
                 $this->display('VipCenter/VipBD');

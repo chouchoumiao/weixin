@@ -63,7 +63,7 @@ $(function(){
         }
 
         $.ajax({
-            url:'VipBDData.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID ?>'//改为你的动态页
+            url:ROOT+'/APP/Index/VipBD'//改为你的动态页
             ,type:"POST"
             ,data:{
                 "name":thisName.val(),
