@@ -91,7 +91,6 @@ class IndexController extends Controller {
             $msg = " 亲，您已经成功绑定了会员！</br>
                         初次绑定获得$weixinName".$newVipFirstIntegral;
             ToolModel::jsonReturn(JSON_SUCCESS,$msg);
-
         }
 
         //存在推荐人
