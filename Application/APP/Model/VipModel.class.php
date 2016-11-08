@@ -20,6 +20,61 @@ class VipModel {
 	}
 
     /**
+     * 新增会员信息
+     * @param $name
+     * @param $sex
+     * @param $tel
+     * @param $integral
+     * @param $comment
+     * @return bool
+     */
+    public function addVipInfo($name,$sex,$tel,$integral,$comment){
+
+
+        $data['WEIXIN_ID'] = $this->weixinID;
+        $data['Vip_name'] = $name;
+        $data['Vip_sex'] = $sex;
+        $data['Vip_tel'] = $tel;
+        $data['Vip_address'] = 0;       //新增会员时 默认地区未选择,需要补填
+        $data['Vip_openid'] = $this->openid;
+        $data['Vip_integral'] = $integral;
+        $data['Vip_createtime'] = date("Y-m-d H:i:s",time());
+        $data['Vip_edittime'] = date("Y-m-d H:i:s",time());
+        $data['Vip_isSignedDayTime'] = null;
+        $data['Vip_isDeleted'] = 0;
+        $data['Vip_isSubscribed'] = 1;
+        $data['Vip_comment'] = $comment;
+
+        if( false === M()->table('Vip')->add($data)){
+            return false;
+        }
+
+        return true;
+
+    }
+
+    /**
+     * 根据传入的分值和推荐人ID,更新对应ID的推荐人的积分数
+     * @param $id
+     * @param $integral
+     * @return bool
+     */
+    public function updateReferrerIntegral($id,$integral){
+
+        $data['Vip_integral'] = $integral;
+        $data['Vip_edittime'] = date("Y-m-d H:i:s",time());
+
+        $where['Vip_id'] = $id;
+        $where['WEIXIN_ID'] = $this->weixinID;
+
+        if(false === M()->table('Vip')->where($where)->save($data)){
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * 查询传入的ID号查询该会员是否已经存在
      * @param $referrerId
      * @return bool

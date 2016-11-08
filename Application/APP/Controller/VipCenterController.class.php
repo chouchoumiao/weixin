@@ -319,16 +319,7 @@ class VipCenterController extends CommonController {
                     //判断是否是台州地区和路桥发布公众号，满足条件写入活动表
                     //if(strstr($city,'浙江') && $weixinID == 69){
                     if(strstr($city,ALLOW_PROVINCE)){
-                        
-                        $iphoneEventData['WEIXIN_ID'] = $_SESSION['weixinID'];
-                        $iphoneEventData['ipE_name'] = $_SESSION['vipInfo']['Vip_name'];;
-                        $iphoneEventData['ipE_sex'] = $_SESSION['vipInfo']['Vip_sex'];
-                        $iphoneEventData['ipE_tel'] = $_SESSION['vipInfo']['Vip_tel'];
-                        $iphoneEventData['ipE_openid'] = $_SESSION['openid'];
-                        $iphoneEventData['ipE_referee_vipID'] = $referrerID;
-                        $iphoneEventData['ipE_insertTime'] = date("Y-m-d H:i:s",time());
-                        
-                        if(D('Common')->addIphoneEvent($iphoneEventData)){
+                        if(D('Common')->addIphoneEvent($_SESSION['vipInfo']['Vip_name'],$_SESSION['vipInfo']['Vip_sex'],$_SESSION['vipInfo']['Vip_tel'],$referrerID)){
                             $addMsg = PHP_EOL.'推荐人同时获得一个印章';
                         }
                     }

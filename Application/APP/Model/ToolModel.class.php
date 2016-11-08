@@ -323,5 +323,16 @@ namespace APP\Model;
             return self::getSubString($str,3);
         }
 
+        /**
+         * 返回json结果
+         * @param $flag
+         * @param $msg
+         */
+        static function jsonReturn($flag,$msg){
+            $arr['success'] = $flag;
+            $arr['msg'] = $msg;
+            echo json_encode($arr);
+            exit;
+        }
 
     }

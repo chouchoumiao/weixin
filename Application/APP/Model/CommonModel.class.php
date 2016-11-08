@@ -92,11 +92,24 @@ namespace APP\Model;
         }
 
         /**
-         * 
-         * @param $data
+         * 追加印章记录
+         * @param $ipE_name
+         * @param $ipE_sex
+         * @param $ipE_tel
+         * @param $referrerID
          * @return bool
          */
-        public function addIphoneEvent($data){
+        public function addIphoneEvent($ipE_name,$ipE_sex,$ipE_tel,$referrerID){
+
+            $data['ipE_openid'] = $this->openid;
+            $data['WEIXIN_ID'] = $this->weixinID;
+
+            $data['ipE_name'] = $ipE_name;
+            $data['ipE_sex'] = $ipE_sex;
+            $data['ipE_tel'] = $ipE_tel;
+            $data['ipE_referee_vipID'] = $referrerID;
+            $data['ipE_insertTime'] = date("Y-m-d H:i:s",time());
+
             if(false === M()->table('iphoneEvent')->add($data)){
                 return false;
             }

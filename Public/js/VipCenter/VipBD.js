@@ -78,7 +78,7 @@ $(function(){
             }
             ,success:function(json){
                 $("#referrerSubmitDoing").hide();
-                if(json.success == 0){
+                if(json.success == 1){
                     $("#main").hide();
                     $('#myOKMsg').html(json.msg);
                     $('#myOKMsg').show();
