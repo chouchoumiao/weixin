@@ -278,4 +278,33 @@ class VipModel {
 		return true;
 	}
 
+    /**
+     * 获得印章排名
+     * @return bool
+     */
+    public function getSealRank(){
+        $sql = "SELECT A.Vip_id,
+               A.Vip_openid,
+               A.Vip_name,
+               A.Vip_tel,
+               B.flowerCount,
+               @rownum := @rownum +1 rownum
+        FROM Vip AS A
+        INNER JOIN(
+            SELECT @rownum :=0,ipE_referee_vipID,count(*) AS flowerCount
+            FROM iphoneEvent
+            GROUP BY ipE_referee_vipID
+            ORDER BY flowerCount DESC
+        )  AS B
+        WHERE A.Vip_id = B.ipE_referee_vipID
+        LIMIT 20";
+
+        $data = M()->table('Vip')->query($sql);
+
+        if(false === $data){
+            return false;
+        }
+        return $data;
+    }
+
 }

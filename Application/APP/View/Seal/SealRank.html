@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>拉好友赢大奖</title>
+
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/flat-ui/2.2.2/css/flat-ui.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--图标-->
+    <!--<link rel="icon" type="image/x-icon" href="__PUBLIC__/img/favicon.ico">-->
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id = "main">
+                <h5>拉好友 赢大奖 活动</h5>
+                <div class="alert alert-info" id = "baseTitle">
+                    <p class="text-primary">亲，你以为拉好友 赢大奖 活动只有 印章兑换里的那些奖品吗？错了，那只是保底的奖励，当你拉够<span style="color:#E74C3C">30</span>人时，你将获得<span style="color:#E74C3C">现场抽大奖</span>的机会，iphone6s？iwatch？ipadmini？kindle？...，对大奖中就有他们的身份，详情见<span style="color:#E74C3C">12月31日</span>“路桥发布”微信内容。快加把劲，努力拉好友来关注“路桥发布”吧。</p>
+                </div>
+                <a class="btn btn-danger btn-block" role="button" data-toggle="collapse" data-target="#NG" aria-expanded="false" aria-controls="collapseExample">
+                    点击查看您的排名
+                </a>
+                <div class="collapse" id="NG">
+
+                    <empty name="vipCount">
+                        <div class="well well-sm">
+                            <span class="text-danger"><small>没有数据</small></span><br>
+                        </div>
+                    <else/>
+                        <div class="well">
+                            <span class="text-danger"><small>排名：{$rank}</small></span><br>
+                            <span class="text-danger"><small>印章：{$vipCount}</small></span>
+                        </div>
+                    </empty>
+                </div>
+                </br>
+                <a class="btn btn-warning btn-block" role="button" data-toggle="collapse" data-target="#OK" aria-expanded="false" aria-controls="collapseExample">
+                    点击查看前20排名
+                </a>
+                <div class="collapse" id="OK">
+                    <empty name="data">
+                        <div class="well well-sm">
+                            <span class="text-warning"><small>没有数据</small></span>
+                        </div>
+                    <else/>
+                        <foreach name="data" item="vo">
+                            <div class="well">
+                                <span class="text-warning"><small>排名：{$vo['rownum']}</small></span><br>
+                                <span class="text-warning"><small>姓名：{$vo['Vip_name']}</small></span><br>
+                                <span class="text-warning"><small>手机：{$vo['Vip_tel']}<?php echo $newTel?></small></span><br>
+                                <span class="text-warning"><small>印章：{$vo['flowerCount']}个</small></span>
+                            </div>
+                        </foreach>
+                    </empty>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/flat-ui/2.2.2/js/flat-ui.min.js"></script>
+    <script src="__PUBLIC__/js/wx.js"></script>
+    <script src="__PUBLIC__/js/common.js"></script>
+    <script src="__PUBLIC__/js/function.js"></script>
+</body>
+</html>
+

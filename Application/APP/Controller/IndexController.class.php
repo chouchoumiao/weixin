@@ -86,7 +86,7 @@ class IndexController extends Controller {
             }
 
             //新增会员信息后追加写入记录表中
-            $this->addRecord($_SESSION['openid'],'会员绑定无推荐人',0,$thisVip_integral);
+            D('Common')->addIntegralRecord($_SESSION['openid'],'会员绑定无推荐人',0,$thisVip_integral);
 
             $msg = " 亲，您已经成功绑定了会员！</br>
                         初次绑定获得$weixinName".$newVipFirstIntegral;
@@ -113,7 +113,7 @@ class IndexController extends Controller {
         }
 
         //追加积分变动时写入记录表中 功能
-        $this->addRecord($thisVip_referrer,'会员绑定推荐人加'.$weixinName,$oldVipIntegral,$plusIntegral);
+        D('Common')->addIntegralRecord($thisVip_referrer,'会员绑定推荐人加'.$weixinName,$oldVipIntegral,$plusIntegral);
 
         //存在推荐人的时候，新积分数 = 新会员初始积分数+额外积分数
         $thisVipIntegral = $thisVip_integral + $plusIntegralForNewVip;
@@ -123,7 +123,7 @@ class IndexController extends Controller {
         }
 
         //新增会员信息后追加写入记录表中
-        $this->addRecord($_SESSION['openid'],'会员绑定存在推荐人会员加'.$weixinName,0,$thisVipIntegral);
+        D('Common')->addIntegralRecord($_SESSION['openid'],'会员绑定存在推荐人会员加'.$weixinName,0,$thisVipIntegral);
         //根据IP地址取得城市名称 20151215
         $city = getCity();
 
@@ -148,24 +148,5 @@ class IndexController extends Controller {
                     推荐人也同时获得额外$weixinName".$plusIntegral."</br>
                     推荐人还获得一个印章，积攒印章可得大奖"."</br>";
         ToolModel::jsonReturn(JSON_SUCCESS,$msg);
-    }
-
-    /**
-     * 设置追加积分记录的数据
-     * @param $openid
-     * @param $event
-     * @param $oldIntegral
-     * @param $plusIntegral
-     * @return mixed
-     */
-    private function addRecord($openid,$event,$oldIntegral,$plusIntegral){
-        $data['openid'] = $openid;
-        $data['event'] = $event;
-        $data['totalIntegral'] = $oldIntegral;
-        $data['integral'] = $plusIntegral;
-        $data['insertTime'] = date("Y-m-d H:i:s",time());
-
-        D('Common')->addIntegralRecord($data);
-
     }
 }

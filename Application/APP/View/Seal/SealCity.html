@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>印章兑换</title>
+
+    <link href="__PUBLIC__/css/Seal/seal.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--图标-->
+    <!--<link rel="icon" type="image/x-icon" href="__PUBLIC__/img/favicon.ico">-->
+</head>
+<body>
+<div class="price_banner"><img src="__PUBLIC__/img/Seal/seal.jpg"></div>
+<div class="productbox" id="integralPro">
+<notempty name="noData">
+    <div><p>相关奖品将于1月4日放出，敬请期待！</p></div>
+<else/>
+    <foreach name="data" item="vo" key="k">
+    <ul>
+        <li>
+            <div class="pic01box" >
+
+                <div class="pic01" onclick="showMask({$k})">
+                    <img src="{$vo['flowerCity_imgPath']}">
+                </div>
+                <div class="pic01text" align = "center">
+
+                        <h2>{$vo['flowerCity_name']}</h2>
+                    <p>
+                        <span style="float:left; margin-left:6px">印章:{$vo['flowerCity_flowerNum']}</span>
+                            <span style="float:right; margin-right:6px">库存:{$vo['flowerCity_stockCount']}</span>
+
+                            <elt name="vo['flowerCity_stockCount']" value="0">
+                                <input class="btnsEnd" id="btnsEnd" type="button" value="已结束">
+                            <else/>
+                                <input class="btns" id="btns" type="button" value="兑  换"
+                                       onclick="return integralGoodsBill({$vo['id']})">
+                            </elt>
+                    </p>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div id="mask{$k}" class="mask" style = "display:none">
+        <span style="color: #3d74ef">
+            <h3>{$vo['flowerCity_name']}</h3>
+        </span>
+        <span>{$vo['flowerCity_content']}</span>
+    </div>
+    </foreach>
+</notempty>
+</div>
+<div id="overMask" class= "overMask" style="display:none"></div>
+
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="__PUBLIC__/js/wx.js"></script>
+<script src="__PUBLIC__/js/common.js"></script>
+<script src="__PUBLIC__/js/function.js"></script>
+<script src="__PUBLIC__/js/Seal/seal.js?v=20160102"></script>
+</body>
+</html>

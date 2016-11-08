@@ -335,4 +335,26 @@ namespace APP\Model;
             exit;
         }
 
+        /**
+         * 传入完整的手机号,返回隐藏中间五位号码的手机号
+         * @param $tel
+         * @return string
+         */
+        static function hideTel($tel){
+            return substr($tel,0,3)."*****".substr($tel,8,3);
+        }
+        
+        /**
+         * 生成兑换码
+         * @param $pre
+         * @return string
+         */
+        static function snMaker($pre) {
+            $date = date('Ymd');
+            $rand = rand(1000,9999);
+            $time = mb_substr(time(), 5, 5, 'utf-8');
+            $serialNumber = $time.$pre.$date.$rand;
+            return $serialNumber;
+        }
+
     }

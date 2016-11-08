@@ -118,11 +118,21 @@ namespace APP\Model;
         }
 
         /**
-         * 追加积分记录
-         * @param $data
+         * 根据传入的信息追加信息(分值变化时候)
+         * @param $openid
+         * @param $event
+         * @param $oldIntegral
+         * @param $plusIntegral
          * @return bool
          */
-        public function addIntegralRecord($data){
+
+        public function addIntegralRecord($openid,$event,$oldIntegral,$plusIntegral){
+
+            $data['openid'] = $openid;
+            $data['event'] = $event;
+            $data['totalIntegral'] = $oldIntegral;
+            $data['integral'] = $plusIntegral;
+            $data['insertTime'] = date("Y-m-d H:i:s",time());
 
             if( false === M()->table('integralRecord')->add($data)){
                 return false;
