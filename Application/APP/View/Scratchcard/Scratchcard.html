@@ -98,18 +98,12 @@
                         <div class="Detail">
                             <p><span style="color: red; ">[活动开始时间]：</span>{$data['scratchcard_beginDate']}</p>
                             <p><span style="color: red; ">[活动结束时间]：</span>{$data['scratchcard_endDate']}</p>
-                            <?php if ($freeTimes > 0){
-                            ?>
-                                <p><span style="color: blue; ">免费次数：{$data['scratchcard_times']}次
-                                <p><span style="color: blue; ">免费结束后，每次需要{$data['scratchcard_Integral']} {$_SESSION['config']['CONFIG_VIP_NAME']}
-                            <?php
-                            }else{
-                            ?>
-                                <p><span style="color: blue; ">每一次成功"建言献策"，将赢得一次抽奖机会
-                            <?php
-                            }
-                            ?>
-                            </span></p>
+                                <gt name="data['scratchcard_times']" value="0">
+                                    <p><span style="color: blue; ">免费次数：{$data['scratchcard_times']}次</span></p>
+                                    <p><span style="color: blue; ">免费结束后，每次需要{$data['scratchcard_Integral']} {$_SESSION['config']['CONFIG_VIP_NAME']}</span></p>
+                                <else/>
+                                    <p><span style="color: blue; ">每一次成功"建言献策"，将赢得一次抽奖机会</span></p>
+                                </gt>
                         </div>
                 </div>
             </div>
