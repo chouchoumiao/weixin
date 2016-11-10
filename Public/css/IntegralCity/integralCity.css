@@ -1,0 +1,103 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;}
+a{text-decoration:none;}
+body{background-color:#d0374c;}
+li{list-style:none;}
+input[type=button]{
+	-webkit-appearance:none;
+	outline:none
+}
+.price_banner{width:100%;}
+.price_banner img{width:100%;}
+
+.bannerbox{width:100%;padding-top: 46px;}
+.bannerbox img{width:100%;}
+
+.product_navbox{position:relative;}
+.product_nav{overflow:hidden; width:100%; /* background-color:#a5a5a5; */}
+.product_nav ul li{float:left; width:25%;font-size: 14px;}
+.product_nav ul li a{display:inline-block; width:100%;  text-align:center; padding:10px 0;background: #a5a5a5;}
+.product_nav ul li a span{display:inline-block;vertical-align: middle;color:#f3f3f3;}
+/* .product_nav ul li a span img{width:20px;}  */
+/* .product_nav .jgph{background:url(../../../../images/fimages/goodee/028jt2.png) no-repeat right;} */
+.product_nav .recommend_product a{background-color: #fed300; color:#fff9dd; }
+.product_nav .recommend_product div{  margin: 0px auto 0 auto;  width: 0;      height: 0;      border-left: 12px solid transparent;      border-right: 12px solid transparent;      border-top: 12px solid #fed300;}
+.recommend_product span img{width:100%;}
+
+.productbox{padding: 15px 8px;overflow: hidden;}
+.fleft{float:left;}
+.fright{float:right;}
+
+/*追加 固定高 height: 200px; 20150827*/
+.pic01box{width:100%; min-height: 200px;overflow:hidden;display: inline-block;}
+.pic01{margin:7px; border-bottom:1px solid #dddddd; overflow: hidden;text-align: center;}
+.pic01 span{display:inline-block; width:30px; position:absolute; top:6px;}
+.pic01 img{width:100%;overflow: hidden;}
+.pic01text{margin: 10px 10px 0 10px;}
+.pic01text h2{font-size:12px; color:#8A8888; font-weight:normal;}
+.pic01text p{color:#ff1700; font-size:14px; line-height: 30px; font-weight:bold;margin-left: 0px;height: 30px;}
+.noData{margin-left:auto; margin-right:auto;}
+.plusClass{margin-left:-2px;margin-right:-3px;}
+.productbox ul{
+margin:0;
+padding: 0 0 0 0;
+width:50%;
+float:left;
+}
+
+.productbox ul li{
+box-shadow: 0 0 6px #C7C7C7;
+background: #fff;
+width: 95%;
+margin: 0 0 5% 2%;
+float: left;
+border-radius: 5px;
+}
+
+/*20150826 php文件样式移至此处*/
+.btns {
+    width:100%; 
+    height:30px;
+    background:#d0374c;
+    margin-bottom:10px;
+}
+.btnsEnd{
+    width:100%;
+    height:30px;
+    background:#666666;
+    margin-bottom: 10px;
+}
+/*最外层图层样式*/
+.overMask {
+    background:#666666;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 1100;   
+    opacity:0; 
+    -moz-opacity:0; 
+    margin-left: auto;
+    margin-right: auto;
+}
+/*商品说明图层样式*/
+.mask {
+    filter: alpha(opacity=60); 
+    background-color: #434343;     
+    z-index: 1002;
+    opacity:0.9; 
+    -moz-opacity:0.9; 
+    
+    margin-right:5px;
+}
+/*商品说明图层文字样式*/
+.mask span{
+    font-size: 16px;
+    display:inline-block;
+    padding:10px;
+    line-height:22px;
+    color: #fff;
+    float:left;
+    word-break:break-all;
+    text-align:justify;
+}

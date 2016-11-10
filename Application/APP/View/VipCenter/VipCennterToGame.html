@@ -37,13 +37,13 @@
             <small><em>{$vipInfo['Vip_name']}排名为: 第 {$getIntegralRank} 名</em></small>
             <div class = "link">
                 <div class="leftIcon">
-                    <a href="../02_integralCity/integralCity.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID?>">
+                    <a href="__ROOT__/APP/IntegralCity/index/action/showView/">
                         <img class = "leftImg" src="__PUBLIC__/img/VipCenter/duihuan.png">
                     </a>
                     <p>{$_SESSION['config']['CONFIG_VIP_NAME']}兑换</p>
                 </div>
                 <div class="rightIcon">
-                    <a href="../95_scratchcard/scratchcard.php?openid=<?php echo $openid;?>&weixinID=<?php echo $weixinID?>">
+                    <a href="__ROOT__/APP/Scratchcard/index/action/showView/">
                         <img class = "leftImg" src="__PUBLIC__/img/VipCenter/choujiang.png">
                     </a>
                     <p>{$_SESSION['config']['CONFIG_VIP_NAME']}抽奖</p>

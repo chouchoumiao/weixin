@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>{$_SESSION['config']['CONFIG_VIP_NAME']}商城</title>
+
+    <link href="__PUBLIC__/css/IntegralCity/integralCity.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--图标-->
+    <!--<link rel="icon" type="image/x-icon" href="__PUBLIC__/img/favicon.ico">-->
+</head>
+<body>
+<div class="price_banner"><img src="__PUBLIC__/img/integralCity/integralPro.jpg"></div>
+<div class="productbox" id="integralPro">
+    <?php
+//追加不存在判断 wujiayu
+if(!$integralGoodsInfoArr){
+    echo '<div><p>当前尚未有活动，敬请关注！</p></div>';
+exit;
+}
+$count = count($integralGoodsInfoArr);
+for ($i = 0;$i<$count;$i++) {
+//if($i<= (count($integralGoodsInfoArr)/2) - 1){
+?>
+<ul>
+    <li>
+        <div class="pic01box" >
+            <div class="pic01" onclick="showMask(<?php echo $i;?>)">
+                <img src="<?php echo $integralGoodsInfoArr[$i]['integralCity_imgPath'];?>">
+            </div>
+            <div class="pic01text" align = "center">
+                <h2><?php echo $integralGoodsInfoArr[$i]['integralCity_name'];?></h2>
+                <p>
+                    <span style = "float:left; margin-left:10px"><?php echo $weixinName;?>:<?php echo $integralGoodsInfoArr[$i]['integralCity_integralNum'];?></span>
+                    <span style = "float:right; margin-right:10px" >库存:<?php echo $integralGoodsInfoArr[$i]['integralCity_stockCount'];?><span>
+                </p>
+                <p>
+                    <?php
+                        if($integralGoodsInfoArr[$i]['integralCity_stockCount'] <= 0){
+                    ?>
+                    <input class="btnsEnd"  id="btnsEnd" type="button" value = "已结束">
+                    <?php
+                        }else{
+                    ?>
+                    <input class="btns" id="btns" type="button" value = "兑  换" onclick = "return integralGoodsBill(<?php echo $integralGoodsInfoArr[$i]['integralCity_id'];?>);">
+                    <?php
+                        }
+                    ?>
+                </p>
+            </div>
+        </div>
+    </li>
+</ul>
+<div id="mask<?php echo $i?>" class="mask" style = "display:none">
+    <span style="color: #3d74ef"><h3><?php echo $integralGoodsInfoArr[$i]['integralCity_name']?></h3></span>
+    <span><?php echo $integralGoodsInfoArr[$i]['integralCity_content']?></span>
+</div>
+<?
+    }
+    ?>
+</div>
+<div id="overMask" class= "overMask" style="display:none"></div>
+
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="__PUBLIC__/js/wx.js"></script>
+<script src="__PUBLIC__/js/common.js"></script>
+<script src="__PUBLIC__/js/function.js"></script>
+<script src="__PUBLIC__/js/IntegralCity/integralCity.js?v=20160101"></script>
+</body>
+</html>
