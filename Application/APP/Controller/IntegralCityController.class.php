@@ -20,11 +20,11 @@ class IntegralCityController extends CommonController {
         if(isset($action) && ('' != $action)){
 
             switch ($action){
-                case 'showView':
-                    $this->showView();
-                    break;
                 case 'integralCity':
                     $this->integralCity();
+                    break;
+                case 'integralJudge':
+                    $this->integralJudge();
                     break;
             }
         }
@@ -35,24 +35,23 @@ class IntegralCityController extends CommonController {
      * 进行积分商城逻辑
      */
     private function integralCity(){
+        //取得当前时间内积分商城活动的商品信息
+        $data = D('IntegralCity')->getIntegralCityEvent();
 
+        if(!$data){
+            $this->assign('noData',true);
+        }else{
+            $this->assign('data',$data);
+        }
+        $this->display('IntegralCity/IntegralCity');
     }
 
     /**
      * 显示积分商城页面
      */
-    private function showView(){
-        
+    private function integralJudge(){
 
-    }
 
-    //生成兑换码
-    private function snMaker($pre) {
-        $date = date('Ymd');
-        $rand = rand(1000,9999);
-        $time = mb_substr(time(), 5, 5, 'utf-8');
-        $serialNumber = $time.$pre.$date.$rand;
-        return $serialNumber;
     }
 
 }

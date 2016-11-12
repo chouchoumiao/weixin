@@ -21,54 +21,42 @@
     <!--<link rel="icon" type="image/x-icon" href="__PUBLIC__/img/favicon.ico">-->
 </head>
 <body>
-<div class="price_banner"><img src="__PUBLIC__/img/integralCity/integralPro.jpg"></div>
+<div class="price_banner"><img src="__PUBLIC__/img/IntegralCity/integralPro.jpg"></div>
 <div class="productbox" id="integralPro">
-    <?php
-//追加不存在判断 wujiayu
-if(!$integralGoodsInfoArr){
-    echo '<div><p>当前尚未有活动，敬请关注！</p></div>';
-exit;
-}
-$count = count($integralGoodsInfoArr);
-for ($i = 0;$i<$count;$i++) {
-//if($i<= (count($integralGoodsInfoArr)/2) - 1){
-?>
-<ul>
-    <li>
-        <div class="pic01box" >
-            <div class="pic01" onclick="showMask(<?php echo $i;?>)">
-                <img src="<?php echo $integralGoodsInfoArr[$i]['integralCity_imgPath'];?>">
-            </div>
-            <div class="pic01text" align = "center">
-                <h2><?php echo $integralGoodsInfoArr[$i]['integralCity_name'];?></h2>
-                <p>
-                    <span style = "float:left; margin-left:10px"><?php echo $weixinName;?>:<?php echo $integralGoodsInfoArr[$i]['integralCity_integralNum'];?></span>
-                    <span style = "float:right; margin-right:10px" >库存:<?php echo $integralGoodsInfoArr[$i]['integralCity_stockCount'];?><span>
-                </p>
-                <p>
-                    <?php
-                        if($integralGoodsInfoArr[$i]['integralCity_stockCount'] <= 0){
-                    ?>
-                    <input class="btnsEnd"  id="btnsEnd" type="button" value = "已结束">
-                    <?php
-                        }else{
-                    ?>
-                    <input class="btns" id="btns" type="button" value = "兑  换" onclick = "return integralGoodsBill(<?php echo $integralGoodsInfoArr[$i]['integralCity_id'];?>);">
-                    <?php
-                        }
-                    ?>
-                </p>
-            </div>
+<notempty name="noData">
+
+    <div><p>当前尚未有活动，敬请关注！</p></div>
+<else/>
+    <foreach name="data" item="vo" key="k">
+        <ul>
+            <li>
+                <div class="pic01box" >
+                    <div class="pic01" onclick="showMask({$k})">
+                        <img src="<?php echo $vo['integralCity_imgPath'];?>">
+                    </div>
+                    <div class="pic01text" align = "center">
+                        <h2>{$vo['integralCity_name']}</h2>
+                        <p>
+                            <span style = "float:left; margin-left:10px">价值:{$vo['integralCity_integralNum']}</span>
+                            <span style = "float:right; margin-right:10px" >库存:{$vo['integralCity_stockCount']}</span>
+                        </p>
+                        <p>
+                            <elt name="vo['integralCity_stockCount']" value="0">
+                                <input class="btnsEnd"  id="btnsEnd" type="button" value = "已结束">
+                            <else/>
+                                <input class="btns" id="btns" type="button" value = "兑  换" onclick = "return integralGoodsBill({$vo['integralCity_id']})">
+                            </elt>
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div id="mask<?php echo $i?>" class="mask" style = "display:none">
+            <span style="color: #3d74ef"><h3>{$vo['integralCity_name']}</h3></span>
+            <span>{$vo['integralCity_content']}</span>
         </div>
-    </li>
-</ul>
-<div id="mask<?php echo $i?>" class="mask" style = "display:none">
-    <span style="color: #3d74ef"><h3><?php echo $integralGoodsInfoArr[$i]['integralCity_name']?></h3></span>
-    <span><?php echo $integralGoodsInfoArr[$i]['integralCity_content']?></span>
-</div>
-<?
-    }
-    ?>
+    </foreach>
+</notempty>
 </div>
 <div id="overMask" class= "overMask" style="display:none"></div>
 
