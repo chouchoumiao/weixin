@@ -57,9 +57,9 @@ class VipCennterToGameController extends CommonController {
         }
 
         //取得库存 如果库存<=0 则不能进行 20151222
-        $thisIntegralCtiyStock = intval($sealInfoByID["flowerCity_stockCount"]);
+        $thisSealStock = intval($sealInfoByID["flowerCity_stockCount"]);
 
-        if($thisIntegralCtiyStock <= 0){
+        if($thisSealStock <= 0){
             ToolModel::jsonReturn(JSON_ERROR,'库存不足，无法兑换！');
         }
 
@@ -88,16 +88,15 @@ class VipCennterToGameController extends CommonController {
 
         //当该会员印章总量大于商品印章时，可以进行兑换
         //库存减一
-        $newthisIntegralCtiyStock = $thisIntegralCtiyStock - 1;
+        $newthisSealStock = $thisSealStock - 1;
 
         //将该商品的库存减一,更新该商品信息
-        if(!D('Seal')->updateStockCount($thisIntegralID,$newthisIntegralCtiyStock)){
+        if(!D('Seal')->updateStockCount($thisIntegralID,$newthisSealStock)){
             ToolModel::jsonReturn(JSON_ERROR,'更新库存失败，无法兑换！');
         }
 
         //生成兑换码
-        $openidCn = substr($_SESSION['openid'],-4)."01";
-        $cnCode = ToolModel::snMaker($openidCn);
+        $cnCode = ToolModel::snMaker('01');
 
         //追加兑换记录
         if (!D('Bill')->addSealBillInfo($thisIntegralID,$sealInfoByID,$cnCode)){

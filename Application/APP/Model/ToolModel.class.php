@@ -343,17 +343,20 @@ namespace APP\Model;
         static function hideTel($tel){
             return substr($tel,0,3)."*****".substr($tel,8,3);
         }
-        
+
         /**
          * 生成兑换码
-         * @param $pre
+         * @param $snType   兑换码的类型(如001表示积分商城)
          * @return string
          */
-        static function snMaker($pre) {
+        static function snMaker($snType) {
+
+            $openidCn = substr($_SESSION['openid'],-4).strval($snType);
+
             $date = date('Ymd');
             $rand = rand(1000,9999);
             $time = mb_substr(time(), 5, 5, 'utf-8');
-            $serialNumber = $time.$pre.$date.$rand;
+            $serialNumber = $time.$openidCn.$date.$rand;
             return $serialNumber;
         }
 

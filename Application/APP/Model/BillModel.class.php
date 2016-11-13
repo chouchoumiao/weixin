@@ -129,5 +129,66 @@ class BillModel {
         return true;
     }
 
+    /**
+     * 兑换积分商城商品后追加bill记录
+     * @param $id
+     * @param $data
+     * @param $cnCode
+     * @return bool
+     */
+    public function addIntegralCityBillInfo($id,$data,$cnCode){
+
+
+        $data['WEIXIN_ID']= $this->weixinID;
+        $data['Bill_type']= C('BILL_TYPE_ARR')['INTEGRAL_CITY'];
+        $data['Bill_item_id']= $id;
+
+        $data['Bill_GoodsName']= $data["integralCity_name"];
+        $data['Bill_GoodsDescription']= $data["integralCity_name"];
+        $data['Bill_openid']= $this->openid;
+
+        $data['Bill_insertDate']= date("Y-m-d H:i:s",time());
+        $data['Bill_editDate']= date("Y-m-d H:i:s",time());
+
+        $data['Bill_goods_beginDate']= $SealData["integralCity_fromDate"];
+        $data['Bill_goods_endDate']= $SealData["integralCity_endDate"];
+        $data['Bill_goods_expirationDate']= $SealData["integralCity_expirationDate"];
+
+        $data['Bill_integral']= $SealData["integralCity_integralNum"];
+        $data['Bill_SN']= $cnCode;
+        $data['Bill_Status']= 0;
+
+        if(false === M()->table('bill')->add($data)){
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 根据传入的id判断该商品当前会员是否当天已经中过奖
+     * @param $id
+     * @return bool
+     */
+    public function isBilledSameDay($id){
+
+        $nowDate = date("Y-m-d",time());
+        $billType = C('BILL_TYPE_ARR')['INTEGRAL_CITY'];
+
+        //追加功能 如果同一商品今天已经兑换 2次则不能在进行兑换
+        $where = "Bill_item_id = $id
+        AND Bill_openid = '$this->openid'
+        AND WEIXIN_ID = $this->weixinID
+        AND DATE_FORMAT(Bill_insertDate, '%Y-%m-%d' )= '$nowDate'
+        AND bill_type = $billType";
+
+        $data = M()->table('bill')->where($where)->find();
+
+        if( $data ){
+            return true;
+        }
+        return false;
+    }
+
 
 }

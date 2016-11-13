@@ -27,7 +27,7 @@ function integralGoodsBill(thisIntegralID){
     if(a==true)
     {
         $.ajax({
-            url:'ROOT+"/APP/IntegralCity/doAction/action/integralJudge/'//改为你的动态页
+            url:ROOT+"/APP/IntegralCity/index/action/integralJudge/"//改为你的动态页
             ,type:"POST"
             ,data:{"fromIntegralID":thisIntegralID}//调用json.js类库将json对象转换为对应的JSON结构字符串
             ,dataType: "json"

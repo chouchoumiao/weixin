@@ -49,13 +49,13 @@ class IntegralCityModel {
      * @param $id
      * @return bool
      */
-    public function getSealInfoByID($id){
+    public function getIntegralCityInfoByID($id){
 
-        $where['flowerCity_isDeleted'] = 0;
-        $where['id'] = $id;
+        $where['integralCity_isDeleted'] = 0;
+        $where['integralCity_id'] = $id;
         $where['WEIXIN_ID'] = $this->weixinID;
 
-        $data = M()->table('flowerCity_config')->where($where)->find();
+        $data = M()->table('integralCity_config')->where($where)->find();
 
         if(false === $data){
             return false;
@@ -69,15 +69,15 @@ class IntegralCityModel {
      * @param $count
      * @return bool
      */
-    public function updateStockCount($id,$count){
+    public function updateIntegralCityStockCount($id,$count){
 
-        $data['flowerCity_stockCount'] = $count;
-        $data['flowerCity_editTime'] = date("Y-m-d H:i:s",time());
+        $data['integralCity_stockCount'] = $count;
+        $data['integralCity_editTime'] = date("Y-m-d H:i:s",time());
 
-        $where['id'] = $id;
+        $where['integralCity_id'] = $id;
         $where['WEIXIN_ID'] = $this->weixinID;
 
-        if(false === M()->table('flowerCity_config')->where($where)->save($data)){
+        if(false === M()->table('integralCity_config')->where($where)->save($data)){
             return false;
         }
 

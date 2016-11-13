@@ -6,6 +6,7 @@
  * Time: 14:36
  */
 namespace APP\Controller;
+use APP\Model\ToolModel;
 use Think\Controller;
 
 header("Content-type:text/html;charset=utf-8");
@@ -87,9 +88,6 @@ class ScratchcardController extends CommonController {
         //初始化奖品对应的分数为0
         $thisIntegral = 0;
 
-        //设置SN码
-        $openidCn = substr($_SESSION['openid'],-4)."03";
-
         //设置尚未中奖的flag = NO
         $isOK = "NO";
         $detail_nameCount = count($detail_name);
@@ -100,7 +98,8 @@ class ScratchcardController extends CommonController {
             //根据取得的随机值，判断是否中奖
                 if (rand(1, 100) <= $detail_probability[$i]){
                     //arr数组是中奖后需返回的数据
-                    $cnCode = $this->snMaker($openidCn);
+                    //设置SN码
+                    $cnCode = ToolModel::snMaker("03");
                     $arr["status"]= "ok";
                     $arr["prizelevel"]=$detail_name[$i];
                     $arr["prizedescription"]=$detail_description[$i];
@@ -188,14 +187,4 @@ class ScratchcardController extends CommonController {
         $this->display('Scratchcard');
         
     }
-
-    //生成兑换码
-    private function snMaker($pre) {
-        $date = date('Ymd');
-        $rand = rand(1000,9999);
-        $time = mb_substr(time(), 5, 5, 'utf-8');
-        $serialNumber = $time.$pre.$date.$rand;
-        return $serialNumber;
-    }
-
 }
