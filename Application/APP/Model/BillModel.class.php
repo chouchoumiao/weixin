@@ -132,29 +132,29 @@ class BillModel {
     /**
      * 兑换积分商城商品后追加bill记录
      * @param $id
-     * @param $data
+     * @param $integralCitydata
      * @param $cnCode
      * @return bool
      */
-    public function addIntegralCityBillInfo($id,$data,$cnCode){
+    public function addIntegralCityBillInfo($id,$integralCitydata,$cnCode){
 
 
         $data['WEIXIN_ID']= $this->weixinID;
         $data['Bill_type']= C('BILL_TYPE_ARR')['INTEGRAL_CITY'];
         $data['Bill_item_id']= $id;
 
-        $data['Bill_GoodsName']= $data["integralCity_name"];
-        $data['Bill_GoodsDescription']= $data["integralCity_name"];
+        $data['Bill_GoodsName']= $integralCitydata["integralCity_name"];
+        $data['Bill_GoodsDescription']= $integralCitydata["integralCity_name"];
         $data['Bill_openid']= $this->openid;
 
         $data['Bill_insertDate']= date("Y-m-d H:i:s",time());
         $data['Bill_editDate']= date("Y-m-d H:i:s",time());
 
-        $data['Bill_goods_beginDate']= $SealData["integralCity_fromDate"];
-        $data['Bill_goods_endDate']= $SealData["integralCity_endDate"];
-        $data['Bill_goods_expirationDate']= $SealData["integralCity_expirationDate"];
+        $data['Bill_goods_beginDate']= $integralCitydata["integralCity_fromDate"];
+        $data['Bill_goods_endDate']= $integralCitydata["integralCity_endDate"];
+        $data['Bill_goods_expirationDate']= $integralCitydata["integralCity_expirationDate"];
 
-        $data['Bill_integral']= $SealData["integralCity_integralNum"];
+        $data['Bill_integral']= $integralCitydata["integralCity_integralNum"];
         $data['Bill_SN']= $cnCode;
         $data['Bill_Status']= 0;
 

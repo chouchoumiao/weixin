@@ -77,7 +77,7 @@ class IntegralCityController extends CommonController {
         }
 
         //取得会员当前积分
-        $thsVipIntegralNum = $_SESSION['Vip_integral'];
+        $thsVipIntegralNum = $_SESSION['vipInfo']['Vip_integral'];
 
         //该商品所需的积分数
         $thisIntegralNum = $integralCityInfoByID["integralCity_integralNum"];
@@ -90,7 +90,7 @@ class IntegralCityController extends CommonController {
 
         //不够积分
         if($newVipIntegralNum < 0){
-            ToolModel::jsonReturn(JSON_ERROR,'您的'.$weixinName.'不足兑换该商品');
+            ToolModel::jsonReturn(JSON_ERROR,'您的'.$weixinName.'不足兑换该商品'.$thsVipIntegralNum.'+'.$thisIntegralNum);
         }
 
         //够积分可以兑换的逻辑

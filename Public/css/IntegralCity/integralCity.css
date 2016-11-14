@@ -34,7 +34,7 @@ input[type=button]{
 .pic01{margin:7px; border-bottom:1px solid #dddddd; overflow: hidden;text-align: center;}
 .pic01 span{display:inline-block; width:30px; position:absolute; top:6px;}
 .pic01 img{width:100%;overflow: hidden;}
-.pic01text{margin: 10px 10px 0 10px;}
+.pic01text{margin:10px;}
 .pic01text h2{font-size:12px; color:#8A8888; font-weight:normal;}
 .pic01text p{color:#ff1700; font-size:14px; line-height: 30px; font-weight:bold;margin-left: 0px;height: 30px;}
 .noData{margin-left:auto; margin-right:auto;}

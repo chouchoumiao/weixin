@@ -8,7 +8,7 @@
 
     <title>印章兑换</title>
 
-    <link href="__PUBLIC__/css/Seal/seal.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/Seal/seal.css?v=20160104" rel="stylesheet" type="text/css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,18 +35,17 @@
                     <img src="{$vo['flowerCity_imgPath']}">
                 </div>
                 <div class="pic01text" align = "center">
-
-                        <h2>{$vo['flowerCity_name']}</h2>
+                    <h2>{$vo['flowerCity_name']}</h2>
                     <p>
                         <span style="float:left; margin-left:6px">印章:{$vo['flowerCity_flowerNum']}</span>
-                            <span style="float:right; margin-right:6px">库存:{$vo['flowerCity_stockCount']}</span>
-
-                            <elt name="vo['flowerCity_stockCount']" value="0">
-                                <input class="btnsEnd" id="btnsEnd" type="button" value="已结束">
-                            <else/>
-                                <input class="btns" id="btns" type="button" value="兑  换"
-                                       onclick="return integralGoodsBill({$vo['id']})">
-                            </elt>
+                        <span style="float:right; margin-right:6px">库存:{$vo['flowerCity_stockCount']}</span>
+                    </p>
+                    <p>
+                        <elt name="vo['flowerCity_stockCount']" value="0">
+                            <input class="btnsEnd" id="btnsEnd" type="button" value="已结束">
+                        <else/>
+                            <input class="btns" id="btns" type="button" value="兑  换" onclick="return integralGoodsBill({$vo['id']})">
+                        </elt>
                     </p>
                 </div>
             </div>
