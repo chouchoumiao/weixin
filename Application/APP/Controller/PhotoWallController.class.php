@@ -36,8 +36,8 @@ class PhotoWallController extends CommonController {
                 case 'photoWallShow':
                     $this->photoWallShow();
                     break;
-                case 'adviceScratchcard':
-                    $this->adviceScratchcard();
+                case 'photoWallShowData':
+                    $this->photoWallShowData();
                     break;
                 case 'photoWallData':
                     $this->photoWallData();
@@ -122,25 +122,27 @@ class PhotoWallController extends CommonController {
     }
 
     /**
-     * 显示建言献策抽奖画面
+     * 点赞后操作
      */
-    private function adviceScratchcard(){
+    private function photoWallShowData(){
 
-        //取得建言献策的抽奖次数
-        $adviceCount = intval(D('Advice')->getAdviceCount());
-
-        //取得刮刮卡使用次数
-        $scratchcardedTimes = intval(D('Scratchcard')->getScratchcardUserCountByID(DATI_GUAGUAKA_EVENT_ID));
-
-        $adviceCount = $adviceCount - $scratchcardedTimes;
-
-        if($adviceCount <= 0){
-            $this->assign('noData',true);
-        }else{
-            $this->assign('count',$adviceCount);
+        if(!isset($_POST)){
+            $arr['success'] = -1;
+            echo json_encode($arr);
+            exit;
         }
 
-        $this->display('AdviceScratchcard');
+        $id = I('post.id',0);
+        $num = I('post.num',0);
+
+        if(!D('PhotoWall')->addLike($id,$num)){
+            $arr['success'] = -1;
+        }else{
+            $arr['success'] = 1;
+        }
+        echo json_encode($arr);
+        exit;
+
     }
     /**
      * 检查传入的参数的正确定

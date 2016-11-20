@@ -19,6 +19,24 @@ class PhotoWallModel {
 	}
 
     /**
+     * 点赞后累计
+     * @param $id
+     * @param $num
+     * @return bool
+     */
+    public function addLike($id,$num){
+        $data['PHOTOWALL_LIKENUM'] = $num;
+        $data['PHOTOWALL_EDITETIME'] = date("Y/m/d H:i:s",time());
+
+        $where['id'] = $id;
+        $where['WEIXIN_ID'] = $this->weixinID;
+
+        if(M()->table('photoWall')->where($where)->save($data)){
+            return true;
+        }
+        return false;
+    }
+    /**
      * 追加新照片墙记录
      * @param $post
      * @param $imgPath

@@ -98,7 +98,7 @@ h1.page-title{
     content:"";
 }
 .glass-note::before{
-    background:url(../img/PhotoWall/photoWallShow_imgs.png) 0 -11px no-repeat;
+    background:url(../../img/PhotoWall/photoWallShow_imgs.png) 0 -11px no-repeat;
     background-size:58px auto;
     display:inline-block;
     height:16.5px;
@@ -151,7 +151,7 @@ h1.page-title{
     content:"灞曞紑";
 }
 .simple-fold::after{
-    background:url(../images/photoWallShow_imgs.png) 0 0 no-repeat;
+    background:url(../../img/PhotoWall/photoWallShow_imgs.png) 0 0 no-repeat;
     background-size:58px auto;
     height:11px;
     margin-left:.2rem;
@@ -237,7 +237,7 @@ h1.page-title{
 }
 
 .tour-list > .item.hot .head::before{
-    background:url(../images/photoWallShow_imgs.png) -21px 0 no-repeat;
+    background:url(../../img/PhotoWall/photoWallShow_imgs.png) -21px 0 no-repeat;
     background-size:58px auto;
     content:"";
     height:37px;
@@ -303,7 +303,7 @@ h1.page-title{
 @keyframes zoom-animation{ to{ background-color:rgba(0,0,0,.75); } }
 
 .zoom::after{
-    background:url(../images/photoWallShow_imgs.png) 0 -28px no-repeat;
+    background:url(../../img/PhotoWall/photoWallShow_imgs.png) 0 -28px no-repeat;
     background-size:58px auto;
     height:16px;
     margin:-8px 0 0 -10px;
@@ -340,7 +340,7 @@ h1.page-title{
     margin-left:.4rem;
 }
 .exchange-rate .icon-to{
-    background:url(../images/photoWallShow_imgs.png) -20px -38px no-repeat;
+    background:url(../../img/PhotoWall/photoWallShow_imgs.png) -20px -38px no-repeat;
     background-size:58px auto;
     display:inline-block;
     height:27px;
@@ -401,7 +401,7 @@ h1.page-title{
     vertical-align:middle;
 }
 .exchange-rate .search-btn::before{
-    background:url(../images/photoWallShow_imgs.png) 0 -28px no-repeat;
+    background:url(../../img/PhotoWall/photoWallShow_imgs.png) 0 -28px no-repeat;
     background-size:58px auto;
     height:16px;
     margin-right:.4rem;
@@ -430,7 +430,7 @@ h1.page-title{
     vertical-align:middle;
 }
 .exchange-rate .swop-btn::before{
-    background:url(../images/photoWallShow_imgs.png) 0 -44px no-repeat;
+    background:url(../../img/PhotoWall/photoWallShow_imgs.png) 0 -44px no-repeat;
     background-size:58px auto;
     height:16px;
     margin-right:.4rem;
@@ -463,7 +463,7 @@ h1.page-title{
 }
 .weather .wind-indicator-icon{
     backface-visibility:hidden;
-    background:url(../images/photoWallShow_imgs.png) 0 0 no-repeat;
+    background:url(../../img/PhotoWall/photoWallShow_imgs.png) 0 0 no-repeat;
     background-size:58px auto;
     display:inline-block;
     height:11px;

@@ -5,8 +5,31 @@ $(function(){
         $('#up_img').click();
     });
 
+    $('.body').imgAutoSize(5);// 控制图片与容器的边距5
+
+    $(".search-btn").click(function(){
+        $(".top-navbar").toggleClass("toggle");
+    });
+
 
 });
+
+function adlike(id,num,picid){
+
+    $.ajax({
+        type: "post",
+        dataType: "json",
+        url: ROOT+"/APP/PhotoWall/index/action/photoWallShowData",
+        data:{"id":id,"num":num},
+        success: function (json) {
+            if(json.success == 1){
+                $(".spanid_"+picid).text('已赞');
+            }else if (json.success == -1){
+                return false;
+            }
+        }
+    });
+}
 
 function photoWallCheckForm(){
 
