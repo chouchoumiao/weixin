@@ -26,7 +26,7 @@ class CommonController extends Controller{
 
         //使用__construct方法时，需先调用父类的__construct方法先
         parent::__construct();
-
+        
         //只能使用微信内置浏览器进行访问 20160123
         if(!is_weixin()){
             echoWarning('功能只能在微信内置浏览器进行访问噢');exit;
@@ -46,26 +46,17 @@ class CommonController extends Controller{
         //取得该公众号的基础信息，写入session
         $_SESSION['config'] = D('Common')->getCon();
 
-        //如果当前的Controller是在需要判断会员的列表中，则进行是否会员判断，如果不是则显示会员绑定按钮
-        if( in_array(CONTROLLER_NAME,C('IS_VIP_ACTION_ARR')) ){
-
-            //如果不存在或者为空则创建，否则直接使用
-            if(!isset($this->VipModel) || ('' == $this->VipModel) ){
-                $this->VipModel = new VipModel();
-            }
-
-            //判断是否是会员
-            if( !$this->VipModel->isVip() ){
+        //先判断当前用户是否已经是会员了,是会员则取得会员信息存入session
+        if(D('Vip')->isVip()){
+            $_SESSION['vipInfo'] = D('Vip')->vipInfo();
+        }else{
+            //如果当前的Controller是在需要判断会员的列表中，但是当前并不是会员,则显示错误信息
+            if( in_array(CONTROLLER_NAME,C('IS_VIP_ACTION_ARR')) ){
 
                 ToolModel::doAlert('必须是会员才能使用该功能，请先注册为会员！');
                 $this->display('VipCenter/VipBD');
                 exit;
             }
-        }
-
-        //将会员信息存入session
-        if(!isset($_SESSION['vipInfo']) || ('' == $_SESSION['vipInfo'])){
-            $_SESSION['vipInfo'] = $this->VipModel->vipInfo();
         }
 
     }

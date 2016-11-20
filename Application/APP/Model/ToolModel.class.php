@@ -360,4 +360,25 @@ namespace APP\Model;
             return $serialNumber;
         }
 
+        /**
+         * @param $data
+         * @return bool|int
+         */
+        static function doFilterSelect($data){
+
+            if(false === $data){
+                return false;
+            }
+            if(null === $data){
+                return 0;
+            }
+
+            if(is_array($data) && count($data)>0){
+                return $data;
+            }else{
+                return false;
+            }
+
+        }
+
     }

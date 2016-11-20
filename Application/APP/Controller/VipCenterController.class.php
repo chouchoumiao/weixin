@@ -359,10 +359,10 @@ class VipCenterController extends CommonController {
         $nowflowerCount = $flowerCount - $afterBill;
 
         //取得建言献策的抽奖次数
-        $adviceCount = D('Common')->getAdviceCount();
+        $adviceCount = D('Advice')->getAdviceCount();
 
         //取得答题刮刮卡获得的使用次数
-        $scratchcardedTimes = D('Common')->getScratchcardUserCount();
+        $scratchcardedTimes = D('Scratchcard')->getScratchcardUserCountByID(DATI_GUAGUAKA_EVENT_ID);
 
         $count = intval($adviceCount) - intval($scratchcardedTimes);
 

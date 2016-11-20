@@ -1,0 +1,76 @@
+<extend name="Advice_layout" />
+<block name="advice_CSS">
+</block>
+<block name="advice_body">
+    <nav class="navbar navbar-default navbar-fixed-top advice-head" role="navigation">
+        <ul class="nav nav-pills">
+            <!--<li class="active"><a href="./adviceInfo.php">活动介绍</a></li><-->
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceMain/">活动</a></li>
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/showView">我要建言</a></li>
+            <li class="active"><a href="#">最新建言</a></li>
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceScratchcard">抽奖</a></li>
+
+        </ul>
+    </nav>
+    <div class="advice-contents">
+        <blockquote>
+            <strong>
+                <span class="adviceShow-title-span">针对各自关心的热点问题，来看网民们都怎么说。</span>
+            </strong>
+        </blockquote>
+        <br/>
+        <br/>
+
+        <!--无数据-->
+        <notempty name="noData">
+            <fieldset>
+                <br/>
+                <section class="adviceShow-detail adviceShow-detail-color-236">
+                    <section class="adviceShow-detail-section">
+                        <span class="second-span">尚未有网友建言！</span>
+                    </section>
+                </section>
+            </fieldset>
+        </notempty>
+        <!--取数据错误-->
+        <notempty name="error">
+            <fieldset>
+                <br/>
+                <section class="adviceShow-detail adviceShow-detail-color-255">
+                    <section class="adviceShow-detail-section">
+                        <span class="second-span">取数据错误！</span>
+                    </section>
+                </section>
+            </fieldset>
+        </notempty>
+        <!--数据输出-->
+        <notempty name="data">
+            <foreach name="data" item="vo">
+                <fieldset>
+                    <section class="section-name">
+                        <section>
+                            网友昵称：{$vo['ADVICE_NAME']}>
+                        </section>
+                    </section>
+                    <section class="adviceShow-detail adviceShow-detail-color-236">
+                        <section class="adviceShow-detail-section">
+                            <span class="second-span">{$vo['ADVICE_ADVICE']}</span>
+                        </section>
+                    </section>
+                    <br/>
+                    <if condition="$vo['ADVICE_REPLY'] neq '' ">
+                        <section class="adviceShow-detail adviceShow-detail-color-255">
+                            <section class="adviceShow-detail-section">
+                                <span class="first-span">回复：</span>
+                                <span class="second-span">{$vo['ADVICE_REPLY']}</span>
+                            </section>
+                        </section>
+                        <br/>
+                    </if>
+                </fieldset>
+            </foreach>
+        </notempty>
+    </div>
+</block>
+<block name="advice_JS">
+</block>

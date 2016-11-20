@@ -61,37 +61,6 @@ namespace APP\Model;
         }
 
         /**
-         * 取得建言献策的抽奖次数
-         * @return mixed
-         */
-        public function getAdviceCount(){
-            $where['WEIXIN_ID'] = $this->weixinID;
-            $where['ADVICE_OPENID'] = $this->openid;
-            $where['ADVICE_EVENT'] = 1;
-
-            return M()->table('adviceInfo')->where($where)->count();
-        }
-
-        /**
-         * 取得答题刮刮卡获得的使用次数
-         * @return mixed
-         */
-        public function getScratchcardUserCount(){
-            $where['scratchcard_userOpenid'] = $this->openid;
-            $where['WEIXIN_ID'] = $this->weixinID;
-            $where['scratchcard_userIsAllow'] = 1;
-            $where['scratchcard_id'] = DATI_GUAGUAKA_EVENT_ID;
-
-            $data = M()->table('scratchcard_user')->field('scratchcard_userCount')->where($where)->find();
-            if(false === $data){
-                return false;
-            }
-
-            return $data['scratchcard_userCount'];
-
-        }
-
-        /**
          * 追加印章记录
          * @param $ipE_name
          * @param $ipE_sex
@@ -159,5 +128,15 @@ namespace APP\Model;
             return intval($count);
         }
 
+        /**
+         * 根据传入的weixinID获得当前公众号的图文设置信息
+         * @return bool|int
+         */
+        public function getReplyInfo(){
+            $where['WEIXIN_ID'] = $_SESSION['weixinID'];
+
+            return ToolModel::doFilterSelect(M()->table('replyInfo')->where($where)->select());
+
+        }
 
     }

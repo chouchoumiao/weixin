@@ -21,6 +21,9 @@ class WechatCallbackapi
         $this->weixinID = $weixinInfo['id'];
         $this->weixinName = $weixinInfo['weixinName'];
 
+        //并将weixinID和openid存入session中
+        $_SESSION['weixinID'] = $this->weixinID;
+
         $this->token = $weixinInfo['weixinToken'];
         $this->appID = $weixinInfo['weixinAppId'];
 
@@ -76,6 +79,10 @@ class WechatCallbackapi
             $RX_TYPE = trim($postObj->MsgType);
 
             $this->openid = $postObj->FromUserName;
+
+            //追加到session中
+            $_SESSION['openid'] = $this->openid;
+
 
             //消息类型分离
             switch ($RX_TYPE)
@@ -377,41 +384,46 @@ class WechatCallbackapi
             }
             $result = $this->transmitText($object, $content);
         }else{
-//            //红包以外活动
-//            $replyInfoWhere['WEIXIN_ID'] = $weixinID;
-//            $replyInfo =  M()->table('replyInfo')->where($replyInfoWhere)->select();
-//
-//            $isSeted = 'NO';
-//            $replyInfoCount = count($replyInfo);
-//            for($i = 0;$i<$replyInfoCount;$i++){
-//                if ($keyword == $replyInfo[$i]['reply_intext']){
-//                    $content = array();
-//                    $content[] = array(
-//                        'Title'=>$replyInfo[$i]['reply_title'],
-//                        'Description'=>$replyInfo[$i]['reply_description'],
-//                        'PicUrl'=>$replyInfo[$i]['reply_ImgUrl'],
-//                        'Url' =>$replyInfo[$i]['reply_url']."?openid=".$openid."&weixinID=".$weixinID);
-//                    $isSeted = 'YES';
-//                }
-//            }
-            //追加会员中心画面
-            if ($keyword ==  "会员中心"){
+            //红包以外活动
 
-                $openidUrlEncode = base64_encode($this->openid);
-                $weixinIDUrlEncode = base64_encode($this->weixinID);
+            $isSeted = 'NO';
 
-                $content = array();
-                $content[] = array("Title"=>"路桥发布”会员中心",  "Description"=>"微”言大义，居“信”为政！“路桥发布”期待与您一起携手打造风清气朗的网络空间。",
-                    "PicUrl"=>"http://zglqxww-weixincourse.stor.sinaapp.com/VipCenter/vipCard.png",
-                    //"Url" =>"http://3.zglqxww.sinaapp.com/01_vipCenter/VipCennter.php?openid=".$encodeOpenid."&weixinID=".$encodeWeixinID);
-                    //"Url" =>"http://www.chouchoumiao.com/weixin/APP/VipCenter/index/openid/".$openid."/weixinID/".$weixinID);
-                    "Url" =>"http://www.chouchoumiao.com/weixin/APP/VipCenter/index/action/center/openid/".$openidUrlEncode."/weixinID/".$weixinIDUrlEncode);
-                $isSeted = "YES";
+            $replyInfo = D('Common')->getReplyInfo();
+            $replyInfoCount = count($replyInfo);
+            if($replyInfoCount > 0){
+                //传入的时候使用base64编码加密
+                $newOpenid = base64_encode($this->openid);
+                $newweixinID = base64_encode($this->weixinID);
+                for($i = 0;$i<$replyInfoCount;$i++){
+                    if ($keyword == $replyInfo[$i]['reply_intext']){
+                        $content = array();
+                        $content[] = array(
+                            'Title'=>$replyInfo[$i]['reply_title'],
+                            'Description'=>$replyInfo[$i]['reply_description'],
+                            'PicUrl'=>$replyInfo[$i]['reply_ImgUrl'],
+                            'Url' =>$replyInfo[$i]['reply_url']."/openid/".$newOpenid."/weixinID/=".$newweixinID);
+                        $isSeted = 'YES';
+                    }
+                }
             }
+            //追加会员中心画面
+//            if ($keyword ==  "会员中心"){
+//
+//                $openidUrlEncode = base64_encode($this->openid);
+//                $weixinIDUrlEncode = base64_encode($this->weixinID);
+//
+//                $content = array();
+//                $content[] = array("Title"=>"路桥发布”会员中心",  "Description"=>"微”言大义，居“信”为政！“路桥发布”期待与您一起携手打造风清气朗的网络空间。",
+//                    "PicUrl"=>"http://zglqxww-weixincourse.stor.sinaapp.com/VipCenter/vipCard.png",
+//                    //"Url" =>"http://3.zglqxww.sinaapp.com/01_vipCenter/VipCennter.php?openid=".$encodeOpenid."&weixinID=".$encodeWeixinID);
+//                    //"Url" =>"http://www.chouchoumiao.com/weixin/APP/VipCenter/index/openid/".$openid."/weixinID/".$weixinID);
+//                    "Url" =>"http://www.chouchoumiao.com/weixin/APP/VipCenter/index/action/center/openid/".$openidUrlEncode."/weixinID/".$weixinIDUrlEncode);
+//                $isSeted = "YES";
+//            }
             /*测试用*/
             if($isSeted == 'NO'){
 
-                $content = '测试阶段,请继续关注我们，谢谢!';
+                $content = '请继续关注我们，谢谢!';
 
             }
         }

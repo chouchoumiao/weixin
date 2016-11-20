@@ -1,0 +1,53 @@
+<extend name="Advice_layout" />
+<block name="advice_CSS">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.3.0/jquery.mobile-1.3.0.min.css"/>
+</block>
+<block name="advice_body">
+    <nav class="navbar navbar-default navbar-fixed-top advice-head" role="navigation">
+        <ul class="nav nav-pills">
+
+            <!--<li class="active"><a href="./adviceInfo.php">活动介绍</a></li><-->
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceMain/">活动</a></li>
+            <li class="active"><a href="#">我要建言</a></li>
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceShow">最新建言</a></li>
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceScratchcard">抽奖</a></li>
+
+        </ul>
+    </nav>
+    <div data-role="page" data-theme="c">
+        <div class="advice-contents">
+            <form name="customersUpdateForm" method="POST" action="__ROOT__/APP/Advice/index/action/adviced/" data-ajax="false" data-transition="flip">
+                <div>
+                    <label for="textinputName">姓名/昵称 :</label>
+                    <input id = "textinputName" name="textinputName" type="text" value= "{$_SESSION['vipInfo']['Vip_name']}" size="10">
+
+                </div>
+                <div>
+                    <label for="textinputTel">联系方式 :</label>
+                    <input id = "textinputTel" name="textinputTel" type="text" size="20" value="{$_SESSION['vipInfo']['Vip_tel']}">
+                </div>
+                <div  data-role="fieldcontain">
+                    <label for="textinputAdvice">您的建言 :</label>
+                    <textarea id = "textinputAdvice" name="textinputAdvice" style="min-height: 130px;" placeholder = "请输入您的建议！"></textarea>
+                </div>
+                <br>
+                <div>
+                    <p align="center" id ="submitDiv">
+                        <input type="submit" name="submitUpdateCustomersForm" value="提交" onclick="return adviceCheckForm();" >
+                    </p>
+                </div>
+                <div id= "doingDiv" style = "display:none">
+                    <button type="button" name="doingBtn" id="doingBtn" >正在提交,请稍等...</button>
+                </div>
+                <div id = "resetDiv">
+                    <p align="center">
+                        <input type="reset" name="resetForm" value="重填">
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="advice_JS">
+    <script src="http://apps.bdimg.com/libs/jquerymobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+</block>

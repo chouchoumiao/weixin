@@ -111,6 +111,7 @@ class ScratchcardModel {
 
 		$where['scratchcard_userIsAllow'] = 1;
 		$where['scratchcard_userOpenid'] = $this->openid;
+        $where['WEIXIN_ID'] = $this->weixinID;
 		$where['scratchcard_id'] = $id;
 
 		$data = M()->table('scratchcard_user')->field('scratchcard_userCount')->where($where)->find();

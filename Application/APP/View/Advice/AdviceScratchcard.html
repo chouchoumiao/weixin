@@ -1,0 +1,35 @@
+<extend name="Advice_layout" />
+<block name="advice_CSS">
+</block>
+<block name="advice_body">
+    <nav class="navbar navbar-default navbar-fixed-top advice-head" role="navigation">
+        <ul class="nav nav-pills">
+
+            <!--<li class="active"><a href="./adviceInfo.php">活动介绍</a></li><-->
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceMain/">活动</a></li>
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/showView">我要建言</a></li>
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceShow">最新建言</a></li>
+            <li class="active"><a href="#">抽奖</a></li>
+
+        </ul>
+    </nav>
+    <div class="advice-contents">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <notempty name="noData">
+                        <div class="well">
+                            <span class="text-warning">您还没有抽奖机会,赶紧进行活动，建言通过了就有一次抽奖机会,加油吧！</span>
+                        </div>
+                        <else/>
+                        <div class="form-group">
+                            <button type="button" id="link-scratchcard" class="btn btn-info btn-block">建言献策抽奖{$count}次</button>
+                        </div>
+                    </notempty>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="advice_JS">
+</block>
