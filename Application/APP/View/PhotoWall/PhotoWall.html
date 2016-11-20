@@ -1,0 +1,60 @@
+<extend name="PhotoWall_layout" />
+<block name="photoWall_CSS">
+</block>
+<block name="photoWall_body">
+<div>
+    <div id="head">
+        <nav class="navbar navbar-default navbar-fixed-top photoWall-head" role="navigation">
+            <ul class="nav nav-pills">
+
+                <!--<li class="active"><a href="./bbsInfo.php">活动介绍</a></li><-->
+                <li class=""><a data-ajax="false" href="__ROOT__/APP/PhotoWall/index/action/photoWallMain">活动介绍</a></li>
+                <li class=""><a data-ajax="false" href="__ROOT__/APP/PhotoWall/index/action/photoWallShow">照片墙</a></li>
+                <li class="active"><a href="#">我要参加</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</div>
+<div data-role="page" data-theme="c">
+    <div data-role="content">
+        <form name="customersUpdateForm" method="POST" action="__ROOT__/APP/PhotoWall/index/action/photoWallData" data-ajax="false" data-transition="flip" enctype="multipart/form-data">
+            <div>
+                </br></br>
+                <label for="textinputName">姓名/昵称 :</label>
+                <input id = "textinputName" type="text" name="textinputName" value="{$_SESSION['vipInfo']['Vip_name']}" size="10">
+
+            </div>
+            <div>
+                <label for="textinputTel">联系方式(可选) :</label>
+                <input id = "textinputTel" type="text" name="textinputTel" size="20" value="{$_SESSION['vipInfo']['Vip_tel']}">
+            </div>
+            <div>
+                <label for="up_img">上传图片 :</label>
+                <input type="file" id="up_img" name="up_img" style = "display:none" accept="image/*"/>
+                <div id="imgdiv">
+                    <img id="imgShow" src="__PUBLIC__/img/upload.jpg" class="img-rounded" width="150"/>
+                </div>
+            </div>
+
+            <br>
+            <div  id ="submitDiv">
+                <p align="center">
+                    <input type="submit" id = "submitBtn" name="submitUpdateCustomersForm" value="提交" onclick="return photoWallCheckForm();" >
+                </p>
+            </div>
+            <div id= "doingDiv" style = "display:none">
+                <button type="button" name="doingBtn" id="doingBtn" >正在提交,请稍等...</button>
+            </div>
+            <div id = "resetDiv">
+                <p align="center">
+                    <input type="reset" name="resetForm" id="resetForm" value="重填">
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+</block>
+<block name="photoWall_JS">
+    <script src="__PUBLIC__/js/uploadPreview.js"></script>
+</block>

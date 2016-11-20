@@ -1,5 +1,8 @@
 <?php
+define('PUBIC_URL_PATH','http://'.$_SERVER['HTTP_HOST'].'/weixin/Public');
 return array(
+
+
 	//'配置项'=>'配置值'
 
     /********************数据库配置**************************/

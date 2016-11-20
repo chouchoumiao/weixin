@@ -1,0 +1,30 @@
+<extend name="PhotoWall_layout" />
+<block name="photoWall_CSS">
+</block>
+<block name="photoWall_body">
+    <div id="head">
+        <nav class="navbar navbar-default navbar-fixed-top photoWall-head" role="navigation">
+            <ul class="nav nav-pills">
+
+                <!--<li class="active"><a href="./bbsInfo.php">活动介绍</a></li><-->
+                <li class="active"><a href="#">活动介绍</a></li>
+                <li class=""><a data-ajax="false" href="__ROOT__/APP/PhotoWall/index/action/photoWallShow">照片墙</a></li>
+                <li class=""><a data-ajax="false" href="__ROOT__/APP/PhotoWall/index/action/photoWall">我要参加</a></li>
+
+            </ul>
+        </nav>
+    </div>
+    <div class="photoWall-contents">
+        <div class="news_main_img">
+            <img src="__PUBLIC__/img/PhotoWall/main_photoWall.jpg" />
+        </div>
+    </div>
+    <div class="wl_news_detail">
+        <div>
+            <span >&nbsp &nbsp &nbsp &nbsp赶紧来参加吧！</span>
+        </div>
+    </div>
+</block>
+<block name="photoWall_JS">
+    <script src="__PUBLIC__/js/uploadPreview.js"></script>
+</block>

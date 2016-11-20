@@ -139,4 +139,39 @@ namespace APP\Model;
 
         }
 
+        /**
+         * 上传拖图片
+         * @param $folderName
+         * @param bool $isThumb 是否需要生成缩略图,默认不生成
+         * @return mixed
+         */
+        public function doUploadImg($folderName,$isThumb = false){
+            $config = ToolModel::imgUploadConfig($folderName);
+            //上传文件
+            $retArr = ToolModel::uploadImg($config);
+
+            if(!$retArr){
+                ToolModel::goBack('上传图片错误,请重新上传');
+                exit;
+            }
+
+            if($retArr['success']){
+
+                $imgPath = PUBLIC_PATH.'/'.$retArr['msg'];
+
+                $ret['imgPath'] = $retArr['msg'];
+                //判断是否需要生成缩略图
+                if($isThumb){
+                    //设置缩略图的保存地址与原图path一致
+                    $thumbPath = PUBLIC_PATH.'/'.$retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
+
+                    ToolModel::setThumb($imgPath,$thumbPath);
+
+                    $ret['thumbPath'] = $retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
+                }
+                return $ret;
+            }else{
+                ToolModel::goBack('上传图片错误,错误原因:'.$retArr['msg'].'请重新上传!');
+            }
+        }
     }

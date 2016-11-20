@@ -1,0 +1,90 @@
+<extend name="PhotoWall_layout" />
+<block name="photoWall_CSS">
+</block>
+<block name="photoWall_body">
+    <div id="head">
+        <nav class="navbar navbar-default navbar-fixed-top photoWall-head" role="navigation">
+            <ul class="nav nav-pills">
+
+                <!--<li class="active"><a href="./bbsInfo.php">活动介绍</a></li><-->
+                <li class=""><a data-ajax="false" href="__ROOT__/APP/PhotoWall/index/action/photoWallMain">活动介绍</a></li>
+                <li class="active"><a href="#">照片墙</a></li>
+                <li class=""><a data-ajax="false" href="__ROOT__/APP/PhotoWall/index/action/photoWall">我要参加</a></li>
+
+            </ul>
+        </nav>
+    </div>
+    <br/>
+    <br/>
+    <blockquote style="border-width: 0px 0px 0px 10px; font: 14px/25px arial, helvetica, sans-serif; margin: 5px 0px 0px; padding: 10px; border-radius: 4px; text-align: left; color: rgb(255, 255, 255); text-transform: none; text-indent: 0px; letter-spacing: normal; word-spacing: 0px; border-left-color: rgb(255, 0, 17); border-left-style: solid; white-space: normal; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important; font-size-adjust: none; font-stretch: normal; box-shadow: 2px 2px 4px rgb(153,153,153); text-shadow: 0px 1px 0px rgb(34,95,135); background-color: rgb(55, 57, 57); -webkit-text-stroke-width: 0px;" data-mce-style="margin: 5px 0px 0px; padding: 10px; max-width: 100%; orphans: 2; widows: 2; line-height: 25px; font-family: arial, helvetica, sans-serif; text-shadow: #225f87 0px 1px 0px; color: #ffffff; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; box-shadow: #999999 2px 2px 4px; border-left-width: 10px; border-left-style: solid; border-left-color: #fdd000; background-color: #373939; word-wrap: break-word !important;">
+        <span style="margin: 0px; padding: 0px; font-style: normal; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;"></span>
+        <span style="margin: 0px; padding: 0px; font-size: 18px; font-style: normal; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">
+        <strong style="margin: 0px; padding: 0px; font-style: normal; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">
+            <span style="margin: 0px; padding: 0px; font-style: normal; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">照片墙展示：
+        </span>
+        </strong>
+        </span>
+    </blockquote>
+    <br/>
+    <!--无数据-->
+    <notempty name="noData">
+        <fieldset style="padding: 0px; border: 0px currentColor; border-image: none; color: rgb(62, 62, 62); line-height: 25px; font-family: 微软雅黑; margin-left: 10px; white-space: normal; max-width: 100%; box-sizing: border-box !important; background-color: rgb(255, 255, 255);">
+            </br>
+            <section class="main2" style="border: 1px solid rgb(0, 187, 236); border-image: none; font-size: 1em; margin-top: -1.5em; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">
+                <section style="padding: 1.4em 1em 1em; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">
+                    <span style="text-align: inherit; color: rgb(51, 51, 51); line-height: 1.2; font-family: inherit; font-size: 1em; text-decoration: inherit; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">尚未有图片！</span>
+                </section>
+            </section>
+        </fieldset>
+    </notempty>
+    <!--取数据错误-->
+    <notempty name="error">
+        <fieldset style="padding: 0px; border: 0px currentColor; border-image: none; color: rgb(62, 62, 62); line-height: 25px; font-family: 微软雅黑; margin-left: 10px; white-space: normal; max-width: 100%; box-sizing: border-box !important; background-color: rgb(255, 255, 255);">
+            </br>
+            <section class="main2" style="border: 1px solid rgb(0, 187, 236); border-image: none; font-size: 1em; margin-top: -1.5em; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">
+                <section style="padding: 1.4em 1em 1em; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">
+                    <span style="text-align: inherit; color: rgb(51, 51, 51); line-height: 1.2; font-family: inherit; font-size: 1em; text-decoration: inherit; -ms-word-wrap: break-word !important; max-width: 100%; box-sizing: border-box !important;">数据读取错误！</span>
+                </section>
+            </section>
+        </fieldset>
+    </notempty>
+    <!--数据输出-->
+    <notempty name="data">
+        <foreach name="data" item="vo" key="k">
+            <div class="container">
+                <div class="album">
+                    <ul>
+                        <li>
+                            <span class="glass-note spanid_{$k}" onclick="adlike({$vo['id']},({$vo['PHOTOWALL_LIKENUM']}+1),{$k} )">{$vo['PHOTOWALL_LIKENUM']}</span>
+                            <img src="{$vo['PHOTOWALL_IMGURL']}" width="150"/>
+                        </li>
+
+                    </ul>
+                </div><!-- end album -->
+            </div>
+            </br>
+        </foreach>
+    </notempty>
+    <div class="zoom-photo" id="zoom-photo">
+        <div class="body"></div><!-- end body -->
+        <div class="foot">
+            <span class="zoom-in">放大</span>
+            <span class="zoom-out">缩小</span>
+            <span class="zoom-next">下一个</span>
+            <span class="zoom-prev">上一个</span>
+        </div><!-- end foot -->
+    </div><!-- end zoom-photo -->
+
+    <div class="shade" id="shade"></div><!-- end shade -->
+
+    <div class="footer">
+        <span class="retop" id="retop">返回顶部</span>
+    </div><!-- end footer -->
+
+</block>
+<block name="photoWall_JS">
+    <script src="__PUBLIC__/js/uploadPreview.js"></script>
+    <script src="__PUBLIC__/js/PhotoWall/photoWallShow_template.js"></script>
+    <script src="__PUBLIC__/js/PhotoWall/photoWallShow_main.js"></script>
+    <script src="__PUBLIC__/js/PhotoWall/photoWallShow_jquery.imgautosize.js"></script>
+</block>

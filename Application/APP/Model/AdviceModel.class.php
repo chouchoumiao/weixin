@@ -16,8 +16,6 @@ class AdviceModel {
 	public function __construct(){
 		$this->openid = $_SESSION['openid'];
 		$this->weixinID = $_SESSION['weixinID'];
-        $this->obj = M()->table('adviceInfo');
-
 	}
 
 	/**

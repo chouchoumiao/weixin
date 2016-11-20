@@ -84,34 +84,14 @@ class ForwardingGiftController extends CommonController {
             exit;
         }
 
-        //设置删除图片的相关配置项
-        $config = ToolModel::imgUploadConfig(FOLDER_NAME_FORWARDINGGIFT);
-        //上传文件
+        $ret = D('Common')->doUploadImg(FOLDER_NAME_FORWARDINGGIFT,true);
 
-        $retArr = ToolModel::uploadImg($config);
-
-        if(!$retArr){
-            ToolModel::goBack('上传图片错误,请重新上传');
+        //追加数据库记录
+        if(!D('ForwardingGift')->addForwardingGift($ret['thumbPath'],$ret['imgPath'])){
+            ToolModel::goBack('提交存入数据库出错，请重新提交!');
             exit;
         }
 
-        if($retArr['success']){
-
-            //生成缩略图
-            $imgPath = PUBLIC_PATH.'/'.$retArr['msg'];
-            //设置缩略图的保存地址与原图path一致
-            $thumbPath = PUBLIC_PATH.'/'.$retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
-
-            ToolModel::setThumb($imgPath,$thumbPath);
-
-            //追加数据库记录
-            if(!D('ForwardingGift')->addForwardingGift($thumbPath,$imgPath)){
-                ToolModel::goBack('提交存入数据库出错，请重新提交!');
-            }
-
-            ToolModel::goBack('提交成功，请耐心等待审核!');
-        }else{
-            ToolModel::goBack('上传图片错误,错误原因:'.$retArr['msg'].'请重新提交!');
-        }
+        ToolModel::goBack('提交成功，请耐心等待审核!');
     }
 }
