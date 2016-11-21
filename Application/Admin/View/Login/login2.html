@@ -1,0 +1,44 @@
+<extend name="login2_layout" />
+<block name="login_title"><title>登录</title></block>
+<block name="login_content">
+
+    <form method="post" action="__APP__/Admin/Login/doAction/action/login2Data" id="loginform" name="loginform">
+        <p>
+            <label for="user_login">用户名:<br>
+            <input type="text" size="20" value="" class="input" id="user_login" name="userName"></label>
+        </p>
+        <p>
+            <label for="user_pass">密  码:<br>
+            <input type="password" size="20" value="" class="input" id="user_pass" name="pwd"></label>
+        </p>
+            <p class="forgetmenot">
+                <label for="rememberme">
+                    <input type="checkbox" value="forever" id="rememberme" name="rememberme"> 记住我的登录信息
+                </label>
+            </p>
+        <p class="submit">
+            <input type="submit" value="登录" class="button button-primary button-large" id="wp-submit" name="wp-submit">
+            <input type="hidden" value="http://localhost/NewWordpress/wp-admin/" name="redirect_to">
+            <input type="hidden" value="1" name="testcookie">
+        </p>
+    </form>
+
+
+</block>
+
+<block name="login_js">
+    <script type="text/javascript">
+        function wp_attempt_focus(){
+            setTimeout( function(){ try{
+                d = document.getElementById('user_login');
+                d.focus();
+                d.select();
+            } catch(e){}
+            }, 200);
+        }
+
+        wp_attempt_focus();
+        if(typeof wpOnload=='function')wpOnload();
+    </script>
+    <script type="text/javascript" src="__PUBLIC__/js/Admin/Login/login2.js?v=20160101"></script>
+</block>

@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>微信管理后台-测试环境</title>
+        <link rel="stylesheet" href="css/index.css?v=20150430" type="text/css" media="screen" />
+        <!-- 可以设置浏览器显示时，[微信管理后台]左边的小图标-->
+        <!--<link rel="shortcut icon" href="http://sae.sina.com.cn/static/favicon.ico">-->
+
+<?php
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/Common/include.php');
+$userName = $_SESSION['user'];
+$sql = "select * from AdminToWeiID
+where username = '$userName'
+AND weixinStatus = 1";
+$weixinInfo = getDataBySql($sql);
+
+$isWeixinInfoExist = false;
+$isEventListExist = false;
+if(!$weixinInfo){
+    echo "当前未设置过公众号，请添加公众号信息！";
+    //exit;
+}else{
+    $isWeixinInfoExist = true;
+    if(isset($_GET['weixinID'])){
+        $thisWeixinID = $_GET['weixinID'];
+    }else{
+        $thisWeixinID = $weixinInfo[0]['id'];
+    }
+    $_SESSION['weixinID'] = $thisWeixinID;
+    $eventSql = "select * from setEventForAdmin where WEIXIN_ID = $thisWeixinID";
+    $info = getLineBySql($eventSql);
+    if($info['eventNameList']){
+        $isEventListExist = true;
+        $eventNameArr = array();
+        $eventUrlArr = array();
+        $eventNameArr = explode(",",$info['eventNameList']);
+        $eventUrlArr = explode(",",$info['eventUrlList']);
+    }
+}
+
+//session中追加 用于计算升序降序的计数 0：升序 1：降序，默认为0
+$_SESSION['ASCDESCCUNT'] = 0;
+
+$config = getConfigWithMMC($thisWeixinID);
+//判断基础信息是否取得成功
+if($config == '' || empty($config)){
+    echo "取得配置信息失败，请确认！";
+    exit;
+}
+$weixinName = $config['CONFIG_VIP_NAME'];
+?>
+</head>
+<body>
+
+<!--顶部-->
+<div class="layout_top_header">
+        <div style="float: left">
+        <span style="font-size:20px;line-height:45px;padding-left:20px;color:#8d8d8d">微信管理后台</span>
+        </div>
+
+        <div id="ad_setting" class="ad_setting2">
+        <a class="ad_setting_a">
+        <i class="icon-user glyph-icon" style="font-size: 20px"></i>
+        <span>管理员: &nbsp <?php echo $_SESSION['user'];?></span>
+<i class="icon-chevron-down glyph-icon"></i>
+        </a>
+        <ul class="dropdown-menu-uu" style="display: none" id="ad_setting_ul">
+        <li class="ad_setting_ul_li"> <a href="adminEdit.php" target="menuFrame">
+        <i class="icon-user glyph-icon"></i> 修改密码 </a> </li>
+        <li class="ad_setting_ul_li"> <a href="login.php?action=logout">
+        <i class="icon-signout glyph-icon" ></i>
+        <span class="font-bold" id='logout'>退出</span></a>
+        </li>
+        </ul>
+        </div>
+        <div id="ad_setting" class="ad_setting">
+        <a class="ad_setting_a" >
+        <span>
+        <select style="font-size:15px;color:#8d8d8d" id = "weiIDSelect" onchange="getWeiID();">
+<?php
+        $weixinInfoCount = count($weixinInfo);
+for($i=0;$i<$weixinInfoCount;$i++){
+    ?>
+<option value=<?php echo $weixinInfo[$i]['id']?>><?php echo $weixinInfo[$i]['weixinName'];?></option>
+    <?php
+}
+?>
+</select>
+</span>
+</a>
+</div>
+<div id="ad_setting" class="ad_setting">
+        <a class="ad_setting_a" href="javascript:; ">
+        <i style="font-size: 16px"></i>
+        <span >当前公众号:</span>
+</a>
+</div>
+</div>
+<!--顶部结束-->
+<!--菜单-->
+<div class="layout_left_menu">
+        <ul id="menu">
+        <li class="childUlLi">
+        <a href="main.html"  target="menuFrame"><i class="glyph-icon icon-home"></i>首页</a>
+        <ul>
+        <li><a target="menuFrame" href="javascript:void(0)"><i class="glyph-icon icon-chevron-right"></i>管理公众号</a>
+<ul>
+<?php
+        $weiID = $_SESSION['weixinID'];
+$sql = "select * from AdminToWeiID where id = $weiID AND weixinStatus = 1";
+$weiInfo = getlineBySql($sql);
+if($weiInfo['id']){
+    ?>
+<li><a target="menuFrame" href="javascript:void(0)">
+            <i class="glyph-icon icon-chevron-right2"></i><?php echo $weiInfo['weixinName'];?>
+</a>
+    <ul>
+    <li><a href="../forWexinID/weixinIDAddNew.php?weixinID=<?php echo $weiInfo['id'];?>" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right3"></i>编辑公众号基本设置</a>
+            </li>
+            <li><a href="../forEventReply/eventReplySet.php?weixinID=<?php echo $weiInfo['id'];?>" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right3"></i>进入活动相关设置</a>
+            </li>
+            <li><a href="../forWexinID/menuSet.php?weixinID=<?php echo $weiInfo['id'];?>" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right3"></i>自定义菜单设置</a>
+    </li>
+    </ul>
+    </li>
+    <?php
+}else{
+    ?>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尚未设置公众号信息!</a>
+    </li>
+    <?php
+}
+?>
+</ul>
+<li><a href="../forWexinID/weixinIDAddNew.php" target="menuFrame">
+        <i class="glyph-icon icon-chevron-right"></i><font color="#FF0000">添加新公众号</font> </a>
+        </li>
+        <li><a href="../forWexinID/editWeixinID.php" target="menuFrame">
+        <i class="glyph-icon icon-chevron-right"></i>编辑公众号</a>
+</li>
+<?php
+        //if($_SESSION['user'] == "admin"){
+        ?>
+<li><a href="adminSetMuneClass.php" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>菜单分类设置</a></li>
+<?php
+        //}
+        ?>
+</li>
+</ul>
+</li>
+<li class="childUlLi">
+        <a target="menuFrame" href="javascript:void(0)"> <i class="glyph-icon icon-reorder"></i>会员管理</a>
+<ul>
+<?php
+if($isEventListExist){
+    ?>
+<li><a href="../froIntegralNewVip/integralNewVip.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>初始化设置</a></li>
+            <li><a href="../froIntegralSetDaily/integralSetDaily.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>签到<?php echo $weixinName;?></a></li>
+    <?php
+}else{
+    ?>
+<li><a target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>尚未设置活动，请设置！</a></li>
+    <?php
+}
+?>
+
+</ul>
+</li>
+<li class="childUlLi">
+        <a target="menuFrame" href="javascript:void(0)"> <i class="glyph-icon  icon-location-arrow"></i>活动设置</a>
+<ul>
+<?php
+if($isEventListExist){
+    $eventNameArrCount = count($eventNameArr);
+    for($i=0;$i<$eventNameArrCount;$i++){
+        if(strstr($eventNameArr[$i],"答题")){
+            ?>
+        <li><a target="menuFrame" href="javascript:void(0)">
+                    <i class="glyph-icon icon-chevron-right"></i><?php echo $eventNameArr[$i];?></a>
+            <ul>
+            <li><a href="../forAnswer/question_search.php" target="menuFrame">
+                    <i class="glyph-icon icon-chevron-right2"></i>结果查询</a>
+                    </li>
+                    <li><a href="../forAnswer/question_master_manager.php" target="menuFrame">
+                    <i class="glyph-icon icon-chevron-right2"></i>主题信息</a>
+                    </li>
+                    <li><a href="../forAnswer/question_manager.php" target="menuFrame">
+                    <i class="glyph-icon icon-chevron-right2"></i>题目信息</a>
+            </li>
+            </ul>
+            </li>
+            <?php
+        }else{
+            ?>
+        <li><a href=<?php echo $eventUrlArr[$i];?> target="menuFrame">
+                    <i class="glyph-icon icon-chevron-right"></i><?php echo $eventNameArr[$i];?></a>
+            </li>
+            <?php
+        }
+    }
+}else{
+    ?>
+<li><a target="menuFrame" href="javascript:void(0)">
+            <i class="glyph-icon icon-chevron-right"></i>尚未设置活动，请设置！</a>
+    </li>
+    <?php
+}
+?>
+</ul>
+</li>
+<li class="childUlLi">
+        <a target="menuFrame" href="javascript:void(0)"> <i class="glyph-icon icon-reorder"></i>用户管理</a>
+<ul>
+<?php
+if($_SESSION['user'] == "admin"){
+    ?>
+<li><a href="adminUserSearch.php" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>管理员权限用户查询</a></li>
+            <li><a href="addUserByAdmin.php" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i>管理员权限用户添加</a></li>
+    <?php
+}
+?>
+<li><a href="adminEdit.php" target="menuFrame">
+        <i class="glyph-icon icon-chevron-right"></i>修改密码</a></li>
+        </ul>
+        </li>
+        <li class="childUlLi">
+        <a target="menuFrame" href="javascript:void(0)"> <i class="glyph-icon icon-reorder"></i>查询功能</a>
+<ul>
+<?php
+if($isEventListExist){
+    ?>
+<li><a href="../forSearchInfo/searchVipInfo.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>会员信息查询</a></li>
+            <li><a href="../froIntegralSetDaily/getDailyCode.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>查询签到码</a></li>
+            <li><a href="../forSearchInfo/searchQAClassInfo.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>答题分类查询</a></li>
+            <li><a href="../forSearchInfo/question_OKCountSearch.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>全答对时间排行</a></li>
+            <li><a href="../forExchange/exchangeInfoSearch.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>奖品兑换情况查询</a>
+            <li><a href="../forExchange/exchange.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>兑奖信息查询</a>
+            <li><a href="../forForwardingGift/forwardingGiftInfoSearch.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>转发有礼查询</a>
+            <li><a href="../forHongbao/hongbaoInfoSearch.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>红包测试</a>
+            <li><a href="../forFlowerCity/flowerCityManger.php" target="menuFrame">
+            <i class="glyph-icon icon-chevron-right"></i>印章商城</a>
+    </li>
+    <?php
+}else{
+    ?>
+<li><a target="menuFrame" href="javascript:void(0)">
+            <i class="glyph-icon icon-chevron-right"></i>尚未设置活动，请设置！</a>
+    </li>
+    <?php
+}
+?>
+</ul>
+</li>
+</ul>
+</div>
+<!--菜单-->
+<div id="layout_right_content" class="layout_right_content">
+        <div class="mian_content">
+        <div id="page_content">
+        <iframe id="menuFrame" name="menuFrame" src="main.html" style="overflow:visible;"
+scrolling="yes" frameborder="no" width="100%" height="100%"></iframe>
+        </div>
+        </div>
+        </div>
+        <div class="layout_footer">
+        <p>Copyright © 2015 - 臭臭喵工作室</p>
+</div>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="js/tendina.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+    function getWeiID(){
+        var weixinID =  $("#weiIDSelect").val();
+        $.ajax({
+            url:"weixinIDData.php"//改为你的动态页
+            ,type:"POST"
+            ,data:{"weixinID":weixinID}//调用json.js类库将json对象转换为对应的JSON结构字符串
+            ,dataType: "json"
+            ,success:function(data){
+                self.location='main.php?weixinID='+weixinID;
+            }
+            ,error:function(xhr){alert('PHP页面有错误！'+xhr.responseText);}
+        });
+    };
+    //用于显示select的选中事件
+    $(document).ready(function(){
+        <?php
+        if(isset($_GET['weixinID'])){
+            ?>
+            $("#weiIDSelect ").val('<?php echo $_GET['weixinID'];?>');
+        <?php
+        }
+        ?>
+
+    });
+</script>
+</body>
+</html>
