@@ -28,8 +28,7 @@ class LoginModel {
         $where['isdeleted'] = 0;
 
         $data = M()->table('AdminUser')->where($where)->find();
-
-        echo M()->table('AdminUser')->getLastsql();exit;
+        
         if($data){
             $this->userName = $userName;
             $this->userPwd = $userPwd;

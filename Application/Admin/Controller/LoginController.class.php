@@ -53,10 +53,9 @@ class LoginController extends CommonController {
         }
 
         //将用户名写入session
-        $_SESSION['username'] = $data['username'];
+        $_SESSION['username2'] = $data['username'];
 
-        echo 'OK';exit;
-        $this->display('Index/index');
+        $this->display('Index/index2');
 
     }
     /**
