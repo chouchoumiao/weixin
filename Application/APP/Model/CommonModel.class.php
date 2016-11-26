@@ -24,7 +24,7 @@ namespace APP\Model;
             $where['weixinStatus'] = 1;
             $where['id'] = $id;
 
-            $data =  M('admin_to_weiid')->where($where)->find();
+            $data =  M()->table('adminToWeiID')->where($where)->find();
 
             if(false === $data){
                 return false;

@@ -27,7 +27,7 @@ class LoginModel {
         $where['password'] = md5($userPwd);
         $where['isdeleted'] = 0;
 
-        $data = M()->table('AdminUser')->where($where)->find();
+        $data = M()->table('adminUser')->where($where)->find();
         
         if($data){
             $this->userName = $userName;

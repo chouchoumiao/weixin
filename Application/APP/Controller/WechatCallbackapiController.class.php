@@ -24,8 +24,9 @@ class WechatCallbackapi
         //并将weixinID和openid存入session中
         $_SESSION['weixinID'] = $this->weixinID;
 
-        $this->token = $weixinInfo['weixinToken'];
-        $this->appID = $weixinInfo['weixinAppId'];
+        echo $this->token = $weixinInfo['weixinToken'];
+        echo $this->appID = $weixinInfo['weixinAppId'];
+        exit;
 
         $this->echoStr = $weixinGetArr['echoStr'];
         $this->signature = $weixinGetArr['signature'];
@@ -389,6 +390,7 @@ class WechatCallbackapi
             $isSeted = 'NO';
 
             $replyInfo = D('Common')->getReplyInfo();
+
             $replyInfoCount = count($replyInfo);
             if($replyInfoCount > 0){
                 //传入的时候使用base64编码加密

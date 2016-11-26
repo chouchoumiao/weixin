@@ -8,7 +8,7 @@ return array(
     /********************数据库配置**************************/
     'DB_TYPE' => 'mysql',
     'DB_HOST' => 'localhost',
-    'DB_NAME' => 'app_zglqxwwtest',
+    'DB_NAME' => 'app_zglqxww',
     'DB_USER' => 'wujiayu',
     'DB_PWD' => '84112326Wu',
     'DB_PORT' => 3306,

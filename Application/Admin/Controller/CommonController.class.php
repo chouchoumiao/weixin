@@ -23,12 +23,12 @@ class CommonController extends Controller{
         parent::__construct();
         
         //判断是否已经登录
-//        if( (!isset($_SESSION['username'])) || ('' == $_SESSION['username']) ){
-//            if(( 'login' != ACTION_NAME) &&  ('login2' != ACTION_NAME) ){
-//
-//                //$this->dispaly('Login/login2');
-//            }
-//        }
+        if( (!isset($_SESSION['username2'])) || ('' == $_SESSION['username2']) ){
+            if(( 'login' != ACTION_NAME) &&  ('login2' != ACTION_NAME) ){
+
+                //$this->dispaly('Login/login2');
+            }
+        }
 
     }
 

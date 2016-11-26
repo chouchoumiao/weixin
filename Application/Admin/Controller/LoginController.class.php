@@ -21,6 +21,10 @@ class LoginController extends CommonController {
                 case 'login2Data':
                     $this->login2Data();
                     break;
+                case 'logout2':
+                    $this->logout2();
+                    break;
+
 
             }
         }
@@ -28,32 +32,42 @@ class LoginController extends CommonController {
 
     }
 
+    //登出
+    private function logout2(){
+        $_SESSIN['username2'] = '';
+        unset($_SESSIN['username2']);
+        $this->display('Login/login2');
+    }
+
     /**
      * 新登录是验证用户名 密码正确性
      */
     private function login2Data(){
-        if(!isset($_POST)){
-            ToolModel::goBack('参数错误');
-            exit;
-        }
 
-        //验证数据正确性
-        $ret = $this->checkData();
-        if( 1 != $ret){
-            ToolModel::goBack($ret);
-            exit;
-        }
+        if(!isset($_SESSION['username2'])){
+            if(!isset($_POST)){
+                ToolModel::goBack('参数错误');
+                exit;
+            }
 
-        
-        //验证正确性
-        $data = D('Login')->checkLogin($this->userName,$this->userPwd);
-        if(!$data){
-            ToolModel::goBack('用户名或密码错误');
-            exit;
-        }
+            //验证数据正确性
+            $ret = $this->checkData();
+            if( 1 != $ret){
+                ToolModel::goBack($ret);
+                exit;
+            }
 
-        //将用户名写入session
-        $_SESSION['username2'] = $data['username'];
+
+            //验证正确性
+            $data = D('Login')->checkLogin($this->userName,$this->userPwd);
+            if(!$data){
+                ToolModel::goBack('用户名或密码错误');
+                exit;
+            }
+
+            //将用户名写入session
+            $_SESSION['username2'] = $data['username'];
+        }
 
         $this->display('Index/index2');
 

@@ -13,6 +13,11 @@ class IndexController extends Controller {
                 case 'showMain':
                     $this->showMain();
                     break;
+                //显示建议的信息画面
+                case 'showSuggest':
+                    $this->showSuggest();
+                    break;
+
 
             }
         }
@@ -21,6 +26,10 @@ class IndexController extends Controller {
 
     private function showMain(){
         $this->display('index');
+    }
 
+
+    private function showSuggest(){
+        echo 'ddd';exit;
     }
 }

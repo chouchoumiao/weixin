@@ -262,7 +262,7 @@ namespace APP\Model;
         static function getConfig($weixinID){
 
             $where['WEIXIN_ID'] = $weixinID;
-            $data = M()->table('ConfigSet')->where($where)->find();
+            $data = M()->table('configSet')->where($where)->find();
             if(false === $data){
                 return array(
                     "CONFIG_INTEGRALINSER" =>0,

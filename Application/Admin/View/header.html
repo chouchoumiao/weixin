@@ -19,7 +19,7 @@
 
 								<div class="m-top-xs">
 									<div class="divider"></div>
-									<a href="__ROOT__/Admin/Login/logout">退出登录</a>
+									<a href="__ROOT__/Admin/Login/doAction/action/logout2">退出登录</a>
 								</div>
 							</div>
 						</li>
@@ -40,17 +40,30 @@
 			</button>
 			<div class="pull-right m-right-sm">
 				<div class="user-block hidden-xs">
-					<div class="panel border dropdown-menu user-panel">
-						<div class="panel-body paddingTB-sm">
-							<ul>
-								<li>
-									<a href="__ROOT__/Admin/Login/logout">
-										<i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">退出登录</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+                    <a href="#" id="userToggle" data-toggle="dropdown">
+                        <div class="user-detail inline-block">
+                            登出
+                            <i class="fa fa-angle-down"></i>
+                            <i></i>
+                            <i></i>
+                        </div>
+                        <span>　</span>
+                        <span>　</span>
+                    </a>
+
+                    <div class="panel border dropdown-menu user-panel">
+                        <div class="panel-body paddingTB-sm">
+                            <ul>
+                                <li>
+                                    <a href="__ROOT__/Admin/Login/doAction/action/logout2">
+                                        <i class="fa fa-power-off fa-lg"></i>
+                                        <span class="m-left-xs">退出登录</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
 				</div>
 			</div>
 

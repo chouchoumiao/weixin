@@ -49,7 +49,7 @@ class AdviceController extends CommonController {
     }
 
     /**
-     * 进行刮奖逻辑
+     * 进行建言献策逻辑
      */
     private function adviced(){
         //过滤参数
