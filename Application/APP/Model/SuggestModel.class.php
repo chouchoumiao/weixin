@@ -41,11 +41,9 @@ class SuggestModel {
      */
     public function getTodaySuggestdCounts(){
 
-        $nowDate = date("Y-m-d",time());
-
-        $where = "WEIXIN_ID = $this->weixinID
-                AND openid = '$this->openid'
-                AND DATE_FORMAT( create_time , '%Y-%m-%d' ) = '$nowDate'";
+        $where['WEIXIN_ID'] = $this->weixinID;
+        $where['openid'] = $this->openid;
+        $where['create_date'] = date("Y-m-d",time());
 
         return intval(M()->table('suggest_info')->where($where)->count());
     }
@@ -56,7 +54,8 @@ class SuggestModel {
      */
     public function addSuggest()
     {
-        $nowTime = date("Y-m-d H:i:s", time());
+        $nowTime = date("H:i:s", time());
+        $nowDate = date("Y-m-d", time());
         $data['WEIXIN_ID'] = $this->weixinID;
         $data['openid'] = $this->openid;
         $data['name'] = I('post.name','');
@@ -64,7 +63,9 @@ class SuggestModel {
         $data['content'] = I('post.content','');
         $data['reply'] = '';
         $data['create_time'] = $nowTime;
+        $data['create_date'] = $nowDate;
         $data['reply_time'] = $nowTime;
+        $data['reply_date'] = $nowDate;
         $data['flag'] = 0;
         $data['is_event'] = 0;
 

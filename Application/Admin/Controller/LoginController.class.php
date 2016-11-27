@@ -36,6 +36,9 @@ class LoginController extends CommonController {
     private function logout2(){
         $_SESSIN['username2'] = '';
         unset($_SESSIN['username2']);
+
+        $_SESSIN['weixinID'] = '';
+        unset($_SESSIN['weixinID']);
         $this->display('Login/login2');
     }
 
@@ -67,8 +70,11 @@ class LoginController extends CommonController {
 
             //将用户名写入session
             $_SESSION['username2'] = $data['username'];
-        }
 
+
+
+        }
+        $_SESSION['weixinID'] = 69; //设置为路桥发布,需改进
         $this->display('Index/index2');
 
     }

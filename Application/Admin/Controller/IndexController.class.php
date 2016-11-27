@@ -30,6 +30,21 @@ class IndexController extends Controller {
 
 
     private function showSuggest(){
-        echo 'ddd';exit;
+
+        $date = D('Suggest')->getSuggestDate();
+
+        if($date){
+            $count = count($date);
+            $this->assign('count',$count);
+
+            for($i=0;$i<$count;$i++){
+                $data = D('Suggest')->getSuggestInfoByDate($date[$i]["create_date"]);
+                //$this->assign('data'.$i,$data);
+                $date[$i]['data'] = $data;
+            }
+            $this->assign('date',$date);
+        }
+
+        $this->display('Suggest/suggest');
     }
 }
