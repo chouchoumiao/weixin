@@ -24,6 +24,9 @@ class LoginController extends CommonController {
                 case 'logout2':
                     $this->logout2();
                     break;
+                case 'showIndex':
+                    $this->showIndex();
+                    break;
 
 
             }
@@ -46,37 +49,38 @@ class LoginController extends CommonController {
      * 新登录是验证用户名 密码正确性
      */
     private function login2Data(){
-
-        if(!isset($_SESSION['username2'])){
-            if(!isset($_POST)){
-                ToolModel::goBack('参数错误');
-                exit;
-            }
-
-            //验证数据正确性
-            $ret = $this->checkData();
-            if( 1 != $ret){
-                ToolModel::goBack($ret);
-                exit;
-            }
-
-
-            //验证正确性
-            $data = D('Login')->checkLogin($this->userName,$this->userPwd);
-            if(!$data){
-                ToolModel::goBack('用户名或密码错误');
-                exit;
-            }
-
-            //将用户名写入session
-            $_SESSION['username2'] = $data['username'];
-
-
-
+        
+        if(!isset($_POST)){
+            ToolModel::jsonReturn(JSON_ERROR,'参数错误');
+            exit;
         }
-        $_SESSION['weixinID'] = 69; //设置为路桥发布,需改进
-        $this->display('Index/index2');
 
+        //验证数据正确性
+        $ret = $this->checkData();
+        if( 1 != $ret){
+            ToolModel::jsonReturn(JSON_ERROR,$ret);
+            exit;
+        }
+
+
+        //验证正确性
+        $data = D('Login')->checkLogin($this->userName,$this->userPwd);
+        if(!$data){
+            ToolModel::jsonReturn(JSON_ERROR,'用户名或密码错误');
+            exit;
+        }
+
+        //将用户名写入session
+        $_SESSION['username2'] = $data['username'];
+
+        $_SESSION['weixinID'] = 69; //设置为路桥发布,需改进
+
+        ToolModel::jsonReturn(JSON_SUCCESS,'');
+
+
+    }
+    private function showIndex(){
+        $this->display('Index/index2');
     }
     /**
      * 新作登录界面

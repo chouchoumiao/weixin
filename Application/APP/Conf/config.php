@@ -14,10 +14,6 @@ define('FOLDER_NAME_PHOTOWALL','PhotoWall');
 //答题刮刮卡的活动ID
 define('DATI_GUAGUAKA_EVENT_ID',159);
 
-//json返回的成功失败参数
-define('JSON_ERROR',-1);
-define('JSON_SUCCESS',1);
-
 return array(
 	//'配置项'=>'配置值'
 
