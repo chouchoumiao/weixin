@@ -76,4 +76,20 @@ class SuggestModel {
         return true;
     }
 
+    /**
+     * 取得当前用户的建议回复信息
+     * @return bool
+     */
+    public function getReplyInfo(){
+        $where['openid'] = $this->openid;
+        $where['WEIXIN_ID'] = $this->weixinID;
+        $where['reply'] = array('neq','');
+
+        $data = M()->table('suggest_info')->where($where)->select();
+        if($data && count($data)>0){
+            return $data;
+        }
+        return false;
+    }
+
 }

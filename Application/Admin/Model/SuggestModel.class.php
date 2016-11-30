@@ -18,6 +18,41 @@ class SuggestModel {
         $this->weixinID = $_SESSION['weixinID'];
     }
 
+    /**
+     * 根据传入的id删除建议
+     * @param $id
+     * @return bool
+     */
+    public function deleteSuggest($id){
+        $where['id'] = $id;
+
+        if( M()->table('suggest_info')->where($where)->delete() == 1){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 对用户提交的建议进行回复
+     * @param $reply
+     * @param $id
+     * @return bool
+     */
+    public function updateReply($id,$reply){
+        $data['reply'] = $reply;
+        $data['reply_date'] = date("Y-m-d", time());
+        $data['reply_time'] = date("H:i:s", time());
+
+        $where['id'] = $id;
+
+        if(count(M()->table('suggest_info')->where($where)->save($data)) == 1){
+            return true;
+        }
+        return false;
+
+
+    }
+
     public function getSuggestDate(){
 
         $data = M()->table('suggest_info')

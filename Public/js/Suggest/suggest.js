@@ -22,11 +22,24 @@ $(function () {
                 $("#submitBtn").html("正在提交...");
             }
             ,success:function(json){
-                alert(json.msg);
-                $("#submitBtn").removeAttr("disabled");
-                $("#submitBtn").html("提交");
+
+                //成功
+                if(json.success == 1){
+                    alert(json.msg);
+                    location.reload();
+                }else if(json.success == -1) {
+                    alert(json.msg);
+                    $("#submitBtn").removeAttr("disabled");
+                    $("#submitBtn").html("提交");
+                }else {
+                    alert('提交出现未知错误,请联系管理员');
+                }
+
+
             }
-            ,error:function(xhr){alert('PHP页面有错误！'+xhr.responseText);}
+            ,error:function(){
+                alert('提交出现未知错误,请联系管理员！');
+            }
         });
     });
 

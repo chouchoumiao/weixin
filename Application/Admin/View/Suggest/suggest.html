@@ -18,7 +18,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <ul class="breadcrumb">
                         <li>建议</li>
-                        <li>建议一览表(按时间有新到旧排序)</li>
+                        <li>建议一览表(按时间有新到旧排序/点击可查看详细和回复)</li>
                     </ul>
 
                     <div class="smart-widget-body hidden-xs">
@@ -32,8 +32,10 @@
                                     {$voo['create_date']}
                                 </a>
                                 <div class="collapse" id="lg{$kk}">
-                                    <foreach name="voo['data']" item="vo">
-                                        <a href="https://www.baidu.com">
+                                    <foreach name="voo['data']" item="vo" key="kkk">
+
+                                        <a href="#" data-toggle="modal" data-target="#{$vo['create_date']}normalModal{$kkk}" class="gallery-action animation-dalay">
+                                            <!-- modal -->
                                             <div class="well well-lg" >
                                                 <span class="text-warning">姓名：{$vo['name']}</span><br>
                                                 <span class="text-warning">手机：{$vo['tel']}</span><br>
@@ -41,9 +43,48 @@
                                                 <span class="text-warning">时间：{$vo['create_time']}</span><br>
                                             </div>
                                         </a>
+                                        <div class="modal fade" id="{$vo['create_date']}normalModal{$kkk}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">
+                                                            <span aria-hidden="true">×</span>
+                                                            <span class="sr-only">Close</span>
+                                                        </button>
+                                                        <h4 class="modal-title">建议详细:</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" for="title">建议时间:</label>
+                                                                    <input class="form-control" type="text" id="title" name="title" disabled value="{$vo.create_date} {$vo.create_time}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">建议内容:</label>
+                                                                    <textarea class="form-control" rows="8"  type="text" disabled>{$vo.content}</textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">回复内容:</label>
+                                                                    <textarea class="form-control" rows="8" id="reply{$vo['id']}" type="text">{$vo.reply}</textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                        <button type="button" class="btn btn-primary" onclick="doUpdate({$vo['id']})">提交</button>
+                                                        <button type="button" class="btn btn-danger" onclick="doDelete({$vo['id']})">删除</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </foreach>
                                 </div>
                                 <br/>
+
+
+
                             </foreach>
                         </empty>
                     </div>
@@ -61,7 +102,7 @@
                                 </a>
                                 <div class="collapse" id="sm{$kk}">
                                     <foreach name="voo['data']" item="vo">
-                                        <a href="https://www.baidu.com">
+                                        <a href="#" data-toggle="modal" data-target="#{$vo['create_date']}smallModal{$kkk}" class="gallery-action animation-dalay">
                                             <div class="well well-lg" >
                                                 <span class="text-warning">姓名：{$vo['name']}</span><br>
                                                 <span class="text-warning">手机：{$vo['tel']}</span><br>
@@ -69,15 +110,48 @@
                                                 <span class="text-warning">时间：{$vo['create_time']}</span><br>
                                             </div>
                                         </a>
+                                        <div class="modal fade" id="{$vo['create_date']}smallModal{$kkk}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">
+                                                            <span aria-hidden="true">×</span>
+                                                            <span class="sr-only">Close</span>
+                                                        </button>
+                                                        <h4 class="modal-title">建议详细:</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" for="title">建议时间:</label>
+                                                                    <input class="form-control" type="text"  name="title" disabled value="{$vo.create_date} {$vo.create_time}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">建议内容:</label>
+                                                                    <textarea class="form-control" rows="7" name="content" type="text" disabled>{$vo.content}</textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">回复内容:</label>
+                                                                    <textarea class="form-control" rows="7" id="small_reply{$vo['id']}" type="text">{$vo.reply}</textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                        <button type="button" class="btn btn-primary" onclick="small_doUpdate({$vo['id']})">提交</button>
+                                                        <button type="button" class="btn btn-danger" onclick="doDelete({$vo['id']})">删除</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </foreach>
                                 </div>
                                 <br/>
                             </foreach>
                         </empty>
                     </div>
-
-
-
                 </div>
             </div>
         </div><!-- ./padding-md -->
@@ -89,6 +163,6 @@
 </div>
 
 <include file = './js_layout'/>
-
+<script src="__PUBLIC__/js/Admin/Suggest/suggest.js?v=20160101"></script>
 </body>
 </html>

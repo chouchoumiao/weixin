@@ -28,10 +28,12 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div id = "baseInfo">
                 <br/>
-                <div class="alert alert-info" id = "baseTitle">
-                    <p class="text-primary">欢迎您对我们提供宝贵的建议与意见<br/>我们将认真审核后公布</p>
+                <div class="form-group">
+                    <div class="input-group">
+                        <img src="__PUBLIC__/img/Suggest/quzhang.jpg" width="100%" height="100%"/>
+                    </div>
                 </div>
-
+                
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">姓　名</span>
@@ -50,13 +52,38 @@
                         <textarea id ="content" type="text" class="form-control input-lg" rows="10"></textarea>
 
                 </div>
-                <button type="button" class="btn btn-success btn-block" id = "suggestBtn">提交</button>
+                <button type="button" class="btn btn-success btn-block" id = "suggestBtn">提交建议</button>
+                <br/>
+                <div class="form-group">
+                    <a class="btn btn-danger btn-block" role="button" data-toggle="collapse" data-target="#OK" aria-expanded="false" aria-controls="collapseExample">
+                        查询结果
+                    </a>
+                    <div class="collapse" id="OK">
+                        <empty name="data">
+                            <div class="well well-sm">
+                                <span class="text-warning"><small>没有数据</small></span>
+                            </div>
+                        <else/>
+                            <foreach name="data" item="vo">
+                                <div class="well">
+                                    <span class="text-info" style="word-warp:break-word;word-break:break-all;"><small>建议内容:　　{$vo['content']}</small></span><br/>
+                                    <span class="text-info"><small>建议时间:　　{$vo['create_date']} {$vo['create_time']}</small></span>
+                                    <hr/>
+                                    <span class="text-warning" style="word-warp:break-word;word-break:break-all"><small>回复内容:　　{$vo['reply']}</small></span><br/>
+                                    <span class="text-warning"><small>回复时间:　　{$vo['reply_date']} {$vo['reply_time']}</small></span>
+                                </div>
+                            </foreach>
+                        </empty>
+                    </div>
+                </div>
+                <br/>
             </div>
             <!--<button type="button" class="btn btn-block disabled" id = "referrerSubmitDoing" style="display:none">正在提交。。。</button>-->
         </div>
     </div>
 </div>
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/flat-ui/2.2.2/js/flat-ui.min.js"></script>
     <script src="__PUBLIC__/js/wx.js"></script>
     <script src="__PUBLIC__/js/common.js"></script>
     <script src="__PUBLIC__/js/function.js"></script>

@@ -78,6 +78,12 @@ class SuggestController extends CommonController {
      */
     private function showView(){
 
+        //查询当前用户的建议回复信息
+        $data = D('Suggest')->getReplyInfo();
+        if($data){
+           $this->assign('data',$data);
+        }
+
         $this->display('Suggest');
         
     }
