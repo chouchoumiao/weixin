@@ -1061,3 +1061,13 @@ function is_weixin(){
     }
     return false;
 }
+
+/**
+ * 判断传入的数组是否为空
+ * @param $data
+ * @return bool
+ */
+function isArrayNull($data){
+    $tmp = array_filter($data);
+    return empty($tmp);
+}

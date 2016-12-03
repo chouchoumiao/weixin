@@ -67,9 +67,9 @@ class PhotoWallController extends CommonController {
         //图片上传
         //设置删除图片的相关配置项
         $ret = D('Common')->doUploadImg(FOLDER_NAME_PHOTOWALL);
-
+        
         //追加数据库记录
-        if(!$this->obj->addPhotoWall($_POST,$ret['imgPath'])){
+        if(!$this->obj->addPhotoWall($_POST,$ret[0]['imgPath'])){
             ToolModel::goBack('提交时出现错误，请重新提交!');
             exit;
         }

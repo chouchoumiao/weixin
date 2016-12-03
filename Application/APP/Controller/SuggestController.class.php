@@ -43,34 +43,49 @@ class SuggestController extends CommonController {
      * 进行建议Suggest逻辑
      */
     private function suggested(){
+
         //过滤参数
         $ret = $this->checkPostVal();
         if( 1 != $ret){
-            ToolModel::jsonReturn(JSON_ERROR,$ret);
+            ToolModel::goBack($ret);
             exit;
         }
 
         //判断是否已经存在相同的建言了
         $suggest = I('post.content','');
         if($this->obj->isSameSuggest($suggest)){
-            ToolModel::jsonReturn(JSON_ERROR,'已经有相同内容的建议了，请不要重复提交!');
+            ToolModel::goBack('已经有相同内容的建议了，请不要重复提交!');
             exit;
         }
 
         //通用户每天只能建言两次
         if($this->obj->getTodaySuggestdCounts() >= 2){
-            ToolModel::jsonReturn(JSON_ERROR,'一天只能提交两次哦,请明天再继续提交您的建议');
+            ToolModel::goBack('一天只能提交两次哦,请明天再继续提交您的建议');
             exit;
         }
 
+        //上传多张图片
+        //判断是否有上传图片
+        $imgPathJson = '';
+        $thumbPathJson = '';
+        if(!isArrayNull($_FILES['up_img']['name'])){
+            $ret = D('Common')->doUploadImg(FOLDER_NAME_SUGGEST,true);
+
+            foreach ($ret as $name){
+                $imgPathArr[] = $name['imgPath'];
+                $thumbPathArr[] = $name['thumbPath'];
+            }
+            //5.4版本后,加JSON_UNESCAPED_SLASHES可以取消自动转义
+            $imgPathJson = json_encode($imgPathArr,JSON_UNESCAPED_SLASHES);
+            $thumbPathJson = json_encode($thumbPathArr,JSON_UNESCAPED_SLASHES);
+        }
         //追加建言记录
-        if(!$this->obj->addSuggest($_POST)){
-            ToolModel::jsonReturn(JSON_ERROR,'提交时出现错误，请重新提交！');
+        if(!$this->obj->addSuggest($imgPathJson,$thumbPathJson)){
+            ToolModel::goBack('提交时出现错误，请重新提交！');
             exit;
         }
 
-        ToolModel::jsonReturn(JSON_SUCCESS,'提交成功！感谢您的建议,我们会认真详读');
-
+        ToolModel::goToUrl('提交成功！感谢您的建议,我们会认真详读','showView');
     }
 
     /**
@@ -78,6 +93,14 @@ class SuggestController extends CommonController {
      */
     private function showView(){
 
+        if( ( 'quzhang' != I('get.flag')) && ( 'shuji' != I('get.flag'))){
+            echo '参数错误';
+            exit;
+        }
+
+        if(I('get.flag') == 'quzhang'){
+            $this->assign('quzhang',true);
+        }
         //查询当前用户的建议回复信息
         $data = D('Suggest')->getReplyInfo();
         if($data){

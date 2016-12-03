@@ -28,55 +28,74 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div id = "baseInfo">
                 <br/>
-                <div class="form-group">
-                    <div class="input-group">
-                        <img src="__PUBLIC__/img/Suggest/quzhang.jpg" width="100%" height="100%"/>
+                <form name="customersUpdateForm" method="POST" action="__ROOT__//APP/Suggest/index/action/suggested" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <notempty name="quzhang">
+                                <img src="__PUBLIC__/img/Suggest/quzhang.jpg" width="100%" height="100%"/>
+                            <else/>
+                                <img src="__PUBLIC__/img/Suggest/shuji.jpg" width="100%" height="100%"/>
+                            </notempty>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon">姓　名</span>
-                        <input type="text" id="name" class="form-control input-lg" value="{$_SESSION['vipInfo']['Vip_name']}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon">手　机</span>
-                        <input type="tel" id="tel" class="form-control input-lg" value="{$_SESSION['vipInfo']['Vip_tel']}">
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <span class="span">请填写您的建议:</span>
-                        <textarea id ="content" type="text" class="form-control input-lg" rows="10"></textarea>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">姓　名</span>
+                            <input type="text" id="name" name="name" class="form-control input-lg" value="{$_SESSION['vipInfo']['Vip_name']}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">手　机</span>
+                            <input type="tel" id="tel" name="tel" class="form-control input-lg" value="{$_SESSION['vipInfo']['Vip_tel']}">
+                        </div>
+                    </div>
 
-                </div>
-                <button type="button" class="btn btn-success btn-block" id = "suggestBtn">提交建议</button>
-                <br/>
-                <div class="form-group">
-                    <a class="btn btn-danger btn-block" role="button" data-toggle="collapse" data-target="#OK" aria-expanded="false" aria-controls="collapseExample">
-                        查询结果
-                    </a>
-                    <div class="collapse" id="OK">
-                        <empty name="data">
-                            <div class="well well-sm">
-                                <span class="text-warning"><small>没有数据</small></span>
-                            </div>
-                        <else/>
-                            <foreach name="data" item="vo">
-                                <div class="well">
-                                    <span class="text-info" style="word-warp:break-word;word-break:break-all;"><small>建议内容:　　{$vo['content']}</small></span><br/>
-                                    <span class="text-info"><small>建议时间:　　{$vo['create_date']} {$vo['create_time']}</small></span>
-                                    <hr/>
-                                    <span class="text-warning" style="word-warp:break-word;word-break:break-all"><small>回复内容:　　{$vo['reply']}</small></span><br/>
-                                    <span class="text-warning"><small>回复时间:　　{$vo['reply_date']} {$vo['reply_time']}</small></span>
+                    <div class="form-group">
+                        <span class="span">请填写您的建议:</span>
+                            <textarea id ="content" name="content" type="text" class="form-control input-lg" rows="10"></textarea>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="up_img">您可以上传三张图片 :</label>
+                        <input type="file" id="up_img" name="up_img[]" style = "display:none" accept="image/*"/>
+                        <input type="file" id="up_img1" name="up_img[]" style = "display:none" accept="image/*"/>
+                        <input type="file" id="up_img2" name="up_img[]" style = "display:none" accept="image/*"/>
+                        <div id="imgdiv">
+                            <img id="imgShow" src="__PUBLIC__/img/upload.jpg" class="img-rounded" style="padding-left: 2%" width="30%"/>
+                            <img id="imgShow2" src="__PUBLIC__/img/upload.jpg" class="img-rounded" style="padding-left: 2%" width="30%"/>
+                            <img id="imgShow1" src="__PUBLIC__/img/upload.jpg" class="img-rounded" style="padding-left: 2%" width="30%"/>
+                        </div>
+
+                        <p class="text-danger"><small>支持jpg,png,jpeg,请上传小于3M的图片</small></p>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block" id = "suggestBtn" onclick="return suggestCheck()">提交建议</button>
+                    <br/>
+                    <div class="form-group">
+                        <a class="btn btn-danger btn-block" role="button" data-toggle="collapse" data-target="#OK" aria-expanded="false" aria-controls="collapseExample">
+                            查询结果
+                        </a>
+                        <div class="collapse" id="OK">
+                            <empty name="data">
+                                <div class="well well-sm">
+                                    <span class="text-warning"><small>没有数据</small></span>
                                 </div>
-                            </foreach>
-                        </empty>
+                            <else/>
+                                <foreach name="data" item="vo">
+                                    <div class="well">
+                                        <span class="text-info" style="word-warp:break-word;word-break:break-all;"><small>建议内容:　　{$vo['content']}</small></span><br/>
+                                        <span class="text-info"><small>建议时间:　　{$vo['create_date']} {$vo['create_time']}</small></span>
+                                        <hr/>
+                                        <span class="text-warning" style="word-warp:break-word;word-break:break-all"><small>回复内容:　　{$vo['reply']}</small></span><br/>
+                                        <span class="text-warning"><small>回复时间:　　{$vo['reply_date']} {$vo['reply_time']}</small></span>
+                                    </div>
+                                </foreach>
+                            </empty>
+                        </div>
                     </div>
-                </div>
-                <br/>
+                    <br/>
+                </form>
             </div>
             <!--<button type="button" class="btn btn-block disabled" id = "referrerSubmitDoing" style="display:none">正在提交。。。</button>-->
         </div>
@@ -87,6 +106,7 @@
     <script src="__PUBLIC__/js/wx.js"></script>
     <script src="__PUBLIC__/js/common.js"></script>
     <script src="__PUBLIC__/js/function.js"></script>
-    <script src="__PUBLIC__/js/Suggest/suggest.js?v=20160104"></script>
+    <script src="__PUBLIC__/js/uploadPreview.js"></script>
+    <script src="__PUBLIC__/js/Suggest/suggest.js?v=20160107"></script>
 </body>
 </html>

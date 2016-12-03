@@ -8,6 +8,10 @@ define('PUBLIC_PATH',$_SERVER['DOCUMENT_ROOT'].'/weixin/Public');
 
 //分享有礼的文件夹名称
 define('FOLDER_NAME_FORWARDINGGIFT','ForwardingGift');
+
+//区长书记建议的文件夹名称
+define('FOLDER_NAME_SUGGEST','Suggest');
+
 //照片墙的文件夹名称
 define('FOLDER_NAME_PHOTOWALL','PhotoWall');
 
@@ -56,8 +60,8 @@ return array(
         99 => '其他地区'
     ),
 
-    //文件上传默认大小:5M
-    'FILE_SIZE' => 5242880,
+    //文件上传默认大小:3M
+    'FILE_SIZE' => 3145728,
 
 
     //图片资源可上传的后缀

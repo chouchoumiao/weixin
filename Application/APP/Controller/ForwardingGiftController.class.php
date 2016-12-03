@@ -87,7 +87,7 @@ class ForwardingGiftController extends CommonController {
         $ret = D('Common')->doUploadImg(FOLDER_NAME_FORWARDINGGIFT,true);
 
         //追加数据库记录
-        if(!D('ForwardingGift')->addForwardingGift($ret['thumbPath'],$ret['imgPath'])){
+        if(!D('ForwardingGift')->addForwardingGift($ret[0]['thumbPath'],$ret[0]['imgPath'])){
             ToolModel::goBack('提交存入数据库出错，请重新提交!');
             exit;
         }

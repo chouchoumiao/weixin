@@ -208,29 +208,46 @@ namespace APP\Model;
 
                 $upload = new \Think\Upload($config);// 实例化上传类
                 $info = $upload->upload();
-
                 //判断是否有图
-                $pathName = '';
                 if($info){
-                    foreach($info as $file){
-                        $pathName .= $file['savepath'].$file['savename'];
+                    //单张图片
+                    if(count($info) == 1){
+                        foreach($info as $file){
+                            $pathName .= $file['savepath'].$file['savename'];
+                        }
+                        $retArr[0]['success'] = 1;
+                        $retArr[0]['msg'] = $pathName;
+                        $retArr[0]['size'] = $file['size'];
+                        $retArr[0]['fileName'] = $file['name'];
+                        $retArr[0]['saveName'] = $file['savename'];
+
+                        //获得上传的路径地址
+                        $retArr[0]['savePath'] = $config['savePath'];
+
+                        //取得不带后缀名的文件名称
+                        $imgNameArr = explode('.',$file['savename']);
+                        $retArr[0]['imgName'] = $imgNameArr[0];
+
+                    }else{
+                        foreach($info as $key => $file){
+
+                            $retArr[$key]['success'] = 1;
+                            $retArr[$key]['msg'] = $file['savepath'].$file['savename'];
+                            $retArr[$key]['size'] = $file['size'];
+                            $retArr[$key]['fileName'] = $file['name'];
+                            $retArr[$key]['saveName'] = $file['savename'];
+
+                            //获得上传的路径地址
+                            $retArr[$key]['savePath'] = $config['savePath'];
+
+                            //取得不带后缀名的文件名称
+                            $imgNameArr = explode('.',$file['savename']);
+                            $retArr[$key]['imgName'] = $imgNameArr[0];
+                        }
                     }
-                    $retArr['success'] = 1;
-                    $retArr['msg'] = $pathName;
-                    $retArr['size'] = $file['size'];
-                    $retArr['fileName'] = $file['name'];
-                    $retArr['saveName'] = $file['savename'];
-
-                    //获得上传的路径地址
-                    $retArr['savePath'] = $config['savePath'];
-
-                    //取得不带后缀名的文件名称
-                    $imgNameArr = explode('.',$file['savename']);
-                    $retArr['imgName'] = $imgNameArr[0];
 
                     return $retArr;
-                }
-                else{
+                }else{
                     $retArr['success'] = 0;
                     $retArr['msg'] = $upload->getError();
                     return $retArr;

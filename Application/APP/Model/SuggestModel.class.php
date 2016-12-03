@@ -50,9 +50,11 @@ class SuggestModel {
 
     /**
      * 追加记录
+     * @param $imgPathJson 上传大图的路径(Json格式)
+     * @param $thumbPathJson 上传缩略图的路径(Json格式)
      * @return bool
      */
-    public function addSuggest()
+    public function addSuggest($imgPathJson,$thumbPathJson)
     {
         $nowTime = date("H:i:s", time());
         $nowDate = date("Y-m-d", time());
@@ -61,11 +63,20 @@ class SuggestModel {
         $data['name'] = I('post.name','');
         $data['tel'] = I('post.tel','');
         $data['content'] = I('post.content','');
-        $data['reply'] = '';
+        $data['imgPath'] = $imgPathJson;
+        $data['thumbPath'] = $thumbPathJson;
+
         $data['create_time'] = $nowTime;
         $data['create_date'] = $nowDate;
-        $data['reply_time'] = $nowTime;
-        $data['reply_date'] = $nowDate;
+        $data['reply1'] = '';
+        $data['reply2'] = '';
+        $data['reply3'] = '';
+        $data['reply_time1'] = null;
+        $data['reply_date1'] = null;
+        $data['reply_time2'] = null;
+        $data['reply_date2'] = null;
+        $data['reply_time3'] = null;
+        $data['reply_date3'] = null;
         $data['flag'] = 0;
         $data['is_event'] = 0;
 
@@ -83,7 +94,7 @@ class SuggestModel {
     public function getReplyInfo(){
         $where['openid'] = $this->openid;
         $where['WEIXIN_ID'] = $this->weixinID;
-        $where['reply'] = array('neq','');
+        $where['reply1'] = array('neq','');
 
         $data = M()->table('suggest_info')->where($where)->select();
         if($data && count($data)>0){
