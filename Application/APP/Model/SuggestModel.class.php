@@ -37,12 +37,14 @@ class SuggestModel {
 
     /**
      * 获得当前用户今天建言的次数
-     * @return mixed
+     * @param $flag
+     * @return int
      */
-    public function getTodaySuggestdCounts(){
+    public function getTodaySuggestdCounts($flag){
 
         $where['WEIXIN_ID'] = $this->weixinID;
         $where['openid'] = $this->openid;
+        $where['flag'] = $flag;
         $where['create_date'] = date("Y-m-d",time());
 
         return intval(M()->table('suggest_info')->where($where)->count());
@@ -50,11 +52,12 @@ class SuggestModel {
 
     /**
      * 追加记录
-     * @param $imgPathJson 上传大图的路径(Json格式)
-     * @param $thumbPathJson 上传缩略图的路径(Json格式)
+     * @param $flag          区长还是书记flag
+     * @param $imgPathJson   原始图片路径的Json字符串
+     * @param $thumbPathJson 缩略图路径的Json字符串
      * @return bool
      */
-    public function addSuggest($imgPathJson,$thumbPathJson)
+    public function addSuggest($flag,$imgPathJson,$thumbPathJson)
     {
         $nowTime = date("H:i:s", time());
         $nowDate = date("Y-m-d", time());
@@ -77,7 +80,7 @@ class SuggestModel {
         $data['reply_date2'] = null;
         $data['reply_time3'] = null;
         $data['reply_date3'] = null;
-        $data['flag'] = 0;
+        $data['flag'] = $flag;
         $data['is_event'] = 0;
 
         if (false === M()->table('suggest_info')->add($data)) {

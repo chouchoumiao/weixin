@@ -154,12 +154,12 @@ namespace APP\Model;
                 ToolModel::goBack('上传图片错误,请重新上传');
                 exit;
             }
-            if($retArrs['success'] == 0){
-                ToolModel::goBack('上传图片错误,错误原因:'.$retArrs['msg'].'请重新上传!');
-                exit;
-            }
 
             foreach ($retArrs as $key => $retArr){
+                if($retArr['success'] == 0){
+                    ToolModel::goBack('上传第'.$key.'个图片错误,错误原因:'.$retArr['msg'].'请重新上传!');
+                    exit;
+                }
                 $imgPath = PUBLIC_PATH.'/'.$retArr['msg'];
 
                 $ret[$key]['imgPath'] = $retArr['msg'];

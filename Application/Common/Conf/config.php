@@ -3,6 +3,11 @@ define('PUBIC_URL_PATH','http://'.$_SERVER['HTTP_HOST'].'/weixin/Public');
 //json返回的成功失败参数
 define('JSON_ERROR',-1);
 define('JSON_SUCCESS',1);
+
+//区长书记的flag
+define('QUZHANG',1);
+define('SHUJI',2);
+
 return array(
 
 

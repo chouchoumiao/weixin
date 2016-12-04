@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <include file='./head_layout' />
+    <link href="__PUBLIC__/css/Admin/Suggest/suggest.css?v=20160106" rel="stylesheet">
 </head>
 <body class="overflow-hidden">
 <div class="wrapper preload">
@@ -20,7 +21,6 @@
                         <li>建议</li>
                         <li>建议一览表(按时间有新到旧排序/点击可查看详细和回复)</li>
                     </ul>
-
                     <div class="smart-widget-body hidden-xs">
                         <empty name="count">
                             <a class="btn btn-lg btn-info btn-block" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
@@ -66,8 +66,36 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="">回复内容:</label>
-                                                                    <textarea class="form-control" rows="8" id="reply{$vo['id']}" type="text">{$vo.reply}</textarea>
+                                                                    <textarea class="form-control" rows="8" id="reply{$vo['id']}" type="text">{$vo.reply1}</textarea>
                                                                 </div>
+                                                                <notempty name="vo.imgData">
+                                                                    <div class="form-group" >
+                                                                        <label class="">图片信息:</label>
+                                                                        <notempty name="vo.thumbPath1">
+
+                                                                            <!-- 代码 开始 -->
+                                                                            <!--<div id="content">-->
+                                                                                <!--<div id="images">-->
+                                                                                    <a id="imgUrl1" title="" href="__PUBLIC__{$vo['imgPath1']}">
+                                                                                        <img alt="" src="__PUBLIC__{$vo.thumbPath1}" />
+                                                                                    </a>
+                                                                                <!--</div>-->
+
+                                                                            <!--</div>-->
+
+                                                                            <!--<a id="imgUrl1" href="__PUBLIC__/{$vo['imgPath1']}">-->
+                                                                                <!--<img src="__PUBLIC__/{$vo.thumbPath1}" width="25%" style="padding-left: 1%">-->
+                                                                            <!--</a>-->
+                                                                        </notempty>
+                                                                        <notempty name="vo.thumbPath2">
+                                                                            <img src="__PUBLIC__{$vo.thumbPath2}" width="25%" style="padding-left: 1%">
+                                                                        </notempty>
+                                                                        <notempty name="vo.thumbPath3">
+                                                                            <img src="__PUBLIC__{$vo.thumbPath3}" width="25%" style="padding-left: 1%">
+                                                                        </notempty>
+                                                                    </div>
+                                                                    <div id="credit"></div>
+                                                                </notempty>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -82,9 +110,6 @@
                                     </foreach>
                                 </div>
                                 <br/>
-
-
-
                             </foreach>
                         </empty>
                     </div>
@@ -95,13 +120,13 @@
                             <a class="btn btn-lg btn-info btn-block" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
                                 无数据
                             </a>
-                            <else/>
+                        <else/>
                             <foreach name="date" item="voo" key="kk">
                                 <a class="btn btn-lg btn-info btn-block" role="button" data-toggle="collapse" data-target="#sm{$kk}" aria-expanded="false" aria-controls="collapseExample">
                                     {$voo['create_date']}
                                 </a>
                                 <div class="collapse" id="sm{$kk}">
-                                    <foreach name="voo['data']" item="vo">
+                                    <foreach name="voo['data']" item="vo" key="kkk">
                                         <a href="#" data-toggle="modal" data-target="#{$vo['create_date']}smallModal{$kkk}" class="gallery-action animation-dalay">
                                             <div class="well well-lg" >
                                                 <span class="text-warning">姓名：{$vo['name']}</span><br>
@@ -133,8 +158,25 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="">回复内容:</label>
-                                                                    <textarea class="form-control" rows="7" id="small_reply{$vo['id']}" type="text">{$vo.reply}</textarea>
+                                                                    <textarea class="form-control" rows="7" id="small_reply{$vo['id']}" type="text">{$vo.reply1}</textarea>
                                                                 </div>
+
+                                                                <notempty name="vo.imgData">
+                                                                    <div class="form-group">
+                                                                        <label class="">图片信息:</label>
+                                                                        <notempty name="vo.thumbPath1">
+                                                                            <img src="__PUBLIC__/{$vo.thumbPath1}" width="90%">
+                                                                            <hr/>
+                                                                        </notempty>
+                                                                        <notempty name="vo.thumbPath2">
+                                                                            <img src="__PUBLIC__/{$vo.thumbPath2}" width="90%">
+                                                                            <hr/>
+                                                                        </notempty>
+                                                                        <notempty name="vo.thumbPath3">
+                                                                            <img src="__PUBLIC__/{$vo.thumbPath3}" width="90%">
+                                                                        </notempty>
+                                                                    </div>
+                                                                </notempty>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -163,6 +205,22 @@
 </div>
 
 <include file = './js_layout'/>
-<script src="__PUBLIC__/js/Admin/Suggest/suggest.js?v=20160101"></script>
+
+<script src="__PUBLIC__/js/Admin/jquery.min.js"></script>
+<script src="__PUBLIC__/js/Admin/jquery.imgbox.pack.js"></script>
+<script src="__PUBLIC__/js/Admin/Suggest/suggest.js?v=20160104"></script>
+<script>
+
+    $(document).ready(function() {
+        //图片点击放大JS
+        $("#imgUrl1").imgbox({
+            'speedIn'		: 0,
+            'speedOut'		: 0,
+            'alignment'		: 'center',
+            'overlayShow'	: true,
+            'allowMultiple'	: false
+        });
+    });
+</script>
 </body>
 </html>

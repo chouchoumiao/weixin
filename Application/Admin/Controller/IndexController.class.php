@@ -39,11 +39,47 @@ class IndexController extends Controller {
 
             for($i=0;$i<$count;$i++){
                 $data = D('Suggest')->getSuggestInfoByDate($date[$i]["create_date"]);
-                //$this->assign('data'.$i,$data);
+
+                foreach ($data as $key=>$vo){
+
+                    $thumbPathArr = json_decode($vo['thumbPath']);
+                    $imgPathArr = json_decode($vo['imgPath']);
+                    $imgCount = count($thumbPathArr);
+
+                    switch ($imgCount){
+                        case 1:
+                            $data[$key]['imgData'] = true;
+                            $data[$key]['thumbPath1'] = $thumbPathArr[0];
+                            
+                            $data[$key]['imgPath1'] = $imgPathArr[0];
+                            break;
+                        case 2:
+                            $data[$key]['imgData'] = true;
+                            $data[$key]['thumbPath1'] = $thumbPathArr[0];
+                            $data[$key]['thumbPath2'] = $thumbPathArr[1];
+
+                            $data[$key]['imgPath1'] = $imgPathArr[0];
+                            $data[$key]['imgPath2'] = $imgPathArr[1];
+                            break;
+                        case 3:
+                            $data[$key]['imgData'] = true;
+                            $data[$key]['thumbPath1'] = $thumbPathArr[0];
+                            $data[$key]['thumbPath2'] = $thumbPathArr[1];
+                            $data[$key]['thumbPath3'] = $thumbPathArr[2];
+
+                            $data[$key]['imgPath1'] = $imgPathArr[0];
+                            $data[$key]['imgPath2'] = $imgPathArr[1];
+                            $data[$key]['imgPath3'] = $imgPathArr[2];
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 $date[$i]['data'] = $data;
             }
             $this->assign('date',$date);
         }
+        //dump($date);exit;
 
         $this->display('Suggest/suggest');
     }

@@ -41,8 +41,14 @@ class SuggestController extends CommonController {
 
     /**
      * 进行建议Suggest逻辑
+     * flag 1:区长 2:书记
      */
     private function suggested(){
+
+        $flag = I('post.flag',0);
+        if( ($flag != QUZHANG) && ($flag != SHUJI) ){
+            ToolModel::goBack('参数错误');
+        }
 
         //过滤参数
         $ret = $this->checkPostVal();
@@ -59,7 +65,7 @@ class SuggestController extends CommonController {
         }
 
         //通用户每天只能建言两次
-        if($this->obj->getTodaySuggestdCounts() >= 2){
+        if($this->obj->getTodaySuggestdCounts($flag) >= 2){
             ToolModel::goBack('一天只能提交两次哦,请明天再继续提交您的建议');
             exit;
         }
@@ -80,25 +86,27 @@ class SuggestController extends CommonController {
             $thumbPathJson = json_encode($thumbPathArr,JSON_UNESCAPED_SLASHES);
         }
         //追加建言记录
-        if(!$this->obj->addSuggest($imgPathJson,$thumbPathJson)){
+        if(!$this->obj->addSuggest($flag,$imgPathJson,$thumbPathJson)){
             ToolModel::goBack('提交时出现错误，请重新提交！');
             exit;
         }
 
-        ToolModel::goToUrl('提交成功！感谢您的建议,我们会认真详读','showView');
+        ToolModel::goToUrl('提交成功！感谢您的建议,我们会认真详读','showView/flag/'.$flag);
     }
 
     /**
      * 显示建议页面
+     * flag 1:区长 2:书记
      */
     private function showView(){
 
-        if( ( 'quzhang' != I('get.flag')) && ( 'shuji' != I('get.flag'))){
+        $flag = I('get.flag',0);
+        if( ( QUZHANG != $flag) && ( SHUJI != $flag)){
             echo '参数错误';
             exit;
         }
 
-        if(I('get.flag') == 'quzhang'){
+        if($flag == QUZHANG){
             $this->assign('quzhang',true);
         }
         //查询当前用户的建议回复信息

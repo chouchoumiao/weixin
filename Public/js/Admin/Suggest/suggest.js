@@ -18,6 +18,15 @@ $(function () {
         doUpdate(reply,openid);
     });
 
+    //图片点击放大JS
+    $("#imgUrl1").imgbox({
+        'speedIn'		: 0,
+        'speedOut'		: 0,
+        'alignment'		: 'center',
+        'overlayShow'	: true,
+        'allowMultiple'	: false
+    });
+
 
 });
 
@@ -103,3 +112,8 @@ function update(id,reply) {
         ,error:function(xhr){alert('PHP页面有错误！'+xhr.responseText);}
     });
 }
+
+function showImg(imgPath) {
+    alert(imgPath);
+}
+
