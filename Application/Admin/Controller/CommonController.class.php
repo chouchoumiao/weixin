@@ -21,14 +21,15 @@ class CommonController extends Controller{
 
         //使用__construct方法时，需先调用父类的__construct方法先
         parent::__construct();
-        
+        //echo $_SESSION['username2'].'8888';
         //判断是否已经登录
+        //echo ACTION_NAME;exit;
         if( (!isset($_SESSION['username2'])) || ('' == $_SESSION['username2']) ){
-            if(( 'login' != ACTION_NAME) &&  ('login2' != ACTION_NAME) ){
-
-                //$this->dispaly('Login/login2');
+            if( ( 'doLogin') != ACTION_NAME && ( 'Login' != ACTION_NAME)){
+                $this->redirect('Admin/Login/doLogin/action/login2');
             }
         }
+        //exit;
 
     }
 

@@ -6,8 +6,9 @@ use APP\Model\ToolModel;
 class LoginController extends CommonController {
 
     private $userName,$userPwd;
+    private $flag;
 
-    public function doAction(){
+    public function doLogin(){
         //根据传入的事件进入对应各页面的显示处理
         $action = strval($_GET['action']);
 
@@ -24,10 +25,6 @@ class LoginController extends CommonController {
                 case 'logout2':
                     $this->logout2();
                     break;
-                case 'showIndex':
-                    $this->showIndex();
-                    break;
-
 
             }
         }
@@ -37,11 +34,14 @@ class LoginController extends CommonController {
 
     //登出
     private function logout2(){
-        $_SESSIN['username2'] = '';
+        $_SESSIN['username2'] = null;
         unset($_SESSIN['username2']);
 
-        $_SESSIN['weixinID'] = '';
+        $_SESSIN['weixinID'] = null;
         unset($_SESSIN['weixinID']);
+
+        $_SESSIN['flag'] = null;
+        unset($_SESSIN['flag']);
         $this->display('Login/login2');
     }
 
@@ -63,6 +63,12 @@ class LoginController extends CommonController {
         }
 
 
+        if(strval($this->userName) == 'quzhang'){
+            $_SESSION['flag'] = QUZHANG;
+        }else{
+            $_SESSION['flag'] = SHUJI;
+        }
+
         //验证正确性
         $data = D('Login')->checkLogin($this->userName,$this->userPwd);
         if(!$data){
@@ -79,9 +85,7 @@ class LoginController extends CommonController {
 
 
     }
-    private function showIndex(){
-        $this->display('Index/index2');
-    }
+   
     /**
      * 新作登录界面
      */
@@ -94,6 +98,10 @@ class LoginController extends CommonController {
         $this->userName = I('post.userName','');
         if( ('' == strval($this->userName)) ){
             return '用户名不能为空';
+        }
+
+        if( 'quzhang' != strval($this->userName) && ('shuji' != strval($this->userName))){
+            return '用户名错误';
         }
 
         if( (ToolModel::getStrLen(strval($this->userName))) > 8 ){

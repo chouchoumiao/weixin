@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class IndexController extends Controller {
+class IndexController extends CommonController {
     public function doAction(){
         //根据传入的事件进入对应各页面的显示处理
         $action = strval($_GET['action']);
@@ -12,6 +12,9 @@ class IndexController extends Controller {
             switch ($action){
                 case 'showMain':
                     $this->showMain();
+                    break;
+                case 'showIndex':
+                    $this->showIndex();
                     break;
                 //显示建议的信息画面
                 case 'showSuggest':
@@ -24,6 +27,11 @@ class IndexController extends Controller {
 
     }
 
+
+    private function showIndex(){
+        $this->display('Index/index2');
+    }
+    
     private function showMain(){
         $this->display('index');
     }

@@ -70,8 +70,10 @@ class SuggestModel {
 
     public function getSuggestDate(){
 
+        $where['flag'] = $_SESSION['flag'];
         $data = M()->table('suggest_info')
                     ->distinct(true)
+                    ->where($where)
                     ->order('create_date Desc')
                     ->field('create_date')
                     ->select();
@@ -91,6 +93,7 @@ class SuggestModel {
 
         $order = 'create_time Desc';
         $where['create_date'] = $date;
+        $where['flag'] = $_SESSION['flag'];
         $where['WEIXIN_ID'] = $this->weixinID;
 
         $data = M()->table('suggest_info')->where($where)->order($order)->select();

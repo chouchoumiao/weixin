@@ -40,7 +40,7 @@ $(function () {
         }
 
         $.ajax({
-            url:ROOT+'/Admin/Login/doAction/action/login2Data'//改为你的动态页
+            url:ROOT+'/Admin/Login/doLogin/action/login2Data'//改为你的动态页
             ,type:"POST"
             ,data:{
                 "userName":name,
@@ -57,7 +57,7 @@ $(function () {
                     alert(json.msg);
                     return false;
                 }else if(json.success == 1) {
-                    location.href = ROOT + '/Admin/Login/doAction/action/showIndex';
+                    location.href = ROOT + "/Admin/Index/doAction/action/showIndex";
                 }
             }
             ,error:function(xhr){alert('PHP页面有错误！'+xhr.responseText);}

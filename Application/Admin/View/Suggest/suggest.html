@@ -37,6 +37,10 @@
                                         <a href="#" data-toggle="modal" data-target="#{$vo['create_date']}normalModal{$kkk}" class="gallery-action animation-dalay">
                                             <!-- modal -->
                                             <div class="well well-lg" >
+                                                <notempty name="vo.replyFlag2">
+                                                    <span class="text-success">已对此条信息进行过回复</span><br>
+                                                    <br/>
+                                                </notempty>
                                                 <span class="text-warning">姓名：{$vo['name']}</span><br>
                                                 <span class="text-warning">手机：{$vo['tel']}</span><br>
                                                 <span class="text-warning">建言：{$vo['content']}</span><br>
@@ -68,13 +72,12 @@
                                                                     <div class="form-group" >
                                                                         <label class="">图片信息:</label>
                                                                         <notempty name="vo.thumbPath1">
-
                                                                             <!-- 代码 开始 -->
                                                                             <!--<div id="content">-->
                                                                                 <!--<div id="images">-->
-                                                                                    <!--<a id="imgUrl1" title="" href="__PUBLIC__{$vo['imgPath1']}">-->
+                                                                                    <a target="_blank" href="__PUBLIC__{$vo['imgPath1']}">
                                                                                         <img alt="" src="__PUBLIC__{$vo.thumbPath1}" width="25%" style="padding-left: 1%">
-                                                                                    <!--</a>-->
+                                                                                    </a>
                                                                                 <!--</div>-->
 
                                                                             <!--</div>-->
@@ -84,10 +87,14 @@
                                                                             <!--</a>-->
                                                                         </notempty>
                                                                         <notempty name="vo.thumbPath2">
-                                                                            <img src="__PUBLIC__{$vo.thumbPath2}" width="25%" style="padding-left: 1%">
+                                                                            <a target="_blank" href="__PUBLIC__{$vo['imgPath2']}">
+                                                                                <img src="__PUBLIC__{$vo.thumbPath2}" width="25%" style="padding-left: 1%">
+                                                                            </a>
                                                                         </notempty>
                                                                         <notempty name="vo.thumbPath3">
-                                                                            <img src="__PUBLIC__{$vo.thumbPath3}" width="25%" style="padding-left: 1%">
+                                                                            <a target="_blank" href="__PUBLIC__{$vo['imgPath3']}">
+                                                                                <img src="__PUBLIC__{$vo.thumbPath3}" width="25%" style="padding-left: 1%">
+                                                                            </a>
                                                                         </notempty>
                                                                     </div>
                                                                     <div id="credit"></div>
@@ -143,6 +150,10 @@
                                     <foreach name="voo['data']" item="vo" key="kkk">
                                         <a href="#" data-toggle="modal" data-target="#{$vo['create_date']}smallModal{$kkk}" class="gallery-action animation-dalay">
                                             <div class="well well-lg" >
+                                                <notempty name="vo.replyFlag2">
+                                                    <span class="text-success">已对此条信息进行过回复</span><br>
+                                                    <br/>
+                                                </notempty>
                                                 <span class="text-warning">姓名：{$vo['name']}</span><br>
                                                 <span class="text-warning">手机：{$vo['tel']}</span><br>
                                                 <span class="text-warning">建言：{$vo['content']}</span><br>
