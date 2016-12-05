@@ -64,10 +64,6 @@
                                                                     <label class="">建议内容:</label>
                                                                     <textarea class="form-control" rows="8"  type="text" disabled>{$vo.content}</textarea>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label class="">回复内容:</label>
-                                                                    <textarea class="form-control" rows="8" id="reply{$vo['id']}" type="text">{$vo.reply1}</textarea>
-                                                                </div>
                                                                 <notempty name="vo.imgData">
                                                                     <div class="form-group" >
                                                                         <label class="">图片信息:</label>
@@ -76,9 +72,9 @@
                                                                             <!-- 代码 开始 -->
                                                                             <!--<div id="content">-->
                                                                                 <!--<div id="images">-->
-                                                                                    <a id="imgUrl1" title="" href="__PUBLIC__{$vo['imgPath1']}">
-                                                                                        <img alt="" src="__PUBLIC__{$vo.thumbPath1}" />
-                                                                                    </a>
+                                                                                    <!--<a id="imgUrl1" title="" href="__PUBLIC__{$vo['imgPath1']}">-->
+                                                                                        <img alt="" src="__PUBLIC__{$vo.thumbPath1}" width="25%" style="padding-left: 1%">
+                                                                                    <!--</a>-->
                                                                                 <!--</div>-->
 
                                                                             <!--</div>-->
@@ -95,6 +91,24 @@
                                                                         </notempty>
                                                                     </div>
                                                                     <div id="credit"></div>
+                                                                </notempty>
+                                                                <notempty name="vo.replyFlag1">
+                                                                    <div class="form-group">
+                                                                        <label class="">回复内容:</label>
+                                                                        <textarea class="form-control" rows="8" id="reply1{$vo['id']}" type="text" {$vo.replyFlag1Readonly} >{$vo.reply1}</textarea>
+                                                                    </div>
+                                                                </notempty>
+                                                                <notempty name="vo.replyFlag2">
+                                                                    <div class="form-group">
+                                                                        <label class="">追加回复1:</label>
+                                                                        <textarea class="form-control" rows="8" id="reply2{$vo['id']}" type="text" {$vo.replyFlag2Readonly} >{$vo.reply2}</textarea>
+                                                                    </div>
+                                                                </notempty>
+                                                                <notempty name="vo.replyFlag3">
+                                                                    <div class="form-group">
+                                                                        <label class="">追加回复2:</label>
+                                                                        <textarea class="form-control" rows="8" id="reply3{$vo['id']}" type="text" {$vo.replyFlag3Readonly}>{$vo.reply3}</textarea>
+                                                                    </div>
                                                                 </notempty>
                                                             </div>
                                                         </div>
@@ -156,11 +170,6 @@
                                                                     <label class="">建议内容:</label>
                                                                     <textarea class="form-control" rows="7" name="content" type="text" disabled>{$vo.content}</textarea>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label class="">回复内容:</label>
-                                                                    <textarea class="form-control" rows="7" id="small_reply{$vo['id']}" type="text">{$vo.reply1}</textarea>
-                                                                </div>
-
                                                                 <notempty name="vo.imgData">
                                                                     <div class="form-group">
                                                                         <label class="">图片信息:</label>
@@ -177,6 +186,25 @@
                                                                         </notempty>
                                                                     </div>
                                                                 </notempty>
+                                                                <notempty name="vo.replyFlag1">
+                                                                    <div class="form-group">
+                                                                        <label class="">回复内容:</label>
+                                                                        <textarea class="form-control" rows="8" id="small_reply1{$vo['id']}" type="text" {$vo.replyFlag1Readonly} >{$vo.reply1}</textarea>
+                                                                    </div>
+                                                                </notempty>
+                                                                <notempty name="vo.replyFlag2">
+                                                                    <div class="form-group">
+                                                                        <label class="">追加回复1:</label>
+                                                                        <textarea class="form-control" rows="8" id="small_reply2{$vo['id']}" type="text" {$vo.replyFlag2Readonly} >{$vo.reply2}</textarea>
+                                                                    </div>
+                                                                </notempty>
+                                                                <notempty name="vo.replyFlag3">
+                                                                    <div class="form-group">
+                                                                        <label class="">追加回复2:</label>
+                                                                        <textarea class="form-control" rows="8" id="small_reply3{$vo['id']}" type="text" {$vo.replyFlag3Readonly}>{$vo.reply3}</textarea>
+                                                                    </div>
+                                                                </notempty>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -208,7 +236,7 @@
 
 <script src="__PUBLIC__/js/Admin/jquery.min.js"></script>
 <script src="__PUBLIC__/js/Admin/jquery.imgbox.pack.js"></script>
-<script src="__PUBLIC__/js/Admin/Suggest/suggest.js?v=20160104"></script>
+<script src="__PUBLIC__/js/Admin/Suggest/suggest.js?v=20160108"></script>
 <script>
 
     $(document).ready(function() {

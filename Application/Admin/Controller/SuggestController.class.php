@@ -45,8 +45,8 @@ class SuggestController extends CommonController {
             exit;
         }
 
-        $reply = I('post.reply','');
-        if($reply == ''){
+        $reply1 = I('post.reply1','');
+        if($reply1 == ''){
             ToolModel::jsonReturn(JSON_ERROR,'回复内容不能为空');
             exit;
         }
@@ -56,8 +56,11 @@ class SuggestController extends CommonController {
             exit;
         }
 
+        $reply2 = I('post.reply2','');
+        $reply3 = I('post.reply3','');
+
         //写入数据库中
-        if(!D('Suggest')->updateReply($id,$reply)){
+        if(!D('Suggest')->updateReply($id,$reply1,$reply2,$reply3)){
             ToolModel::jsonReturn(JSON_ERROR,'提交失败,请重新提交');
             exit;
         }

@@ -31,13 +31,29 @@ $(function () {
 });
 
 function doUpdate(id) {
+    var reply1 = '';
+    var reply2 = '';
+    var reply3 = '';
+    if($('#reply1'+id)){
+        reply1 = $('#reply1'+id).val();
+    }
 
-    var reply = $('#reply'+id).val();
+    if($('#reply2'+id)){
+        reply2 = $('#reply2'+id).val();
+    }
 
-    update(id,reply);
+    if($('#reply3'+id)){
+        reply3 = $('#reply3'+id).val();
+    }
+
+    update(id,reply1,reply2,reply3);
 }
 
 function doDelete(id) {
+
+    if(!confirm('确定删除吗？')){
+        return false;
+    }
     if( ('' == id) || (0 == id)){
         alert('参数错误');
         return false;
@@ -71,18 +87,32 @@ function doDelete(id) {
 
 function small_doUpdate(id) {
 
-    var reply = $('#small_reply'+id).val();
-    update(id,reply);
+    var reply1 = '';
+    var reply2 = '';
+    var reply3 = '';
+    if($('#small_reply1'+id)){
+        reply1 = $('#small_reply1'+id).val();
+    }
+
+    if($('#small_reply2'+id)){
+        reply2 = $('#small_reply2'+id).val();
+    }
+
+    if($('#small_reply3'+id)){
+        reply3 = $('#small_reply3'+id).val();
+    }
+
+    update(id,reply1,reply2,reply3);
 
 }
 
-function update(id,reply) {
+function update(id,reply1,reply2,reply3) {
     if( ('' == id) || (0 == id)){
         alert('参数错误');
         return false;
     }
 
-    if('' == reply){
+    if('' == reply1){
         alert('回复内容不能为空');
         return false;
     }
@@ -92,7 +122,9 @@ function update(id,reply) {
         ,type:"POST"
         ,data:{
             "id":id,
-            "reply":reply
+            "reply1":reply1,
+            "reply2":reply2,
+            "reply3":reply3
         }
         ,dataType:"json"
         ,beforeSend: function(){

@@ -91,6 +91,16 @@
                                         <hr/>
                                         <span class="text-warning" style="word-warp:break-word;word-break:break-all"><small>回复内容:　　{$vo['reply1']}</small></span><br/>
                                         <span class="text-warning"><small>回复时间:　　{$vo['reply_date1']} {$vo['reply_time1']}</small></span>
+                                        <notempty name="vo.reply2">
+                                            <hr/>
+                                            <span class="text-warning" style="word-warp:break-word;word-break:break-all"><small>追加回复1　　{$vo['reply2']}</small></span><br/>
+                                            <span class="text-warning"><small>回复时间:　　{$vo['reply_date2']} {$vo['reply_time2']}</small></span>
+                                        </notempty>
+                                        <notempty name="vo.reply3">
+                                            <hr/>
+                                            <span class="text-warning" style="word-warp:break-word;word-break:break-all"><small>追加回复2:　　{$vo['reply3']}</small></span><br/>
+                                            <span class="text-warning"><small>回复时间:　　{$vo['reply_date3']} {$vo['reply_time3']}</small></span>
+                                        </notempty>
                                     </div>
                                 </foreach>
                             </empty>

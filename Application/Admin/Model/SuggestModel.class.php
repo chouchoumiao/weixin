@@ -34,14 +34,29 @@ class SuggestModel {
 
     /**
      * 对用户提交的建议进行回复
-     * @param $reply
+     * @param $reply1
+     * @param $reply2
+     * @param $reply3
      * @param $id
      * @return bool
      */
-    public function updateReply($id,$reply){
-        $data['reply'] = $reply;
-        $data['reply_date'] = date("Y-m-d", time());
-        $data['reply_time'] = date("H:i:s", time());
+    public function updateReply($id,$reply1,$reply2,$reply3){
+
+        if( ('' == $reply2) || ('undefined' == $reply2) ){
+            $data['reply1'] = $reply1;
+            $data['reply_date1'] = date("Y-m-d", time());
+            $data['reply_time1'] = date("H:i:s", time());
+        }else{
+            if( ('' == $reply3) || ('undefined' == $reply3) ){
+                $data['reply2'] = $reply2;
+                $data['reply_date2'] = date("Y-m-d", time());
+                $data['reply_time2'] = date("H:i:s", time());
+            }else{
+                $data['reply3'] = $reply3;
+                $data['reply_date3'] = date("Y-m-d", time());
+                $data['reply_time3'] = date("H:i:s", time());
+            }
+        }
 
         $where['id'] = $id;
 

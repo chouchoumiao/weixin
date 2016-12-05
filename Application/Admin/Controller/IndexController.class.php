@@ -46,6 +46,33 @@ class IndexController extends Controller {
                     $imgPathArr = json_decode($vo['imgPath']);
                     $imgCount = count($thumbPathArr);
 
+                    if( '' == strval($vo['reply1'])){
+                        $data[$key]['replyFlag1'] = true;
+                    }else{
+                        if('' == strval($vo['reply2'])){
+                            $data[$key]['replyFlag1'] = true;
+                            $data[$key]['replyFlag1Readonly'] = "readonly='readonly'";
+                            $data[$key]['replyFlag2'] = true;
+                        }else{
+                            if('' == strval($vo['reply3'])){
+                                $data[$key]['replyFlag1'] = true;
+                                $data[$key]['replyFlag1Readonly'] = "readonly='readonly'";
+                                $data[$key]['replyFlag2'] = true;
+                                $data[$key]['replyFlag2Readonly'] = "readonly='readonly'";
+                                $data[$key]['replyFlag3'] = true;
+                            }else{
+                                $data[$key]['replyFlag1'] = true;
+                                $data[$key]['replyFlag1Readonly'] = "readonly='readonly'";
+                                $data[$key]['replyFlag2'] = true;
+                                $data[$key]['replyFlag2Readonly'] = "readonly='readonly'";
+                                $data[$key]['replyFlag3'] = true;
+                                $data[$key]['replyFlag3Readonly'] = "readonly='readonly'";
+                            }
+                        }
+                    }
+                    $vo['reply2'] = strval($vo['reply2']);
+                    $vo['reply3'] = strval($vo['reply3']);
+
                     switch ($imgCount){
                         case 1:
                             $data[$key]['imgData'] = true;
