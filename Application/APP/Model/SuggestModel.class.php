@@ -94,10 +94,11 @@ class SuggestModel {
      * 取得当前用户的建议回复信息
      * @return bool
      */
-    public function getReplyInfo(){
+    public function getReplyInfoByFlag($flag){
         $where['openid'] = $this->openid;
         $where['WEIXIN_ID'] = $this->weixinID;
         $where['reply1'] = array('neq','');
+        $where['flag'] = $flag;
 
         $data = M()->table('suggest_info')->where($where)->select();
         if($data && count($data)>0){

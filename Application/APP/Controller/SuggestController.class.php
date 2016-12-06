@@ -110,7 +110,7 @@ class SuggestController extends CommonController {
             $this->assign('quzhang',true);
         }
         //查询当前用户的建议回复信息
-        $data = D('Suggest')->getReplyInfo();
+        $data = D('Suggest')->getReplyInfoByFlag($flag);
         if($data){
            $this->assign('data',$data);
         }
