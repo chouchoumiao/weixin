@@ -34,14 +34,14 @@ class LoginController extends CommonController {
 
     //登出
     private function logout2(){
-        $_SESSIN['username2'] = null;
-        unset($_SESSIN['username2']);
+        $_SESSION['username2'] = null;
+        unset($_SESSION['username2']);
 
-        $_SESSIN['weixinID'] = null;
-        unset($_SESSIN['weixinID']);
+        $_SESSION['weixinID'] = null;
+        unset($_SESSION['weixinID']);
 
-        $_SESSIN['flag'] = null;
-        unset($_SESSIN['flag']);
+        $_SESSION['flag'] = null;
+        unset($_SESSION['flag']);
         $this->display('Login/login2');
     }
 
@@ -49,7 +49,7 @@ class LoginController extends CommonController {
      * 新登录是验证用户名 密码正确性
      */
     private function login2Data(){
-        
+
         if(!isset($_POST)){
             ToolModel::jsonReturn(JSON_ERROR,'参数错误');
             exit;

@@ -71,6 +71,7 @@ class SuggestModel {
     public function getSuggestDate(){
 
         $where['flag'] = $_SESSION['flag'];
+        $where['WEIXIN_ID'] = $this->weixinID;
         $data = M()->table('suggest_info')
                     ->distinct(true)
                     ->where($where)
