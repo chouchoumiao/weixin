@@ -155,6 +155,7 @@ class wechatCallbackapiTest
 
         //并将weixinID和openid存入session中
 
+        unset($_SESSION['weixinID']);
         $_SESSION['weixinID'] = $this->weixinID;
 
     }
@@ -208,6 +209,7 @@ class wechatCallbackapiTest
 
             $this->openid = strval($postObj->FromUserName);
             //获得的opendid设置到session中
+            unset($_SESSION['openid']);
             $_SESSION['openid'] = $this->openid;
 
             //消息类型分离
