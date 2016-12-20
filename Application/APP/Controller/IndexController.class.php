@@ -317,21 +317,51 @@ class wechatCallbackapiTest
                 break;
             case 'CLICK':
 
-                $replyInfoWhwere['WEIXIN_ID'] = $this->weixinID;
-                $replyInfo = M()->table('replyInfo')->where($replyInfoWhwere)->select();
+                //判断是否是从浙江在线绑定过来的(含有zjolTitleName)
+                $keyNameArr = explode('=',$object->EventKey);
+                $keyNameArrCount = count($keyNameArr) - 1;
+                if($keyNameArrCount > 0){
+                    $thisKeyName = $keyNameArr[$keyNameArrCount];
+                }else{
+                    $thisKeyName = $object->EventKey;
+                }
 
-                $replyCount = count($replyInfo);
-                for($i = 0; $i<$replyCount; $i++){
-                    if($object->EventKey == $replyInfo[$i]['reply_intext']){
-                        $content = array();
-                        $content[] = array(
-                            "Title"=>$replyInfo[$i]['reply_title'],
-                            "Description"=>$replyInfo[$i]['reply_description'],
-                            "PicUrl"=>$replyInfo[$i]['reply_ImgUrl'],
-                            "Url" =>$replyInfo[$i]['reply_url']."?openid=".$this->openid."&weixinID=".$this->weixinID
-                        );
+
+//                $content = '取消关注'.$object->EventKey;
+                $replyInfo = D('Common')->getReplyInfo();
+
+                $replyInfoCount = count($replyInfo);
+                if($replyInfoCount > 0){
+                    //传入的时候使用base64编码加密
+                    $newOpenid = base64_encode($this->openid);
+                    $newweixinID = base64_encode($this->weixinID);
+                    for($i = 0;$i<$replyInfoCount;$i++){
+                        if ($thisKeyName  == $replyInfo[$i]['reply_intext']){
+                            $content = array();
+                            $content[] = array(
+                                'Title'=>$replyInfo[$i]['reply_title'],
+                                'Description'=>$replyInfo[$i]['reply_description'],
+                                'PicUrl'=>$replyInfo[$i]['reply_ImgUrl'],
+                                'Url' =>$replyInfo[$i]['reply_url']."/openid/".$newOpenid."/weixinID/=".$newweixinID);
+                        }
                     }
                 }
+
+//                $replyInfoWhwere['WEIXIN_ID'] = $this->weixinID;
+//                $replyInfo = M()->table('replyInfo')->where($replyInfoWhwere)->select();
+//
+//                $replyCount = count($replyInfo);
+//                for($i = 0; $i<$replyCount; $i++){
+//                    if($object->EventKey == $replyInfo[$i]['reply_intext']){
+//                        $content = array();
+//                        $content[] = array(
+//                            "Title"=>$replyInfo[$i]['reply_title'],
+//                            "Description"=>$replyInfo[$i]['reply_description'],
+//                            "PicUrl"=>$replyInfo[$i]['reply_ImgUrl'],
+//                            "Url" =>$replyInfo[$i]['reply_url']."?openid=".$this->openid."&weixinID=".$this->weixinID
+//                        );
+//                    }
+//                }
                 break;
             case 'LOCATION':
                 $content = "上传位置：纬度 ".$object->Latitude.";经度 ".$object->Longitude;
