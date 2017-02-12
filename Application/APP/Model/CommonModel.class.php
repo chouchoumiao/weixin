@@ -34,9 +34,9 @@ namespace APP\Model;
         }
 
         /**
-         * 获得该微信公众号的基本设置
-         * @return array|mixed
-         */
+     * 获得该微信公众号的基本设置
+     * @return array|mixed
+     */
         public function getCon(){
             if( (!isset($_SESSION['config'])) || ('' == $_SESSION['config']) ){
                 $config = ToolModel::getConfig($this->weixinID);
@@ -47,6 +47,7 @@ namespace APP\Model;
 
             return $config;
         }
+
         /**
          * 获得所有的印章数
          * @param $vipID

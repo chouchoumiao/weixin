@@ -57,7 +57,7 @@ $(function () {
                     alert(json.msg);
                     return false;
                 }else if(json.success == 1) {
-                    location.href = ROOT + "/Admin/Index/doAction/action/showIndex";
+                    location.href = ROOT + "/Admin/Index2/doAction/action/showIndex";
                 }
             }
             ,error:function(xhr){alert('PHP页面有错误！'+xhr.responseText);}

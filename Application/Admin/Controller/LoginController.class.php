@@ -14,8 +14,16 @@ class LoginController extends CommonController {
 
         if(isset($action) && ('' != $action)){
 
-            //$this->obj = D('Login');
+            //用于普通登录
             switch ($action){
+                case 'login':
+                    $this->login();
+                    break;
+                case 'loginData':
+                    $this->loginData();
+                    break;
+
+                //用于区长和书记登录页面用
                 case 'login2':
                     $this->login2();
                     break;
@@ -28,10 +36,74 @@ class LoginController extends CommonController {
 
             }
         }
+    }
+
+    /**
+     * 新登录是验证用户名 密码正确性
+     */
+    private function loginData(){
+
+        if(!isset($_POST)){
+            ToolModel::jsonReturn(JSON_ERROR,'参数错误');
+            exit;
+        }
+
+        //验证数据正确性
+        $ret = $this->checkData();
+        if( 1 != $ret){
+            ToolModel::jsonReturn(JSON_ERROR,$ret);
+            exit;
+        }
+
+        //验证正确性
+        $data = D('Login')->checkLogin($this->userName,$this->userPwd);
+
+        if(!$data){
+            ToolModel::jsonReturn(JSON_ERROR,'用户名或密码错误');
+            exit;
+        }
+
+        //将用户名写入session
+        $_SESSION['username'] = $data['username'];
+        
+        ToolModel::jsonReturn(JSON_SUCCESS,'');
 
 
     }
 
+    /**
+     * 原来登录界面
+     */
+    private function login(){
+        $this->display('Login/login');
+    }
+
+    private function checkData(){
+        //检查用户名
+        $this->userName = I('post.userName','');
+        if( ('' == strval($this->userName)) ){
+            return '用户名不能为空';
+        }
+
+        if( (ToolModel::getStrLen(strval($this->userName))) > 20 ){
+            return '用户名不能大于20位';
+        }
+
+        $this->userPwd= I('post.pwd','');
+        if( ('' == strval($this->userPwd)) ){
+            return '密码不能为空';
+        }
+
+        if(ToolModel::getStrLen(strval($this->userPwd)) < 6){
+            return '密码不能小于6位';
+        }
+
+        return 1;
+    }
+
+
+
+    /**************************新登录界面用于区长与书记建言献策用**************************/
     //登出
     private function logout2(){
         $_SESSION['username2'] = null;
@@ -56,7 +128,7 @@ class LoginController extends CommonController {
         }
 
         //验证数据正确性
-        $ret = $this->checkData();
+        $ret = $this->checkData2();
         if( 1 != $ret){
             ToolModel::jsonReturn(JSON_ERROR,$ret);
             exit;
@@ -85,7 +157,7 @@ class LoginController extends CommonController {
 
 
     }
-   
+
     /**
      * 新作登录界面
      */
@@ -93,7 +165,7 @@ class LoginController extends CommonController {
         $this->display('Login/login2');
     }
 
-    private function checkData(){
+    private function checkData2(){
         //检查用户名
         $this->userName = I('post.userName','');
         if( ('' == strval($this->userName)) ){
@@ -119,4 +191,5 @@ class LoginController extends CommonController {
 
         return 1;
     }
+    /**************************新登录界面用于区长与书记建言献策用**************************/
 }
