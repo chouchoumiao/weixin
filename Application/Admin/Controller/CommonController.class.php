@@ -24,8 +24,8 @@ class CommonController extends Controller{
         //echo $_SESSION['username2'].'8888';
         //判断是否已经登录
         //echo ACTION_NAME;exit;
-        if( (!isset($_SESSION['username2'])) || ('' == $_SESSION['username2']) &&
-            (!isset($_SESSION['username'])) || ('' == $_SESSION['username']) ){
+
+        if( (!isset($_SESSION['username2'])) && (!isset($_SESSION['username'])) ){
 
             if( ( 'doLogin') != ACTION_NAME && ( 'Login' != ACTION_NAME)){
                 $this->redirect('Admin/Login/doLogin/action/login');
@@ -40,12 +40,14 @@ class CommonController extends Controller{
      *
      */
     public function _empty(){
-        if( (!isset($_SESSION['username'])) || ('' == $_SESSION['username']) ){
-            //无session则进入后台主页面
-            $this->redirect('Login/login');
-        }else{
-            //有session则进入后台主页面
-            $this->redirect('Index/index');
-        }
+        echo '无该方法,请重新登录';
+        exit;
+//        if( (!isset($_SESSION['username'])) || ('' == $_SESSION['username']) ){
+//            //无session则进入后台主页面
+//            $this->redirect('Login/login');
+//        }else{
+//            //有session则进入后台主页面
+//            $this->redirect('Index/index');
+//        }
     }
 }
