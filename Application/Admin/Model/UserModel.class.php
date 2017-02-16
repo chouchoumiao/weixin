@@ -12,9 +12,12 @@ header("Content-Type:text/html; charset=utf-8");
 class UserModel {
 
     private $userName;
+    private $weixinID;
+
 
     public function __construct(){
         $this->userName = $_SESSION['username'];
+        $this->weixinID = $_SESSION['weixinID'];
     }
 
     /**

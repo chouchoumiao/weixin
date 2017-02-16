@@ -16,6 +16,7 @@ class WeixinModel {
 
     public function __construct(){
         $this->userName = $_SESSION['username'];
+        $this->weixinID = $_SESSION['weixinID'];
     }
 
     /**
@@ -71,6 +72,32 @@ class WeixinModel {
 
         return $data;
 
+    }
+
+    /**
+     * 新增公众号基本信息
+     * @return bool
+     */
+    public function addNewWeixinIDInfo(){
+        //数据微信公众号信息取得
+        $data['username'] = $this->userName;
+        $data['weixinName'] = addslashes($_REQUEST['weixinName']);
+        $data['weixinType'] = addslashes($_REQUEST['weixinType']);
+        $data['weixinUrl'] = addslashes($_REQUEST['weixinUrl']);
+        $data['weixinToken'] = addslashes($_REQUEST['weixinToken']);
+        $data['weixinAppId'] = addslashes($_REQUEST['weixinAppId']);
+        $data['weixinAppSecret'] = addslashes($_REQUEST['weixinAppSecret']);
+        $data['weixinCode'] = addslashes($_REQUEST['weixinCode']);
+        $data['weixinOldID'] = addslashes($_REQUEST['weixinOldID']);
+        $data{'weixinInsertTime'}  = date("Y-m-d H:i:s",time());
+        $data['weixinStatus'] = 1;
+
+        $data = M()->table('AdminToWeiID')->add($data);
+
+        if($data >= 1){
+            return true;
+        }
+        return false;
     }
 
 
