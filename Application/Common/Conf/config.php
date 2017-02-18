@@ -8,6 +8,8 @@ define('JSON_SUCCESS',1);
 define('QUZHANG',1);
 define('SHUJI',2);
 
+define('PAGE_SHOW_COUNT_10',10);
+
 return array(
 
 

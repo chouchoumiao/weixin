@@ -65,7 +65,7 @@ class WeixinController extends CommonController {
             if($resultErrorNo == 0)
             {
 
-                $selectIDSql = "select MAX(id) from AdminToWeiID where weixinStatus = 1";
+                $selectIDSql = "select MAX(id) from adminToWeiID where weixinStatus = 1";
                 $thisID = getVarBySql($selectIDSql);
                 //$newWeixinUrl = "http://1.zglqxwwtest.sinaapp.com/?weixinID=".$thisID;
                 $newWeixinUrl = 'http://'.$_SERVER['HTTP_HOST'].'/?weixinID='.$thisID;
@@ -115,7 +115,7 @@ class WeixinController extends CommonController {
                     $headUrl = "img/default_head.png";
                 }
 
-                $updateSql = "update AdminToWeiID set weixinUrl = '$newWeixinUrl',weixinQRCodeUrl = '$QRUrl', weixinHeadUrl = '$headUrl',
+                $updateSql = "update adminToWeiID set weixinUrl = '$newWeixinUrl',weixinQRCodeUrl = '$QRUrl', weixinHeadUrl = '$headUrl',
                     weixinEditTime = '$nowTime' where id = $thisID";
                 $resultErrorNo = SaeRunSql($updateSql);
 
@@ -127,7 +127,7 @@ class WeixinController extends CommonController {
                     //exit;
                 }else{
                     //处理失败的情况下，将原先插入的数据删除
-                    $deleteSql = "delete from AdminToWeiID where id = $thisID";
+                    $deleteSql = "delete from adminToWeiID where id = $thisID";
                     SaeRunSql($deleteSql);
                     $msg = "提交失败！";
                     //echo $msg.$updateSql;
@@ -182,19 +182,19 @@ class WeixinController extends CommonController {
             }
 
             if( ($QRUrl == "url error") &&  ($headUrl == "url error") ){
-                $sql = "update AdminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
+                $sql = "update adminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
             weixinAppId = '$weixinAppId',weixinAppSecret = '$weixinAppSecret',weixinCode = '$weixinCode',weixinOldID = '$weixinOldID',
             weixinEditTime = '$nowTime' where id = $weixin_id";
             }else if(($QRUrl != "url error") &&  ($headUrl == "url error")){
-                $sql = "update AdminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
+                $sql = "update adminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
             weixinAppId = '$weixinAppId',weixinAppSecret = '$weixinAppSecret',weixinCode = '$weixinCode',weixinOldID = '$weixinOldID',
             weixinQRCodeUrl = '$QRUrl',weixinEditTime = '$nowTime' where id = $weixin_id";
             }else if(($QRUrl == "url error") &&  ($headUrl != "url error")){
-                $sql = "update AdminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
+                $sql = "update adminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
             weixinAppId = '$weixinAppId',weixinAppSecret = '$weixinAppSecret',weixinCode = '$weixinCode',weixinOldID = '$weixinOldID',
             weixinHeadUrl = '$headUrl',weixinEditTime = '$nowTime' where id = $weixin_id";
             }else{
-                $sql = "update AdminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
+                $sql = "update adminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
             weixinAppId = '$weixinAppId',weixinAppSecret = '$weixinAppSecret',weixinCode = '$weixinCode',weixinOldID = '$weixinOldID',
             weixinQRCodeUrl = '$QRUrl',weixinHeadUrl = '$headUrl' weixinEditTime = '$nowTime' where id = $weixin_id";
             }
@@ -232,7 +232,7 @@ class WeixinController extends CommonController {
         $action=addslashes($_GET["action"]);
         
 //        if($action == "delete"){
-//            $deleteSql = "update AdminToWeiID set weixinEditTime = '$nowTime',weixinStatus = 0 where id=$weixinID";
+//            $deleteSql = "update adminToWeiID set weixinEditTime = '$nowTime',weixinStatus = 0 where id=$weixinID";
 //            $errono = SaeRunSql($deleteSql);
 //            if($errono == 0){
 //                $msg = "删除成功！";

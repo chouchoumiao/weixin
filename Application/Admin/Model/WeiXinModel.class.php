@@ -28,7 +28,7 @@ class WeixinModel {
         $where['username'] = $this->userName;
         $where['weixinStatus'] = 1;
 
-        $data = M()->table('AdminToWeiID')->where($where)->select();
+        $data = M()->table('adminToWeiID')->where($where)->select();
 
         if($data === false){
             return false;
@@ -45,7 +45,7 @@ class WeixinModel {
         $where['id'] = $this->weixinID;
         $where['weixinStatus'] = 1;
 
-        $data = M()->table('AdminToWeiID')->where($where)->find();
+        $data = M()->table('adminToWeiID')->where($where)->find();
 
         if($data === false){
             return false;
@@ -92,7 +92,7 @@ class WeixinModel {
         $data{'weixinInsertTime'}  = date("Y-m-d H:i:s",time());
         $data['weixinStatus'] = 1;
 
-        $data = M()->table('AdminToWeiID')->add($data);
+        $data = M()->table('adminToWeiID')->add($data);
 
         if($data >= 1){
             return true;

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+</HEAD>
+<body>
+
+<!--页面名称-->
+<h3 id = "titel">回复建言内容<a href="javascript :;" onClick="javascript :history.back();">返回>></a></h3>
+        <!--表单开始-->
+        <div id = "main_set">
+        <form action="?" method="post" name="class_add" id="class_add" enctype="multipart/form-data" class="form-horizontal" role="form">
+        <fieldset>
+        <div id = "Forminfo">
+        <div class="form-group">
+        <label class="col-sm-2 control-label" for="advice_Name">姓名/昵称：</label>
+<div class="col-sm-5">
+        <input class="form-control" type="text" value="{$adviceInfoArr['ADVICE_NAME']}" name="advice_Name" id = "advice_Name" readonly="true">
+        </div>
+        </div>
+        <div class="form-group">
+        <label class="col-sm-2 control-label" for="advice_tel">联系方式：</label>
+<div class="col-sm-5">
+        <input class="form-control" type="text" value="{$adviceInfoArr['ADVICE_TEL']}" name="advice_tel" id = "advice_tel" readonly="true">
+        </div>
+        </div>
+        <div class="form-group">
+        <label class="col-sm-2 control-label" for="advice_advice">建言内容：</label>
+<div class="col-sm-5">
+        <textarea class="form-control" rows="9" placeholder = "" type="text" name="advice_advice" id = "advice_advice" readonly="true">{$adviceInfoArr['ADVICE_ADVICE']}</textarea>
+</div>
+</div>
+<div class="form-group">
+        <label class="col-sm-2 control-label" for="advice_createTime">建言时间：</label>
+<div class="col-sm-5">
+        <input class="form-control" type="text" value="{$adviceInfoArr['ADVICE_CREATETIME']}" name="advice_createTime" id = "advice_createTime" readonly="true">
+        </div>
+        </div>
+        <div class="form-group">
+        <label class="col-sm-2 control-label" for="advice_Reply">回复内容：</label>
+<div class="col-sm-5">
+        <textarea class="form-control" rows="9" placeholder = "" type="text" name="advice_Reply" id = "advice_Reply">{$adviceInfoArr['ADVICE_REPLY']}</textarea>
+</div>
+</div>
+<div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-5">
+        <input type="hidden" id="advice_id" value="{$adviceInfoArr['id']}"></br>
+<button type="button" class="btn btn-primary btn-block"  id = "formSubmit">提交</button>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label class="col-sm-3 control-label"></label>
+<div class="col-sm-4">
+<div id="myMsg" class="alert alert-warning" style = "display:none"></div>
+<div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
+</div>
+</div>
+</fieldset>
+</form>
+<input type="hidden" id="nowPage" value="{$nowPage}"/>
+</div>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/Admin/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/Admin/Advice/adviceReply.js"></script>
+
+</body>
+</html>
