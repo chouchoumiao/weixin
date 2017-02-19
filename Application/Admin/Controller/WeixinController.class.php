@@ -53,91 +53,67 @@ class WeixinController extends CommonController {
         //新增
         if(!isset($_POST['weixin_id'])){
 
-            if(D('Weixin')->addNewWeixinIDInfo()){
-                //将图片信息保存
-                //分上传图片和未上传图片使用默认图片两种情况
-
-                //1.上传图片 TbC
-
-            }
-
-
-            if($resultErrorNo == 0)
-            {
-
-                $selectIDSql = "select MAX(id) from adminToWeiID where weixinStatus = 1";
-                $thisID = getVarBySql($selectIDSql);
-                //$newWeixinUrl = "http://1.zglqxwwtest.sinaapp.com/?weixinID=".$thisID;
-                $newWeixinUrl = 'http://'.$_SERVER['HTTP_HOST'].'/?weixinID='.$thisID;
-
-                $domain = "weixincourse";
-                $filename = 'up_img';
-                $files = $_FILES[$filename];
-                $fileSize = $files['size'];
-                if ($fileSize > 0){
-                    $name= '/weixin/QRImg-'.$thisID.'.jpg';
-                    $form_data =$files['tmp_name'];
-                    $s2 = new SaeStorage();
-                    $img = new SaeImage();
-                    $img_data = file_get_contents($form_data);//获取本地上传的图片数据
-                    $img->setData($img_data);
-                    //$img->resize(180,180); //图片缩放为180*180
-                    $img->improve();       //提高图片质量的函数
-                    $new_data = $img->exec(); // 执行处理并返回处理后的二进制数据
-                    $s2->write($domain,$name,$new_data);//将public修改为自己的storage 名称
-                    $QRUrl= $s2->getUrl($domain,$name);//将public修改为自己的storage 名称echo "文件名：".$name."<br/>"
-                }else{
-                    $QRUrl = "url error";
-                }
-                if($QRUrl == "url error"){
-                    $QRUrl = "img/default_QR.png";
-                }
-
-                $filename = 'up_imgMin';
-                $files = $_FILES[$filename];
-                $fileSize = $files['size'];
-                if ($fileSize > 0){
-                    $name= '/weixin/HeadImg-'.$thisID.'.jpg';
-                    $form_data =$files['tmp_name'];
-                    $s2 = new SaeStorage();
-                    $img = new SaeImage();
-                    $img_data = file_get_contents($form_data);//获取本地上传的图片数据
-                    $img->setData($img_data);
-                    //$img->resize(180,180); //图片缩放为180*180
-                    $img->improve();       //提高图片质量的函数
-                    $new_data = $img->exec(); // 执行处理并返回处理后的二进制数据
-                    $s2->write($domain,$name,$new_data);//将public修改为自己的storage 名称
-                    $headUrl= $s2->getUrl($domain,$name);//将public修改为自己的storage 名称echo "文件名：".$name."<br/>"
-                }else{
-                    $headUrl = "url error";
-                }
-                if($headUrl == "url error"){
-                    $headUrl = "img/default_head.png";
-                }
-
-                $updateSql = "update adminToWeiID set weixinUrl = '$newWeixinUrl',weixinQRCodeUrl = '$QRUrl', weixinHeadUrl = '$headUrl',
-                    weixinEditTime = '$nowTime' where id = $thisID";
-                $resultErrorNo = SaeRunSql($updateSql);
-
-                if($resultErrorNo == 0){
-                    $msg = "提交成功！1秒后跳转到主页面";
-                    echo "<script>setTimeout(function(){window.parent.location='../login/main.php';},1000);  </script>";
-
-                    //echo $msg.$updateSql;
-                    //exit;
-                }else{
-                    //处理失败的情况下，将原先插入的数据删除
-                    $deleteSql = "delete from adminToWeiID where id = $thisID";
-                    SaeRunSql($deleteSql);
-                    $msg = "提交失败！";
-                    //echo $msg.$updateSql;
-                    //exit;
-                }
-
-            }else{
-                $msg = "追加新公众号失败！";
-            }
+//            if(D('Weixin')->addNewWeixinIDInfo()){
+//                //将图片信息保存
+//                //分上传图片和未上传图片使用默认图片两种情况
+//
+//
+//                //图片上传
+//                //设置删除图片的相关配置项
+//                \CommonToolModel::doUploadImg(FOLDER_NAME_ADMIN_WEIXIN);
+//
+//                foreach ($ret as $name){
+//                    $imgPathArr[] = $name['imgPath'];
+//                }
+//                //5.4版本后,加JSON_UNESCAPED_SLASHES可以取消自动转义
+//                $imgPathJson = json_encode($imgPathArr,JSON_UNESCAPED_SLASHES);
+//
+//                dump($imgPathJson);exit;
+//
+//                $updateSql = "update adminToWeiID set weixinUrl = '$newWeixinUrl',weixinQRCodeUrl = '$QRUrl', weixinHeadUrl = '$headUrl',
+//                    weixinEditTime = '$nowTime' where id = $thisID";
+//                $resultErrorNo = SaeRunSql($updateSql);
+//
+//                if($resultErrorNo == 0){
+//                    $msg = "提交成功！1秒后跳转到主页面";
+//                    echo "<script>setTimeout(function(){window.parent.location='../login/main.php';},1000);  </script>";
+//
+//                    //echo $msg.$updateSql;
+//                    //exit;
+//                }else{
+//                    //处理失败的情况下，将原先插入的数据删除
+//                    $deleteSql = "delete from adminToWeiID where id = $thisID";
+//                    SaeRunSql($deleteSql);
+//                    $msg = "提交失败！";
+//                    //echo $msg.$updateSql;
+//                    //exit;
+//                }
+//
+//            }
+//
+//
+//            if($resultErrorNo == 0)
+//            {
+//
+//            }else{
+//                $msg = "追加新公众号失败！";
+//            }
         }else{
+
+
+
+            //图片上传
+            //设置删除图片的相关配置项
+            $aa =  ToolModel::uploadImg(FOLDER_NAME_ADMIN_WEIXIN);
+            dump($aa);exit;
+
+            foreach ($ret as $name){
+                $imgPathArr[] = $name['imgPath'];
+            }
+            //5.4版本后,加JSON_UNESCAPED_SLASHES可以取消自动转义
+            $imgPathJson = json_encode($imgPathArr,JSON_UNESCAPED_SLASHES);
+
+            dump($imgPathJson);exit;
 
             $domain = 'weixincourse';
             $filename = 'up_img';
