@@ -104,7 +104,7 @@ class WeixinController extends CommonController {
 
             //图片上传
             //设置删除图片的相关配置项
-            $aa =  ToolModel::uploadImg(FOLDER_NAME_ADMIN_WEIXIN);
+            $aa =   D('CommonAdmin')->doAdminUploadImg(FOLDER_NAME_ADMIN_WEIXIN.'/'.$_SESSION['weixinID']);
             dump($aa);exit;
 
             foreach ($ret as $name){

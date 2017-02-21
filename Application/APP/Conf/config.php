@@ -15,9 +15,6 @@ define('FOLDER_NAME_SUGGEST','Suggest');
 //照片墙的文件夹名称
 define('FOLDER_NAME_PHOTOWALL','PhotoWall');
 
-//后台的微信公众号的头像
-define('FOLDER_NAME_ADMIN_WEIXIN','Admin/Weixin');
-
 //答题刮刮卡的活动ID
 define('DATI_GUAGUAKA_EVENT_ID',159);
 
