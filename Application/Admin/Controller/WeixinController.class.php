@@ -105,15 +105,8 @@ class WeixinController extends CommonController {
             //图片上传
             //设置删除图片的相关配置项
             $aa =   D('CommonAdmin')->doAdminUploadImg(FOLDER_NAME_ADMIN_WEIXIN.'/'.$_SESSION['weixinID']);
-            dump($aa);exit;
+            dump($aa["up_img"]);exit;
 
-            foreach ($ret as $name){
-                $imgPathArr[] = $name['imgPath'];
-            }
-            //5.4版本后,加JSON_UNESCAPED_SLASHES可以取消自动转义
-            $imgPathJson = json_encode($imgPathArr,JSON_UNESCAPED_SLASHES);
-
-            dump($imgPathJson);exit;
 
             $domain = 'weixincourse';
             $filename = 'up_img';
