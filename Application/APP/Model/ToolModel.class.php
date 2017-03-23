@@ -257,6 +257,49 @@ namespace APP\Model;
         }
 
         /**
+         * 上传图片(修改danger图片时候下标问题)
+         * @param $config
+         * @return mixed   正确则返回路径名称 错误则返回错误信息
+         */
+        static function uploadImNew($config){
+
+            if (!empty($_FILES)) {
+
+                $upload = new \Think\Upload($config);// 实例化上传类
+                $info = $upload->upload();
+                //判断是否有图
+                if($info){
+                    foreach($info as $key => $file){
+                        if(count($info) == 1){
+                            $pathName .= $file['savepath'].$file['savename'];
+                        }else{
+                            $pathName = $file['savepath'].$file['savename'];
+                        }
+
+                        $retArr[$key]['success'] = 1;
+                        $retArr[$key]['msg'] = $pathName;
+                        $retArr[$key]['size'] = $file['size'];
+                        $retArr[$key]['fileName'] = $file['name'];
+                        $retArr[$key]['saveName'] = $file['savename'];
+
+                        //获得上传的路径地址
+                        $retArr[$key]['savePath'] = $config['savePath'];
+
+                        //取得不带后缀名的文件名称
+                        $imgNameArr = explode('.',$file['savename']);
+                        $retArr[$key]['imgName'] = $imgNameArr[0];
+                    }
+                    return $retArr;
+                }else{
+                    $retArr['success'] = 0;
+                    $retArr['msg'] = $upload->getError();
+                    return $retArr;
+                }
+            }
+            return false;
+        }
+
+        /**
          * 生成缩略图
          * @param $imgPath
          * @param $thumbPath

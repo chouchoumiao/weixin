@@ -84,6 +84,7 @@
                     <img id="imgShow" name="imgShow" src={$weixinInfo['weixinQRCodeUrl']} class="img-rounded" width="150"/>
                 </div>
             </div>
+            <input type="hidden" value="{$weixinInfo['weixinQRCodeUrl']}" name="hidden_QR_Img">
             <div class="form-group" id = "newImgMin">
                 <label class="col-sm-2 control-label" for="up_imgMin">头像：</label>
                 <input type="file" id="up_imgMin" name="up_imgMin" style = "display:none" accept="image/*"/>
@@ -91,6 +92,7 @@
                     <img id="imgShowMin" name="imgShowMin" src={$weixinInfo['weixinHeadUrl']} class="img-rounded" width="85"/>
                 </div>
             </div>
+            <input type="hidden" value="{$weixinInfo['weixinHeadUrl']}" name="hidden_Head_Img">
             <div class="form-group">
                 <label class="col-sm-2 control-label"></label>
                 <div class="col-sm-5">

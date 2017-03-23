@@ -100,75 +100,38 @@ class WeixinController extends CommonController {
 //            }
         }else{
 
-
-
             //图片上传
             //设置删除图片的相关配置项
-            $aa =   D('CommonAdmin')->doAdminUploadImg(FOLDER_NAME_ADMIN_WEIXIN.'/'.$_SESSION['weixinID']);
-            dump($aa["up_img"]);exit;
+            $retArrs =   D('CommonAdmin')->doAdminUploadImg(FOLDER_NAME_ADMIN_WEIXIN.'/'.$_SESSION['weixinID']);
 
+            $uploadCount = count($retArrs);
 
-            $domain = 'weixincourse';
-            $filename = 'up_img';
-            $files = $_FILES[$filename];
-            $fileSize = $files['size'];
-            if ($fileSize > 0){
-                $name= '/weixin/QRImg-'.$weixin_id.'-'.time().'.jpg';
-                $form_data =$files['tmp_name'];
-                $s2 = new SaeStorage();
-                $img = new SaeImage();
-                $img_data = file_get_contents($form_data);//获取本地上传的图片数据
-                $img->setData($img_data);
-                //$img->resize(180,180); //图片缩放为180*180
-                $img->improve();       //提高图片质量的函数
-                $new_data = $img->exec(); // 执行处理并返回处理后的二进制数据
-                $s2->write($domain,$name,$new_data);//将public修改为自己的storage 名称
-                $QRUrl= $s2->getUrl($domain,$name);//将public修改为自己的storage 名称echo "文件名：".$name."<br/>"
-            }else{
-                $QRUrl = "url error";
+            switch ($uploadCount){
+                case 0:
+                    $QRUrl = I('post.hidden_QR_Img');
+                    $headUrl = I('post.hidden_Head_Img');
+                    break;
+                case 1:
+                    foreach ($retArrs as $key => $retArr) {
+                        if ($key == 'up_img') {
+                            $QRUrl = IMG_NET_PATH.$retArr['imgPath'];
+                            $headUrl = I('post.hidden_Head_Img');
+                        } else {
+                            $QRUrl = I('post.hidden_QR_Img');
+                            $headUrl = IMG_NET_PATH.$retArr['imgPath'];
+                        }
+                    }
+                    break;
+                case 2:
+                    $QRUrl = IMG_NET_PATH.$retArrs['up_img']['imgPath'];
+                    $headUrl = IMG_NET_PATH.$retArrs['up_imgMin']['imgPath'];
+                    break;
             }
 
-            $filename = 'up_imgMin';
-            $files = $_FILES[$filename];
-            $fileSize = $files['size'];
-            if ($fileSize > 0){
-                $name= '/weixin/HeadImg-'.$weixin_id.'-'.time().'.jpg';
-                $form_data =$files['tmp_name'];
-                $s2 = new SaeStorage();
-                //if(fileExists($domain, $name)){
-                $r = $s2->delete($domain,$name);
-                //}
-                $img = new SaeImage();
-                $img_data = file_get_contents($form_data);//获取本地上传的图片数据
-                $img->setData($img_data);
-                //$img->resize(180,180); //图片缩放为180*180
-                $img->improve();       //提高图片质量的函数
-                $new_data = $img->exec(); // 执行处理并返回处理后的二进制数据
-                $s2->write($domain,$name,$new_data);//将public修改为自己的storage 名称
-                $headUrl= $s2->getUrl($domain,$name);//将public修改为自己的storage 名称echo "文件名：".$name."<br/>"
-            }else{
-                $headUrl = "url error";
-            }
+            //进行更新数据库
+            $ret = D('Weixin')->updateWeixinIDInfo($QRUrl,$headUrl);
 
-            if( ($QRUrl == "url error") &&  ($headUrl == "url error") ){
-                $sql = "update adminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
-            weixinAppId = '$weixinAppId',weixinAppSecret = '$weixinAppSecret',weixinCode = '$weixinCode',weixinOldID = '$weixinOldID',
-            weixinEditTime = '$nowTime' where id = $weixin_id";
-            }else if(($QRUrl != "url error") &&  ($headUrl == "url error")){
-                $sql = "update adminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
-            weixinAppId = '$weixinAppId',weixinAppSecret = '$weixinAppSecret',weixinCode = '$weixinCode',weixinOldID = '$weixinOldID',
-            weixinQRCodeUrl = '$QRUrl',weixinEditTime = '$nowTime' where id = $weixin_id";
-            }else if(($QRUrl == "url error") &&  ($headUrl != "url error")){
-                $sql = "update adminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
-            weixinAppId = '$weixinAppId',weixinAppSecret = '$weixinAppSecret',weixinCode = '$weixinCode',weixinOldID = '$weixinOldID',
-            weixinHeadUrl = '$headUrl',weixinEditTime = '$nowTime' where id = $weixin_id";
-            }else{
-                $sql = "update adminToWeiID set username = '$user',weixinName = '$weixinName',weixinType = '$weixinType',weixinToken = '$weixinToken',
-            weixinAppId = '$weixinAppId',weixinAppSecret = '$weixinAppSecret',weixinCode = '$weixinCode',weixinOldID = '$weixinOldID',
-            weixinQRCodeUrl = '$QRUrl',weixinHeadUrl = '$headUrl' weixinEditTime = '$nowTime' where id = $weixin_id";
-            }
-            $resultErrorNo = SaeRunSql($sql);
-            if($resultErrorNo == 0){
+            if($ret){
                 $msg = "更新成功！";
             }else{
                 $msg = "更新失败！";

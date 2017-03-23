@@ -101,4 +101,39 @@ class WeixinModel {
     }
 
 
+    /**
+     * 更新微信公众号的基本信息
+     * @param $QRUrl
+     * @param $headUrl
+     * @return bool
+     */
+    public function updateWeixinIDInfo($QRUrl,$headUrl){
+
+        $data['username'] = $this->userName;
+        $data['weixinName'] = I('post.weixinName');
+        $data['weixinType'] = I('post.weixinType');
+        $data['weixinToken'] = I('post.weixinToken');
+        $data['weixinAppId'] = I('post.weixinAppId');
+
+        $data['weixinAppSecret'] = I('post.weixinAppSecret');
+        $data['weixinCode'] = I('post.weixinCode');
+
+        $data['weixinOldID'] = I('post.weixinOldID');
+        $data['weixinEditTime'] = date("Y-m-d H:i:s",time());
+
+        $data['weixinQRCodeUrl'] = $QRUrl;
+        $data['weixinHeadUrl'] = $headUrl;
+
+        $where['id'] = $this->weixinID;
+
+        $ret = M()->table('adminToWeiID')->where($where)->save($data);
+
+        if($ret == 1){
+            return true;
+        }
+        return false;
+
+    }
+
+
 }

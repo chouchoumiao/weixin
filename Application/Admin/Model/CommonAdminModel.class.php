@@ -29,7 +29,7 @@ namespace Admin\Model;
         }
 
         /**
-         * 后台上传拖图片
+         * 后台上传图片
          * @param $folderName
          * @param bool $isThumb 是否需要生成缩略图,默认不生成
          * @return mixed
@@ -37,8 +37,14 @@ namespace Admin\Model;
         public function doAdminUploadImg($folderName,$isThumb = false){
             $config = ToolModel::imgUploadConfig($folderName);
             //上传文件
-            $retArrs = ToolModel::uploadImg($config);
+            $retArrs = ToolModel::uploadImNew($config);
+            
+            //没有文件上传
+            if( isset($retArrs['success']) && ($retArrs['success'] == 0) ){
+                return array();
+            }
 
+            //删除出现错误
             if(!$retArrs){
                 ToolModel::goBack('上传图片错误,请重新上传');
                 exit;
