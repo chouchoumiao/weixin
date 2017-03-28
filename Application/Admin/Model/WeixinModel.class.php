@@ -76,9 +76,11 @@ class WeixinModel {
 
     /**
      * 新增公众号基本信息
+     * @param $QRUrl
+     * @param $headUrl
      * @return bool
      */
-    public function addNewWeixinIDInfo(){
+    public function addNewWeixinIDInfo($QRUrl,$headUrl){
         //数据微信公众号信息取得
         $data['username'] = $this->userName;
         $data['weixinName'] = addslashes($_REQUEST['weixinName']);
@@ -89,6 +91,10 @@ class WeixinModel {
         $data['weixinAppSecret'] = addslashes($_REQUEST['weixinAppSecret']);
         $data['weixinCode'] = addslashes($_REQUEST['weixinCode']);
         $data['weixinOldID'] = addslashes($_REQUEST['weixinOldID']);
+
+        $data['weixinQRCodeUrl'] = $QRUrl;
+        $data['weixinHeadUrl'] = $headUrl;
+
         $data{'weixinInsertTime'}  = date("Y-m-d H:i:s",time());
         $data['weixinStatus'] = 1;
 

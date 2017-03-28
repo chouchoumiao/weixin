@@ -32,111 +32,54 @@ class WeixinController extends CommonController {
         }
     }
 
+    /**
+     * 设置公众号
+     */
     private function weixinIDAddNewData(){
 
-        //数据微信公众号信息取得
-//        $data['username'] = $this->userName;
-//        $data['weixinName'] = addslashes($_REQUEST['weixinName']);
-//        $data['weixinType'] = addslashes($_REQUEST['weixinType']);
-//        $data['weixinUrl'] = addslashes($_REQUEST['weixinUrl']);
-//        $data['weixinToken'] = addslashes($_REQUEST['weixinToken']);
-//        $data['weixinAppId'] = addslashes($_REQUEST['weixinAppId']);
-//        $data['weixinAppSecret'] = addslashes($_REQUEST['weixinAppSecret']);
-//        $data['weixinCode'] = addslashes($_REQUEST['weixinCode']);
-//        $data['weixinOldID'] = addslashes($_REQUEST['weixinOldID']);
-//
-//        $weixin_id = addslashes($_REQUEST['weixin_id']);
-//
-//        $data{'weixinInsertTime'}  = date("Y-m-d H:i:s",time());
-//        $data['weixinStatus'] = 1;
+        //图片上传
+        //设置删除图片的相关配置项
+        $retArrs =   D('CommonAdmin')->doAdminUploadImg(FOLDER_NAME_ADMIN_WEIXIN.'/'.$_SESSION['weixinID']);
+
+        $uploadCount = count($retArrs);
+
+        switch ($uploadCount){
+            case 0:
+                $QRUrl = I('post.hidden_QR_Img');
+                $headUrl = I('post.hidden_Head_Img');
+                break;
+            case 1:
+                foreach ($retArrs as $key => $retArr) {
+                    if ($key == 'up_img') {
+                        $QRUrl = IMG_NET_PATH.$retArr['imgPath'];
+                        $headUrl = I('post.hidden_Head_Img');
+                    } else {
+                        $QRUrl = I('post.hidden_QR_Img');
+                        $headUrl = IMG_NET_PATH.$retArr['imgPath'];
+                    }
+                }
+                break;
+            case 2:
+                $QRUrl = IMG_NET_PATH.$retArrs['up_img']['imgPath'];
+                $headUrl = IMG_NET_PATH.$retArrs['up_imgMin']['imgPath'];
+                break;
+        }
 
         //新增
         if(!isset($_POST['weixin_id'])){
+            $ret = D('Weixin')->addNewWeixinIDInfo($QRUrl,$headUrl);
 
-//            if(D('Weixin')->addNewWeixinIDInfo()){
-//                //将图片信息保存
-//                //分上传图片和未上传图片使用默认图片两种情况
-//
-//
-//                //图片上传
-//                //设置删除图片的相关配置项
-//                \CommonToolModel::doUploadImg(FOLDER_NAME_ADMIN_WEIXIN);
-//
-//                foreach ($ret as $name){
-//                    $imgPathArr[] = $name['imgPath'];
-//                }
-//                //5.4版本后,加JSON_UNESCAPED_SLASHES可以取消自动转义
-//                $imgPathJson = json_encode($imgPathArr,JSON_UNESCAPED_SLASHES);
-//
-//                dump($imgPathJson);exit;
-//
-//                $updateSql = "update adminToWeiID set weixinUrl = '$newWeixinUrl',weixinQRCodeUrl = '$QRUrl', weixinHeadUrl = '$headUrl',
-//                    weixinEditTime = '$nowTime' where id = $thisID";
-//                $resultErrorNo = SaeRunSql($updateSql);
-//
-//                if($resultErrorNo == 0){
-//                    $msg = "提交成功！1秒后跳转到主页面";
-//                    echo "<script>setTimeout(function(){window.parent.location='../login/main.php';},1000);  </script>";
-//
-//                    //echo $msg.$updateSql;
-//                    //exit;
-//                }else{
-//                    //处理失败的情况下，将原先插入的数据删除
-//                    $deleteSql = "delete from adminToWeiID where id = $thisID";
-//                    SaeRunSql($deleteSql);
-//                    $msg = "提交失败！";
-//                    //echo $msg.$updateSql;
-//                    //exit;
-//                }
-//
-//            }
-//
-//
-//            if($resultErrorNo == 0)
-//            {
-//
-//            }else{
-//                $msg = "追加新公众号失败！";
-//            }
         }else{
-
-            //图片上传
-            //设置删除图片的相关配置项
-            $retArrs =   D('CommonAdmin')->doAdminUploadImg(FOLDER_NAME_ADMIN_WEIXIN.'/'.$_SESSION['weixinID']);
-
-            $uploadCount = count($retArrs);
-
-            switch ($uploadCount){
-                case 0:
-                    $QRUrl = I('post.hidden_QR_Img');
-                    $headUrl = I('post.hidden_Head_Img');
-                    break;
-                case 1:
-                    foreach ($retArrs as $key => $retArr) {
-                        if ($key == 'up_img') {
-                            $QRUrl = IMG_NET_PATH.$retArr['imgPath'];
-                            $headUrl = I('post.hidden_Head_Img');
-                        } else {
-                            $QRUrl = I('post.hidden_QR_Img');
-                            $headUrl = IMG_NET_PATH.$retArr['imgPath'];
-                        }
-                    }
-                    break;
-                case 2:
-                    $QRUrl = IMG_NET_PATH.$retArrs['up_img']['imgPath'];
-                    $headUrl = IMG_NET_PATH.$retArrs['up_imgMin']['imgPath'];
-                    break;
-            }
-
             //进行更新数据库
             $ret = D('Weixin')->updateWeixinIDInfo($QRUrl,$headUrl);
-
-            if($ret){
-                $msg = "更新成功！";
-            }else{
-                $msg = "更新失败！";
-            }
         }
+
+        if($ret){
+            $msg = "操作成功！";
+        }else{
+            $msg = "操作失败！";
+        }
+
         echoInfo($msg);
         exit;
     }
@@ -176,6 +119,15 @@ class WeixinController extends CommonController {
 //        }
 
         $weixinInfo = D('Weixin')->getTheWeixinNameInfo();
+
+        //如果QRCodeUrl和HeadUrl为空的话则设置为默认值
+        if($weixinInfo['weixinQRCodeUrl'] == ''){
+            $weixinInfo['weixinQRCodeUrl'] = IMG_NET_PATH.'/img/Admin/default_QR.png';
+        }
+
+        if($weixinInfo['weixinHeadUrl'] == ''){
+            $weixinInfo['weixinHeadUrl'] = IMG_NET_PATH.'/img/Admin/default_head.png';
+        }
 
         $this->assign('weixinInfo',$weixinInfo);
 
