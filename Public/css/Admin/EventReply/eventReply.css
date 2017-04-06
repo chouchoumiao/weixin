@@ -1,0 +1,16 @@
+.divcss5{position:relative;
+    left:190px;
+    top:10px;
+    width:70%;
+    height:100%;
+    border:1px solid #ccc;
+    background:#ebebeb;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+
+.borderHr{
+    border:0;
+    background-color:#cccccc;
+    height:1px;
+}

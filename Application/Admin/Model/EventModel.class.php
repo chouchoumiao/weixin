@@ -29,6 +29,59 @@ class EventModel {
             return false;
         }
         return $data;
+    }
+
+    /**
+     * 新增事件
+     * @param $imgUrl 封面图
+     * @param $replyUrl 对应的前端网站地址
+     * @return bool
+     */
+    public function addNewReply($imgUrl,$replyUrl){
+
+        $data['WEIXIN_ID'] = $this->weixinID;
+        $data['event_Text'] = I('post.eventTypeText'.'');
+        $data['reply_intext'] = I('post.reply_intext'.'');
+        $data['reply_title'] = I('post.reply_title'.'');
+        $data['reply_ImgUrl'] = $imgUrl;
+        $data['reply_url'] = $replyUrl;
+        $data['reply_description'] = I('post.reply_description'.'');
+        $data['reply_content'] = I('post.reply_content'.'');
+        $data['record_insertTime'] = date("Y-m-d H:i:s",time());
+        $data['status'] = 1;
+
+        $ret = M()->table('replyInfo')->add($data);
+
+        if($ret > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 更新事件
+     * @param $imgUrl
+     * @return bool
+     */
+    public function editReply($imgUrl){
+
+        $data['reply_intext'] = I('post.reply_intext'.'');
+        $data['reply_title'] = I('post.reply_title'.'');
+        $data['reply_ImgUrl'] = $imgUrl;
+        $data['reply_description'] = I('post.reply_description'.'');
+        $data['reply_content'] = I('post.reply_content'.'');
+        $data['record_editTime'] = date("Y-m-d H:i:s",time());
+
+        $where['id'] = I('post.replyID');
+
+        $ret = M()->table('replyInfo')->where($where)->save($data);
+
+        if($ret == 1){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
