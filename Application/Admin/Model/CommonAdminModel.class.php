@@ -13,6 +13,21 @@ namespace Admin\Model;
         }
 
         /**
+         * 获取错误码一览表
+         * @return bool|mixed
+         */
+        public function getSetedError(){
+
+            $data = M()->table('ErrorCode')->select();
+            if(false === $data){
+                return false;
+            }
+            return $data;
+
+
+        }
+
+        /**
          * 获得该微信公众号的基本设置(后台用)
          * @param $weixinID
          * @return array|mixed

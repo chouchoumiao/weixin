@@ -20,6 +20,55 @@ class WeixinModel {
     }
 
     /**
+     * 获取当前公众号设置的自定义菜单信息
+     * @return bool|mixed
+     */
+    public function getMenuInfo(){
+        $where['WEIXIN_ID'] = $this->weixinID;
+
+        $data = M('')->table('menuInfo')->where($where)->find($data);
+
+        if( false === $data){
+            return false;
+        }
+        return $data;
+    }
+
+    /**
+     * 根据传入的数据追加新自定义菜单信息
+     * @param $data
+     * @return bool
+     */
+    public function addMenuInfo($data){
+        $data['WEIXIN_ID'] = $this->weixinID;
+
+        $data['menu_insertTime'] = date("Y/m/d H:i:s",time());
+
+        $ret = M('')->table('menuInfo')->add($data);
+
+        if($ret >= 1){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除当前公众号的自定义菜单信息
+     * @return bool
+     */
+    public function delMenuInfo(){
+        $where['WEIXIN_ID'] = $this->weixinID;
+
+        $ret = M('')->table('menuInfo')->where($where)->delete();
+
+        if($ret >= 1){
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
      * 取得当前登录用户可以管理的微信公众号一览表
      * @return bool
      */

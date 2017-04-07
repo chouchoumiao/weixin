@@ -19,6 +19,21 @@ class EventModel {
         $this->weixinID = $_SESSION['weixinID'];
     }
 
+    /**
+     * 取得当前微信公众号设置的事件信息
+     * @return bool|mixed
+     */
+    public function getNowReplyInfo(){
+        $where['WEIXIN_ID'] = $this->weixinID;
+
+        $data = M()->table('replyInfo')->where($where)->select();
+
+        if($data === false){
+            return false;
+        }
+        return $data;
+    }
+
     public function getInfoByEvebtText(){
 
         $where['WEIXIN_ID'] = $this->weixinID;
