@@ -1,0 +1,18 @@
+.account{padding:15px; margin:0; overflow:hidden;}
+.account .pull-right a{font-size:16px; margin-left:10px; font-weight:normal;}
+.account .input-append{width:90%; position:relative;margin-bottom:0;}
+.account .input-append input{width:90%; width:87%\9;}
+.account .input-append button{width:8%; min-width:40px;}
+.account .tbody{background:#FAFAFA; margin-bottom:10px; border:1px #DDD solid; border-top:1px #FFF solid; padding:5px 10px;}
+.account .tbody .con{margin:10px 0; overflow:hidden;}
+.account .tbody .name{width:10%; overflow:hidden;}
+.account .thead{padding:0 10px; border-color:#DDD; border-bottom:1px #EEE solid; border-top:2px #00AFF0 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;}
+.account h4{color:#333;font-weight:normal;overflow:hidden;}
+.main {
+    margin-left:0px;
+    background:#FFF;
+    position:relative;
+    word-wrap:break-word;
+    /*min-width:800px;*/
+    width:100%;
+}

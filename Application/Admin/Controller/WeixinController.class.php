@@ -5,7 +5,6 @@ use APP\Model\ToolModel;
 
 class WeixinController extends CommonController {
 
-    private $userName,$userPwd;
     private $APPID,$APPSECRET;
 
     public function doAction(){
@@ -19,8 +18,17 @@ class WeixinController extends CommonController {
                 case 'getToken':
                     $this->getToken();
                     break;
-                case 'weixinIDAddNew':
+                case 'weixinIDEdit':            //修改
+                    $this->weixinIDEdit();
+                    break;
+                case 'weixinIDAddNew':            //新增
                     $this->weixinIDAddNew();
+                    break;
+                case 'editWeixinID':            //编辑公众号
+                    $this->editWeixinID();
+                    break;
+                case 'deleteWeixinID':            //编辑公众号
+                    $this->deleteWeixinID();
                     break;
                 case 'weixinIDAddNewData':
                     $this->weixinIDAddNewData();
@@ -32,11 +40,77 @@ class WeixinController extends CommonController {
                 case 'menuSetData':
                     $this->menuSetData();
                     break;
+                case 'addWeixinList':
+                    $this->addWeixinList();
+                    break;
+                case 'adminDBOpr':              //
+                    $this->adminDBOpr();
+                    break;
                 default:
                     break;
 
             }
         }
+    }
+
+    /**
+     * 设置事件LIST
+     */
+    private function adminDBOpr(){
+
+        $data = D('Weixin')->getTheWeixinInfo();
+
+        if($data){
+            ToolModel::jsonReturn(JSON_ERROR,'已经存在该公众号的设置信息了，请确认！');
+            exit;
+        }else{
+
+            $ret = D('Weixin')->setEventList();
+            if($ret){
+                ToolModel::jsonReturn(JSON_SUCCESS,'设置成功！');
+                exit;
+            }else{
+                ToolModel::jsonReturn(JSON_ERROR,'设置失败！');
+                exit;
+            }
+        }
+    }
+
+    /**
+     * 管理员设置事件
+     */
+    private function addWeixinList(){
+        $this->display('Weixin/addWeixinList');
+    }
+
+    /**
+     * 删除对应的公众号信息
+     */
+    private function deleteWeixinID(){
+        if(!isset($_GET['WeiID']) || ( '' == I('get.WeiID'))){
+            ToolModel::goBack('传入参数错误');
+            exit;
+        }
+
+        //删除指定的公众号信息
+        $ret = D('Weixin')->delWeixinInfo();
+        if($ret){
+            echoInfo('删除成功');
+            exit;
+        }
+    }
+
+    /**
+     * 显示编辑公众号画面
+     */
+    private function editWeixinID(){
+        $data = D('Weixin')->getWeixinInfoByNowUser();
+        if($data){
+            $this->assign('data',$data);
+        }else{
+            $this->assign('msg','当前未设置过公众号，请添加公众号信息！');
+        }
+        $this->display('Weixin/editWeixinID');
     }
 
     //设置自定义菜单提交时操作
@@ -338,14 +412,13 @@ class WeixinController extends CommonController {
         }
 
         //新增
-        if(!isset($_POST['weixin_id'])){
+        if(!isset($_POST['weixin_id']) || ( '' == I('post.weixin_id',''))){
             $ret = D('Weixin')->addNewWeixinIDInfo($QRUrl,$headUrl);
 
         }else{
             //进行更新数据库
             $ret = D('Weixin')->updateWeixinIDInfo($QRUrl,$headUrl);
         }
-
         if($ret){
             $msg = "操作成功！";
         }else{
@@ -372,23 +445,9 @@ class WeixinController extends CommonController {
     /**
      * 显示公众号信息编辑画面
      */
-    private function weixinIDAddNew(){
-        
-        $nowTime  = date("Y-m-d H:i:s",time());
-        
-        $action=addslashes($_GET["action"]);
-        
-//        if($action == "delete"){
-//            $deleteSql = "update adminToWeiID set weixinEditTime = '$nowTime',weixinStatus = 0 where id=$weixinID";
-//            $errono = SaeRunSql($deleteSql);
-//            if($errono == 0){
-//                $msg = "删除成功！";
-//            }else{
-//                $msg = "删除失败！";
-//            }
-//            echoInfo($msg);
-//            exit;
-//        }
+    private function weixinIDEdit(){
+
+
 
         $weixinInfo = D('Weixin')->getTheWeixinNameInfo();
 
@@ -402,6 +461,15 @@ class WeixinController extends CommonController {
         }
 
         $this->assign('weixinInfo',$weixinInfo);
+
+       $this->display('Weixin/weixinIDAddNew');
+
+    }
+
+    /**
+     * 新增公众号信息
+     */
+    private function weixinIDAddNew(){
 
        $this->display('Weixin/weixinIDAddNew');
 

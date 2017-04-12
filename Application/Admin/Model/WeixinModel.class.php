@@ -20,6 +20,46 @@ class WeixinModel {
     }
 
     /**
+     * 追加事件设置LIST
+     * @return bool
+     */
+    public function setEventList(){
+
+        $data['WEIXIN_ID'] = $this->weixinID;
+        $data['eventNameList'] = I('post.eventNameList');
+        $data['eventUrlList'] = I('post.eventBackUrlList');
+        $data['eventForwardUrlList'] = I('post.eventForwardUrlList');
+        $data['editDateTime'] = date('Y-m-d H:i:s',time());
+
+        $ret = M()->table('setEventForAdmin')->add($data);
+
+        if($ret > 0){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 删除指定的公众号信息
+     * @return bool
+     */
+    public function delWeixinInfo(){
+
+        $where['id'] = I('get.WeiID');
+
+        $ret = M()->table('adminToWeiID')->where($where)->delete();
+
+        if($ret == 1){
+            return true;
+        }
+
+        return false;
+
+
+    }
+
+    /**
      * 获取当前公众号设置的自定义菜单信息
      * @return bool|mixed
      */
@@ -91,7 +131,15 @@ class WeixinModel {
      * @return bool
      */
     public function getTheWeixinNameInfo(){
-        $where['id'] = $this->weixinID;
+
+        //判断是不是通过编辑公众号过来的传递，如果是需要编辑对应的公众号
+        if( isset($_GET['WeiID']) && ( '' != I('get.WeiID')) ){
+            $where['id'] = I('get.WeiID');
+        }else{
+            $where['id'] = $this->weixinID;
+        }
+
+
         $where['weixinStatus'] = 1;
 
         $data = M()->table('adminToWeiID')->where($where)->find();

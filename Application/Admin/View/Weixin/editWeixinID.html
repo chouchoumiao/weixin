@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>管理公众号</title>
+
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/css/Admin/Weixin/editWeixinID.css" type="text/css"/>
+
+</head>
+<body>
+<div class="div_from_aoto">
+    <form>
+        <notempty name="data">
+            <foreach name="data" item="vo" key="k">
+                <div class = "main">
+                    <div class="account">
+                        <div class="navbar-inner thead form-group">
+                            <h4>
+                                <span class="pull-right">
+                                    <a onclick="return confirm('删除帐号将同时删除全部规则及回复，确认吗？');return false;" href="__ROOT__/Admin/Weixin/doAction/action/deleteWeixinID/WeiID/{$vo['id']}">删除</a>
+                                    <a href="__ROOT__/Admin/Weixin/doAction/action/weixinIDEdit/WeiID/{$vo['id']}">编辑</a></span>
+                                <span class="pull-left">{$vo['weixinName']} <small>（微信号：{$vo['weixinAppId']}）</small></span>
+                            </h4>
+                        </div>
+                        <div class="tbody">
+                            <div class="con">
+                                <div class="name pull-left">API地址</div>
+                                <div class="input-append pull-left">
+                                    <p><input type="text" class="form-control" value={$vo['weixinUrl']}>
+                                </div>
+                            </div>
+                            <div class="con">
+                                <div class="name pull-left">Token</div>
+                                <div class="input-append pull-left">
+                                    <input type="text" class="form-control" value={$vo['weixinToken']}>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </foreach>
+            <else/>
+                {$msg}
+        </notempty>
+    </form>
+</div>
+</body>
+
+</html>

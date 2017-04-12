@@ -114,31 +114,6 @@ class IndexController extends CommonController {
 //                        $arr['msg'] = "新用户追加失败！";
 //                    }
 //                }
-            }else if($action = "eventListSet"){
-//                $sql = "select * from  setEventForAdmin where WEIXIN_ID = $weixinID";
-//                $data = getDataBySql($sql);
-//
-//                if($data){
-//                    $arr['success'] = 0;
-//                    $arr['msg'] = "已经存在该公众号的设置信息了，请确认！";
-//                }else{
-//                    $eventNameList = $_POST['eventNameList'];
-//                    $eventBackUrlList = $_POST['eventBackUrlList'];
-//                    $eventForwardUrlList = $_POST['eventForwardUrlList'];
-//                    $nowTime = date('Y-m-d H:i:s',time());
-//
-//                    $sql = "insert into setEventForAdmin (WEIXIN_ID,eventNameList,eventUrlList,
-//                            eventForwardUrlList,editDateTime) values ($weixinID,'$eventNameList',
-//                            '$eventBackUrlList','$eventForwardUrlList','$nowTime')";
-//                    $errono = SaeRunSql($sql);
-//                    if($errono == 0){
-//                        $arr['success'] = 1;
-//                        $arr['msg'] = "设置成功！";
-//                    }else{
-//                        $arr['success'] = 0;
-//                        $arr['msg'] = "设置失败！.$sql";
-//                    }
-//                }
             }
         }else{
             ToolModel::jsonReturn(JSON_ERROR,'session出错，请重新登录！');
