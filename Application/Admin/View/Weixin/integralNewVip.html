@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>新追加会员初始化设置</title>
+
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <form action="?" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+        <fieldset>
+            <div id = "mainInfo">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-7">
+                        <p><h3><span class="label label-info">本&nbsp画&nbsp面&nbsp为&nbsp新&nbsp会&nbsp员&nbsp绑&nbsp定&nbsp时，&nbsp各&nbsp种&nbsp初&nbsp始&nbsp化&nbsp设&nbsp置</span></h3></p></br>
+                        <span>注意：三项必须输入至少一项，不输入的项目表示不改变</span>
+                    </div>
+                </div>
+                <br><br>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label" for="integralNewInsert">新绑定会员可获得{$data['CONFIG_VIP_NAME']}数：</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" placeholder = "当前状态：{$data['CONFIG_INTEGRALINSERT']} {$data['CONFIG_VIP_NAME']}！" type="text" id = "integralNewInsert"></br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label" for="integralReferrerForNewVip">存在推荐人时，新会员可获得额外{$data['CONFIG_VIP_NAME']}数：</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" placeholder = "当前状态：{$data['CONFIG_INTEGRAL_REFERRER_FOR_NEW_VIP']} {$data['CONFIG_VIP_NAME']}！" type="text" id = "integralReferrerForNewVip"></br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label" for="integralReferrer">存在推荐人时，推荐人可获得额外{$data['CONFIG_VIP_NAME']}数：</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" placeholder = "当前状态：{$data['CONFIG_INTEGRALREFERRER']} {$data['CONFIG_VIP_NAME']}！" type="text" id = "integralReferrer"></br>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-success btn-block"  id = "OKBtn">点击进行设置</button>
+                    </div>
+                </div>
+                <input value="{$data['CONFIG_VIP_NAME']}" style="display: none;" id="weixinDisplayName"/>
+            </div>
+            <br>
+            <div class="form-group">
+                <label class="col-sm-1 control-label"></label>
+                <div class="col-sm-10">
+                    <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
+                    <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</body>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="/weixin/Public/js/function.js"></script>
+<script src="/weixin/Public/js/Admin/Weixin/integralNewVip.js"></script>
+
+</html>

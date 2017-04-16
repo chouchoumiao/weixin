@@ -1,4 +1,24 @@
-
+// function doAjax(url,typeFlag,ajaxData) {
+//     var ret = '';
+//     $.ajax({
+//         url:url
+//         ,type:typeFlag
+//         ,data:ajaxData
+//         ,dataType: "json"
+//         ,success:function(json){
+//             if(json.success == 1){
+//
+//                 ret = json;
+//             }else{
+//
+//                 ret =  false;
+//             }
+//         }
+//         ,error:function(xhr){alert('PHP页面有错误！'+xhr.responseText);}
+//     });
+//
+//     return ret;
+// }
 function isIP(strIP) { 
 if (isNull(strIP)) return false; 
 var re=/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/g //匹配IP地址的正则表达式 

@@ -314,6 +314,25 @@ namespace APP\Model;
             $image->thumb($width, $height)->save($thumbPath);
         }
 
+        static private function setNowConfig(&$arr,$weixinID){
+
+            $data['WEIXIN_ID'] = $weixinID;
+            $data['CONFIG_INTEGRALINSERT'] = $arr['CONFIG_INTEGRALINSERT'];
+            $data['CONFIG_INTEGRAL_REFERRER_FOR_NEW_VIP'] = $arr['CONFIG_INTEGRAL_REFERRER_FOR_NEW_VIP'];
+            $data['CONFIG_INTEGRALREFERRER'] = $arr['CONFIG_INTEGRALREFERRER'];
+            $data['CONFIG_DAILYPLUS'] = $arr['CONFIG_DAILYPLUS'];
+            $data['CONFIG_VIP_NAME'] = $arr['CONFIG_VIP_NAME'];
+
+            $ret = M()->table('configSet')->add($data);
+
+            if($ret > 0){
+                return true;
+            }
+
+            return false;
+
+        }
+
         /**
          * 取得当前公众号的基本设置，如果未设置则初始化
          * @param $weixinID
@@ -323,15 +342,22 @@ namespace APP\Model;
 
             $where['WEIXIN_ID'] = $weixinID;
             $data = M()->table('configSet')->where($where)->find();
-            if(false === $data){
-                return array(
-                    "CONFIG_INTEGRALINSER" =>0,
+            if(false === $data || ('' == $data)){
+
+                $initArr =  array(
+                    "CONFIG_INTEGRALINSERT" =>0,
                     "CONFIG_INTEGRAL_REFERRER_FOR_NEW_VIP"=>0,
                     "CONFIG_INTEGRALREFERRER"=>0,
                     "CONFIG_INTEGRALSETDAILY"=>0,
                     "CONFIG_DAILYPLUS"=>0,
                     "CONFIG_VIP_NAME"=>'积分'
                 );
+
+                //初始化设置
+                self::setNowConfig($initArr,$weixinID);
+
+                return $initArr;
+
             }
 
             return $data;

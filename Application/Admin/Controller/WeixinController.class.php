@@ -46,11 +46,46 @@ class WeixinController extends CommonController {
                 case 'adminDBOpr':              //
                     $this->adminDBOpr();
                     break;
+
+                case 'integralNewVip':
+                    $this->integralNewVip();
+                    break;
+                case 'integralNewVipData':
+                    $this->integralNewVipData();
+                    break;
                 default:
                     break;
 
             }
         }
+    }
+
+    /**
+     * 根据提交的表单进行数据更新
+     */
+    private function integralNewVipData(){
+
+        $ret = D('Weixin')->updateConfig();
+
+        if ($ret){
+            ToolModel::jsonReturn(JSON_SUCCESS,'设置成功');
+            exit;
+        }
+
+        ToolModel::jsonReturn(JSON_ERROR,'设置失败，请重新设置');
+    }
+
+    /**
+     * 取得基本设置信息并显示
+     */
+    private function integralNewVip(){
+
+        //取得机会积分的设置，如果没有设置会设置默认数据并写入数据库，所有取得的一定是有数据的
+        $config =   ToolModel::getConfig($_SESSION['weixinID']);
+
+        $this->assign('data',$config);
+
+        $this->display('Weixin/integralNewVip');
     }
 
     /**

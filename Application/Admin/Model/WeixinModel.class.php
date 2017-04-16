@@ -19,6 +19,36 @@ class WeixinModel {
         $this->weixinID = $_SESSION['weixinID'];
     }
 
+
+    /**
+     * 根据提交的表单进行基础设置
+     * @return bool
+     */
+    public function updateConfig(){
+        if(isset($_POST['integralNewInsert']) && ('' != I('post.integralNewInsert'))){
+            $data['CONFIG_INTEGRALINSERT'] = I('post.integralNewInsert');
+        }
+
+        if(isset($_POST['integralReferrerForNewVip']) && ('' != I('post.integralReferrerForNewVip'))){
+            $data['CONFIG_INTEGRAL_REFERRER_FOR_NEW_VIP'] = I('post.integralReferrerForNewVip');
+        }
+
+        if(isset($_POST['integralReferrer']) && ('' != I('post.integralReferrer'))){
+            $data['CONFIG_INTEGRALREFERRER'] = I('post.integralReferrer');
+        }
+
+        $where['WEIXIN_ID'] = $this->weixinID;
+
+        $ret = M()->table('configSet')->where($where)->save($data);
+
+        if($ret>0){
+            return true;
+        }
+
+        return false;
+
+
+        }
     /**
      * 追加事件设置LIST
      * @return bool
