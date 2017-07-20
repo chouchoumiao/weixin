@@ -47,12 +47,24 @@ class WeixinController extends CommonController {
                     $this->adminDBOpr();
                     break;
 
+                //初始化设置
                 case 'integralNewVip':
                     $this->integralNewVip();
                     break;
+                //初始化设置
                 case 'integralNewVipData':
                     $this->integralNewVipData();
                     break;
+
+                //签到设置
+                case 'integralSetDaily':
+                    $this->integralSetDaily();
+                    break;
+                //签到设置
+                case 'integralSetDailyData':
+                    $this->integralSetDailyData();
+                    break;
+
                 default:
                     break;
 
@@ -61,7 +73,30 @@ class WeixinController extends CommonController {
     }
 
     /**
-     * 根据提交的表单进行数据更新
+     * 签到后提交设置后处理
+     */
+    private function integralSetDailyData(){
+
+        $this->integralNewVipData();
+
+    }
+
+    /**
+     * 显示签到设置画面信息
+     */
+    private function integralSetDaily(){
+
+        //取得机会积分的设置，如果没有设置会设置默认数据并写入数据库，所有取得的一定是有数据的
+        $config =   ToolModel::getConfig($_SESSION['weixinID']);
+
+        $this->assign('data',$config);
+
+        $this->display('Weixin/integralSetDaily');
+
+    }
+
+    /**
+     * 根据提交的表单进行数据更新(来之初始化设置和签到设置画面)
      */
     private function integralNewVipData(){
 

@@ -36,27 +36,6 @@ $(function(){
             setTimeout("$('#myMsg').hide()",2000);
             return false;
         }
-        // var url = ROOT+"/Admin/Weixin/doAction/action/integralNewVipData";
-        // var typeFlag = 'POST';
-        // var ajaxData = {
-        //         "integralNewInsert":integralNewInsert,
-        //         "integralReferrerForNewVip":integralReferrerForNewVip,
-        //         "integralReferrer":integralReferrer
-        //     };
-        //
-        // var jsonRet = doAjax(url,typeFlag,ajaxData);
-        //
-        // alert(jsonRet);
-        // if(jsonRet){
-        //
-        //     $('#mainInfo').hide();
-        //     $('#myOKMsg').html(jsonRet.msg);
-        //     $('#myOKMsg').show();
-        // }else{
-        //     $('#myMsg').html(jsonRet.msg);
-        //     $('#myMsg').show();
-        // }
-
 
         $.ajax({
             url:ROOT+"/Admin/Weixin/doAction/action/integralNewVipData"//改为你的动态页

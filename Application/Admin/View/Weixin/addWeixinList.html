@@ -5,45 +5,45 @@
     <title>设置事件List</title>
 
     <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="__PUBLIC__/css/Admin/pageFormart.css" type="text/css"/>
 </head>
 <body>
-<div class="div_from_aoto" id = "infoDiv">
-    <form role="form">
-        <div class="form-group">
-            <label for="eventNameList">该公公众号可使用的活动(逗号分开)</label>
-            <textarea id = "eventNameList"  class="form-control" rows="5"></textarea>
+<div class="container">
+    <div class="div_from_aoto" id = "infoDiv">
+        <form role="form">
+            <div class="form-group">
+                <label for="eventNameList">该公公众号可使用的活动(逗号分开)</label>
+                <textarea id = "eventNameList"  class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="eventBackUrlList">各个活动对应的后台URL(逗号分开)</label>
+                <textarea id = "eventBackUrlList"  class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="eventForwardUrlList">各个活动对应的前端URL(逗号分开)</label>
+                <textarea id = "eventForwardUrlList"  class="form-control" rows="5"></textarea>
+            </div>
+            <div id = "successMeg" class ="successMeg" style="display:none">
+                <label class="laber_from" id = "msg"></label>
+            </div>
+        </form>
+        <div class="control-group">
+            <label class="laber_from" ></label>
+            <div class="controls" ><button id = "OKBtn" class="btn btn-success btn-block">设置</button></div>
         </div>
-        <div class="form-group">
-            <label for="eventBackUrlList">各个活动对应的后台URL(逗号分开)</label>
-            <textarea id = "eventBackUrlList"  class="form-control" rows="5"></textarea>
+        <div id="myAlert" class="alert alert-warning" style = "display:none">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>请注意：</br></strong>不能都为空,并且数组的个数必须一致！
         </div>
-        <div class="form-group">
-            <label for="eventForwardUrlList">各个活动对应的前端URL(逗号分开)</label>
-            <textarea id = "eventForwardUrlList"  class="form-control" rows="5"></textarea>
+        <div id="myAlert2" class="alert alert-warning" style = "display:none">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>请注意：</br></strong>两个文本框内内容形式必须一致！
         </div>
-        <div id = "successMeg" class ="successMeg" style="display:none">
-            <label class="laber_from" id = "msg"></label>
-        </div>
-    </form>
-    <div class="control-group">
-        <label class="laber_from" ></label>
-        <div class="controls" ><button id = "OKBtn" class="btn btn-success btn-block">设置</button></div>
     </div>
-    <div id="myAlert" class="alert alert-warning" style = "display:none">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>请注意：</br></strong>不能都为空,并且数组的个数必须一致！
-    </div>
-    <div id="myAlert2" class="alert alert-warning" style = "display:none">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>请注意：</br></strong>两个文本框内内容形式必须一致！
+    <div class="div_from_aoto">
+        <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
+        <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
     </div>
 </div>
-<div class="div_from_aoto">
-    <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
-    <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
-</div>
-
 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="__PUBLIC__/js/Admin/Weixin/addWeixinList.js"></script>
 </body>

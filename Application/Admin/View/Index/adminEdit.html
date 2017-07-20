@@ -3,38 +3,43 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>密码修改</title>
-
-    <link href="__PUBLIC__/css/Admin/Index/pageFormart.css" type="text/css" rel="stylesheet">
     <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 <body>
-<div class="div_from_aoto" style="width: 500px;">
-    <form>
-        <div class="control-group" id = "pass1">
-            <label class="laber_from">新密码</label>
-            <div  class="controls" ><INPUT class="input_from" id = "newPass" type=password placeholder=" 请输入密码"><p class=help-block></p></div>
+<div class="container">
+    <br/>
+    <br/>
+    <form action="?" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+        <div class="form-group" id = "pass1">
+            <label class="col-sm-4 control-label">新密码</label>
+            <div class="col-sm-4">
+                <INPUT class="form-control" id = "newPass" type=password placeholder=" 请输入密码">
+            </div>
         </div>
-        <div class="control-group" id = "pass2">
-            <label class="laber_from" >再次输入新密码</label>
-            <div  class="controls" ><INPUT class="input_from" id = "newPass2" type=password placeholder=" 请输入确认密码"><p class=help-block></p></div>
+        <div class="form-group" id = "pass2">
+            <label class="col-sm-4 control-label" >再次输入新密码</label>
+            <div  class="col-sm-4" >
+                <INPUT class="form-control" id = "newPass2" type=password placeholder=" 请输入确认密码">
+            </div>
         </div>
         <div id = "successMeg" class ="successMeg" style="display:none">
             <label class="laber_from" id = "msg"></label>
         </div>
+        <br/>
+        <div class="form-group" id = "passBtn">
+            <label class="col-sm-3 control-label" ></label>
+            <div class="col-sm-5">
+                <button type="button" class="btn btn-info btn-block"  id = "newPassBtn" >确认</button>
+            </div>
+        </div>
+        <div id="myAlert" class="alert alert-warning" style = "display:none">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>请注意：</br></strong>用户名，密码不能为空，并且两次输入的密码要一致，请确认！
+        </div>
+        <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
+        <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
     </form>
-    <div class="control-group" id = "passBtn">
-        <label class="laber_from" ></label>
-        <div class="controls" ><button id = "newPassBtn" class="btn btn-success" style="width:120px;" id = "newPassBtn" >确认</button></div>
-    </div>
-    <div id="myAlert" class="alert alert-warning" style = "display:none">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>请注意：</br></strong>用户名，密码不能为空，并且两次输入的密码要一致，请确认！
-    </div>
-    <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
-    <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
 </div>
-
 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/Admin/Index/user.js"></script>
 <script>

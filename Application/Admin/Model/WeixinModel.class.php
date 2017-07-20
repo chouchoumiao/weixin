@@ -25,14 +25,28 @@ class WeixinModel {
      * @return bool
      */
     public function updateConfig(){
+
+        //来之签到设置画面提交的数据
+        if(isset($_POST['thisIntegral']) && ('' != I('post.thisIntegral'))){
+            $data['CONFIG_INTEGRALSETDAILY'] = I('post.thisIntegral');
+        }
+
+        //来之签到设置画面提交的数据
+        if(isset($_POST['dailyCodeIntegral']) && ('' != I('post.dailyCodeIntegral'))){
+            $data['CONFIG_DAILYPLUS'] = I('post.dailyCodeIntegral');
+        }
+
+        //来之初始化设置画面提交的数据
         if(isset($_POST['integralNewInsert']) && ('' != I('post.integralNewInsert'))){
             $data['CONFIG_INTEGRALINSERT'] = I('post.integralNewInsert');
         }
 
+        //来之初始化设置画面提交的数据
         if(isset($_POST['integralReferrerForNewVip']) && ('' != I('post.integralReferrerForNewVip'))){
             $data['CONFIG_INTEGRAL_REFERRER_FOR_NEW_VIP'] = I('post.integralReferrerForNewVip');
         }
 
+        //来之初始化设置画面提交的数据
         if(isset($_POST['integralReferrer']) && ('' != I('post.integralReferrer'))){
             $data['CONFIG_INTEGRALREFERRER'] = I('post.integralReferrer');
         }

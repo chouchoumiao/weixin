@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>每日签到设置</title>
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <form action="?" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+        <fieldset>
+            <div id = "mainInfo">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-3">
+                        <p><h3><span class="label label-info">本画面为每日签到时，能获得的{$data['CONFIG_VIP_NAME']}设置</span></h3></p></br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="integralSet">每日签到{$data['CONFIG_VIP_NAME']}：</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" placeholder = "当前状态：{$data['CONFIG_INTEGRALSETDAILY']} {$data['CONFIG_VIP_NAME']}！" type="text" name="integralSet" id = "integralSet"></br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="integralDailyCode">签到码签到{$data['CONFIG_VIP_NAME']}：</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" placeholder = "当前状态：{$data['CONFIG_DAILYPLUS']} {$data['CONFIG_VIP_NAME']}！" type="text" name="integralDailyCode" id = "integralDailyCode"></br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"></label>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-success btn-block"  id = "OKBtn">点击进行设置</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"></label>
+                <div class="col-sm-4">
+                    <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
+                    <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
+                </div>
+            </div>
+            <input id="vipName" style="display: none" value="{$data['CONFIG_VIP_NAME']}"/>
+
+        </fieldset>
+    </form>
+</div>
+</body>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="/weixin/Public/js/function.js"></script>
+<script src="/weixin/Public/js/Admin/Weixin/integralSetDaily.js"></script>
+
+</html>
