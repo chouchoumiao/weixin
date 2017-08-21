@@ -25,11 +25,211 @@ class EventController extends CommonController {
                 case 'setReply':
                     $this->setReply();
                     break;
+
+                //大转盘后台设置操作
+                case 'bigWheelManger':
+                    $this->bigWheelManger();
+                    break;
+
+
+                case 'bigWheelSet':
+                    $this->showBigWheelSet();
+                    break;
+
+                //大转盘主表相关
+                case 'bigWheelMainInfo':
+                    $this->bigWheelMainInfo();
+                    break;
+
+                //大转盘明细相关
+                case 'bigWheelDetailInsert':
+                    $this->bigWheelDetailInsert();
+                    break;
+
                 default:
                     break;
 
             }
         }
+    }
+
+    /**
+     * 设置大转盘主页面
+     */
+    private function bigWheelManger(){
+
+        //获得建言的总条数
+        $count = D('BigWheel')->getBigWheelCount();
+
+        //分页
+        import('ORG.Util.Page');
+        $Page = new \Org\Util\Page($count, PAGE_SHOW_COUNT_10);
+
+        $nowPage = intval($Page->parameter['p']);
+
+        $limit = $Page->firstRow . ',' . $Page->listRows;
+
+        //取得指定条数的信息
+        $data = D('BigWheel')->getAllBigWheelInfo($limit);
+
+        $show = $Page->show();// 分页显示输出
+
+        //如果有数据的情况
+        if ($count > 0) {
+            $this->assign('data', $data); //用户信息注入模板
+            $this->assign('page', $show);    //赋值分页输出
+            $this->assign('nowPage',$nowPage);
+        }
+
+        $this->display('Event/forBigWheel/bigWheelManger');
+
+    }
+
+    /**
+     * 设置大转盘明细表相关
+     */
+    private function bigWheelDetailInsert(){
+
+        //取得set页面传递过来的数据
+        $mainInfoStr = I('post.mainInfoStr','');
+        $bigWheel_id = I('post.bigWheel_id',0);
+
+        //addslashes函数不能再数组中使用 20150925
+        $titleArr = I('post.titleArr');
+        $descriptionArr = I('post.descriptionArr');
+        $probabilityArr = I('post.probabilityArr');
+        $countArr = I('post.countArr');
+
+        $newTitle = getPreg_replace($titleArr);
+        $newDescription = getPreg_replace($descriptionArr);
+        $newProbability = json_encode($probabilityArr);
+        $newCount = json_encode($countArr);
+
+        //先将Main表插入数据
+        $mainInfoArr = explode(".",$mainInfoStr);
+
+        $thisbigWheel_title = $mainInfoArr[0];
+        $thisbigWheel_description = $mainInfoArr[1];
+        $thisbigWheel_times = $mainInfoArr[2];
+        $thisbigWheel_Integral = $mainInfoArr[3];
+        $thisbigWheel_beginDate = $mainInfoArr[4];
+        $thisbigWheel_endDate = $mainInfoArr[5];
+        $thisbigWheel_expirationDate = $mainInfoArr[6];
+        $thisbigWheel_address = $mainInfoArr[7];
+        $thisbigWheel_imgPath = "img/activity-lottery-7.png";
+        $thisbigWheel_migPathInner = "img/activity-lottery-2.png";
+        $thisbigWheel_count = $mainInfoArr[8];
+
+
+        $data['bigWheel_title'] = $thisbigWheel_title;
+        $data['bigWheel_description'] = $thisbigWheel_description;
+        $data['bigWheel_times'] = $thisbigWheel_times;
+        $data['bigWheel_Integral'] = $thisbigWheel_Integral;
+        $data['bigWheel_beginDate'] = $thisbigWheel_beginDate;
+        $data['bigWheel_endDate'] = $thisbigWheel_endDate;
+        $data['bigWheel_expirationDate'] = $thisbigWheel_expirationDate;
+        $data['bigWheel_address'] = $thisbigWheel_address;
+        $data['bigWheel_migPath'] = $thisbigWheel_imgPath;
+        $data['bigWheel_migPathInner'] = $thisbigWheel_migPathInner;
+        $data['bigWheel_count'] = $thisbigWheel_count;
+
+        $data['bigWheel_detailInfo_title'] = $newTitle;
+        $data['bigWheel_detailInfo_description'] = $newDescription;
+        $data['bigWheel_detailInfo_probability'] = $newProbability;
+
+        $data['bigWheel_detailInfo_title'] = $newCount;
+        $data['bigWheel_insertTime'] = date("Y/m/d H:i:s",time());
+
+
+        if($bigWheel_id > 0){       //更新
+            $ret = D('BigWheel')->UpdateMainBigWheelInfo($data);
+        }else{                      //新增
+            $ret = D('BigWheel')->insertMainBigWheelInfo($data);
+        }
+
+        if(!$ret)
+        {
+            $arr['success'] = "NG";
+            $arr['msg'] = "设置失败！";
+        }else{
+            $arr['success'] = "OK";
+            $arr['msg'] = "设置成功！2秒后跳转到主页面";
+        }
+        echo json_encode($arr);
+        exit;
+    }
+
+    /**
+     * 设置大转盘主表相关
+     */
+    private function bigWheelMainInfo(){
+
+        if(!isset($_POST['bigWheel_id']) || ( 0 == I('post.bigWheel_id',0))){
+            $arr['success'] = 0;
+            echo json_encode($arr);
+            exit;
+        }
+
+        $bigWheel_id = I('post.bigWheel_id');
+
+        $arr['detailInfoTitle'] = "";
+        $arr['detailInfoDescription'] = "";
+        $arr['detailInfoProbability'] = "";
+        $arr['detailInfoCount'] = "";
+
+        $bigWheelMainInfoArr = D('BigWheel')->getMainBigWheelInfoByID( $bigWheel_id );
+
+        if($bigWheelMainInfoArr){
+            $bigWheel_detailInfo_description = $bigWheelMainInfoArr['bigWheel_detailInfo_description'];
+            $bigWheel_detailInfo_probability = $bigWheelMainInfoArr['bigWheel_detailInfo_probability'];
+            $bigWheel_detailInfo_count = $bigWheelMainInfoArr['bigWheel_detailInfo_count'];
+
+            //修正bug 取出的数据不是数据或者为空的情况下,返回值为空 20150925
+            if($bigWheel_detailInfo_description){
+                $detailInfoDescription = json_decode($bigWheel_detailInfo_description);
+            }else{
+                $detailInfoDescription = "";
+            }
+            if($bigWheel_detailInfo_probability){
+                $detailInfoProbability = json_decode($bigWheel_detailInfo_probability);
+            }else{
+                $detailInfoProbability = "";
+            }
+            if($bigWheel_detailInfo_count){
+                $detailInfoCount = json_decode($bigWheel_detailInfo_count);
+            }else{
+                $detailInfoCount = "";
+            }
+            $arr['detailInfoDescription'] = $detailInfoDescription;
+            $arr['detailInfoProbability'] = $detailInfoProbability;
+            $arr['detailInfoCount'] = $detailInfoCount;
+        }
+
+        $arr['success'] = 1;
+        echo json_encode($arr);
+        exit;
+
+    }
+
+    /**
+     * 显示大转盘后台操作的页面
+     */
+    private function showBigWheelSet(){
+
+        //判断是否有传入的大转盘ID
+        if( isset($_GET['bigWheel_id']) && (0 != I('get.bigWheel_id',0))){
+            //根据传入的ID取得该ID的大转盘信息
+            $bigWheel_id = I('get.bigWheel_id',0);
+
+            $data = D('BigWheel')->getBigWheelInfoByID($bigWheel_id);
+
+            $this->assign('data',$data);
+
+
+        }
+
+        $this->display('Event/forBigWheel/bigWheelSet');
+
     }
 
     /**

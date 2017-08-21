@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="__PUBLIC__/css/Admin/simplify.css" rel="stylesheet">
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+</HEAD>
+<body>
+
+<!--页面名称-->
+<h3>大转盘信息 管理<a href="__ROOT__/Admin/Event/doAction/action/bigWheelSet/nowPage/{$nowPage}">新增信息>></a></h3>
+<!--列表开始-->
+<input type="hidden" id="nowPage" value="{nowPage}"/>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>大转盘标题</th>
+        <th>转盘详细信息描述</th>
+        <th>每天免费可抽奖次数</th>
+        <th>抽奖所需积分数</th>
+        <th>活动开始日期</th>
+        <th>活动结束日期</th>
+        <th>领奖过期日期</th>
+        <th>领奖地址</th>
+        <th>奖项个数</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <notempty name="data">
+            <foreach name="data" item="value">
+                <tr>
+                    <td>{$value['bigWheel_id']}</td>
+                    <td>{$value['bigWheel_title']}</td>
+                    <td><textarea>{$value['bigWheel_description']}</textarea></td>
+                    <td>{$value['bigWheel_times']}</td>
+                    <td>{$value['bigWheel_Integral']}</td>
+                    <td>{$value['bigWheel_beginDate']}</td>
+                    <td>{$value['bigWheel_endDate']}</td>
+                    <td>{$value['bigWheel_expirationDate']}</td>
+                    <td><textarea>{$value['bigWheel_address']}</textarea></td>
+                    <td>{$value['bigWheel_count']}</td>
+                    <td>
+                        <a href='javascript:isDelete({$value.bigWheel_id});'>删除</a>&nbsp
+                        <a href='__ROOT__/Admin/Event/doAction/action/bigWheelSet/bigWheel_id/{$value[bigWheel_id]}/nowPage/{$nowPage}'>修改</a>
+                    </td><tr></tbody>";
+                </tr>
+
+            </foreach>
+            <else/>
+        <tbody><tr><td colspan=12>无记录</td></tr></tbody>
+        </notempty>
+
+    </tbody>
+</table>
+<div class="pagination">{$page}</div>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/Admin/common.js"></script>
+</body>
+
+<script>
+    function isDelete(id){
+        if(confirm("确认删除吗？")){
+            location.href='bigWheelManger.php?action=del&bigWheelID='+id;
+        }else{
+            return false;
+        }
+    }
+</script>
+</html>

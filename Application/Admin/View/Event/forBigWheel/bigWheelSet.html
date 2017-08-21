@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/Admin/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+</HEAD>
+<body>
+
+<!--页面名称-->
+<!--表单开始-->
+<div id = "main_set">
+    <form action="?" method="post" name="class_add" id="class_add" enctype="multipart/form-data" class="form-horizontal" role="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"></label>
+                <div class="col-sm-3">
+                    <p><h1>
+                        <span class="label label-info">
+                            大 转 盘 设 置 画 面
+                        </span>
+                    </h1></p><br/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bigWheel_title">活动标题：</label>
+                <div class="col-sm-5">
+                    <input class="form-control" placeholder = "请输入该活动的标题" type="text" value="{$data['bigWheel_title']}" name="bigWheel_title" id = "bigWheel_title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bigWheel_description">活动描述：</label>
+                <div class="col-sm-5">
+                    <textarea class="form-control" placeholder = "请输入该活动的描述" type="text" name="bigWheel_description" id = "bigWheel_description">{$data['bigWheel_description']}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bigWheel_times">每天可免费抽奖次数：</label>
+                <div class="col-sm-5">
+                    <input class="form-control" placeholder = "必须是1-99之间的数字" type="text" value="{$data['bigWheel_times']}" name="bigWheel_times" id = "bigWheel_times">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bigWheel_Integral">每次抽奖需要<?php echo $weixinName;?>数：</label>
+                <div class="col-sm-5">
+                    <input class="form-control" placeholder = "必须是1-99之间的数字" type="text" value="{$data['bigWheel_Integral']}" name="bigWheel_Integral" id = "bigWheel_Integral">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bigWheel_beginDate">活动开始日期:</label>
+                <div class="col-sm-9">
+                    <div class="input-group date form_date col-md-6" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" type="text" placeholder = "格式：yyyy-mm-dd 点击最右边按钮进行日期选择" value="{$data['bigWheel_beginDate']}" name="bigWheel_beginDate" id = "bigWheel_beginDate" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bigWheel_beginDate">活动结束日期:</label>
+                <div class="col-sm-9">
+                    <div class="input-group date form_date col-md-6" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" type="text" placeholder = "格式：yyyy-mm-dd 点击最右边按钮进行日期选择" value="{$data['bigWheel_endDate']}" name="bigWheel_endDate" id = "bigWheel_endDate" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bigWheel_beginDate">领奖过期日期:</label>
+                <div class="col-sm-9">
+                    <div class="input-group date form_date col-md-6" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" type="text" placeholder = "格式：yyyy-mm-dd 点击最右边按钮进行日期选择" value="{$data['bigWheel_expirationDate']}" name="bigWheel_expirationDate" id = "bigWheel_expirationDate" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bigWheel_address">领奖地址：</label>
+                <div class="col-sm-5">
+                    <textarea class="form-control" placeholder = "请输入领奖地址" type="text" name="bigWheel_address" id = "bigWheel_address">{$data['bigWheel_address']}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">奖项个数：</label>
+                <div class="col-sm-5">
+                    <select class="input-xlarge" name="bigWheel_count" id = "bigWheel_count">
+                        <option value="1">一个奖项</option>
+                        <option value="2">二个奖项</option>
+                        <option value="3" selected>三个奖项</option>
+                        <option value="4">四个奖项</option>
+                        <option value="5">五个奖项</option>
+                        <option value="6">六个奖项</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"></label>
+                <div class="col-sm-5">
+                    <input type="hidden" name="bigWheel_id" id="bigWheel_id" value="{$data['bigWheel_id']}">
+                    <button type="button" class="btn btn-primary btn-block" id = "detailSet">设置各个奖项细节</button>
+                </div>
+            </div>
+            <input style="display: none" value="{$data['bigWheel_count']}" id="bigWheelCount"/>
+        </fieldset>
+    </form>
+</div>
+<div id="detail_form" style = "display:none">
+    <form action="?" method="post" name="bigWheelDetail_add" id="bigWheelDetail_add" enctype="multipart/form-data" class="form-horizontal" role="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="detail_title">奖项标题：</label>
+                <div class="col-sm-5">
+                    <input class="form-control" type="text" value="<?php echo $detailInfoTitle[0]?>" name="detail_title" id = "detail_title" readonly="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="detail_description">奖品描述：</label>
+                <div class="col-sm-5">
+                    <textarea class="form-control" placeholder = "请输入该奖品的描述，建议控制在9个中文字之内" type="text" name="detail_description" id = "detail_description"><?php echo $detailInfoDescription[0]?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="detail_probability">中奖概率：</label>
+                <div class="col-sm-5">
+                    <input class="form-control" placeholder = "请输入0-100之间的数字" type="text" value="<?php echo $detailInfoProbability[0]?>" name="detail_probability" id = "detail_probability">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="detail_count">奖品数量：</label>
+                <div class="col-sm-5">
+                    <input class="form-control" placeholder = "请输入0-999999数字" type="text" value="<?php echo $detailInfoCount[0]?>" name="detail_count" id = "detail_count">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"></label>
+                <div class="col-sm-5">
+                    <button type="button" class="btn btn-info btn-block"  id = "submitDoing" style="display:none">正在提交，请稍等。。。</button>
+                    <button type="button" class="btn btn-primary btn-block"  id = "detailAllSubmit" style="display:none">提交</button>
+                    <button type="button" class="btn btn-primary btn-block"  id = "detailSetMore">继续追加奖项</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="form-group">
+    <label class="col-sm-3 control-label"></label>
+    <div class="col-sm-4">
+        <div id="myMsg" class="alert alert-warning" style = "display:none"></div>
+        <div id="myOKMsg" class="alert alert-success" style = "display:none"></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="__PUBLIC__/js/uploadPreview.js"></script>
+<script src="__PUBLIC__/js/function.js"></script>
+<script src="__PUBLIC__/js/Admin/Event/bigWheelSet.js"></script>
+<script src="__PUBLIC__/js/Admin/bootstrap-datetimepicker.js"></script>
+<script src="__PUBLIC__/js/Admin/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript">
+    var PUBLIC = "/weixin/Public";
+    var ROOT = "/weixin";
+    $('.form_date').datetimepicker({
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+</script>
+</html>

@@ -40,14 +40,14 @@ function NotVipDo(openid){
 	}
 }
 
-/**
- * 显示msg
- * @param msg
- */
-function showMsg(msg){
-    if(msg != ""){
-        $('#myMsg').html(msg);
-        $('#myMsg').show();
-        setTimeout("$('#myMsg').hide()",2000);
-    }
-}
+// /**
+//  * 显示msg
+//  * @param msg
+//  */
+// function showMsg(msg){
+//     if(msg != ""){
+//         $('#myMsg').html(msg);
+//         $('#myMsg').show();
+//         setTimeout("$('#myMsg').hide()",2000);
+//     }
+// }

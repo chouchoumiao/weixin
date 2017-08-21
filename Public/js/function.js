@@ -571,4 +571,3 @@ function cTrim(sInputString,iType)
 	}
 	return sInputString;
 }
-
