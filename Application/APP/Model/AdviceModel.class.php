@@ -70,10 +70,12 @@ class AdviceModel {
 
     /**
      * 追加记录
+     * @param $thumbPath
+     * @param $imgPath
      * @param $post
      * @return bool
      */
-    public function addAdvice($post)
+    public function addAdvice($thumbPath,$imgPath,$post)
     {
         $nowTime = date("Y-m-d H:i:s", time());
         $data['WEIXIN_ID'] = $this->weixinID;
@@ -88,6 +90,9 @@ class AdviceModel {
         $data['ADVICE_ISOK'] = 0;
         $data['ADVICE_EVENT'] = 0;
 
+        $data['ADVICE_IMGURL'] = $thumbPath;        //追加图片 20180327
+        $data['ADVICE_BIGIMGURL'] = $imgPath;       //追加图片 20180327
+
         if (false === M()->table('adviceInfo')->add($data)) {
             return false;
         }
@@ -100,7 +105,7 @@ class AdviceModel {
      * @return bool|int
      */
     public function getAccessInfo(){
-        $where['ADVICE_ISOK'] = array('in','1,3');
+//        $where['ADVICE_ISOK'] = array('in','1,3');
         $where['WEIXIN_ID'] = $this->weixinID;
 
         $order = 'ADVICE_EDITETIME DESC';

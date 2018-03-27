@@ -202,18 +202,24 @@ namespace APP\Model;
          * @param $config
          * @return mixed   正确则返回路径名称 错误则返回错误信息
          */
-        static function uploadImg($config){
+        static function uploadImg($config)
+        {
 
             if (!empty($_FILES)) {
 
                 $upload = new \Think\Upload($config);// 实例化上传类
                 $info = $upload->upload();
-                //判断是否有图
-                if($info){
+
+                //返回值为false的话表示失败
+                if (false === $info) {
+                    $retArr['success'] = 0;
+                    $retArr['msg'] = $upload->getError();
+                    return $retArr;
+                }else{
                     //单张图片
-                    if(count($info) == 1){
-                        foreach($info as $file){
-                            $pathName .= $file['savepath'].$file['savename'];
+                    if (count($info) == 1) {
+                        foreach ($info as $file) {
+                            $pathName .= $file['savepath'] . $file['savename'];
                         }
                         $retArr[0]['success'] = 1;
                         $retArr[0]['msg'] = $pathName;
@@ -225,14 +231,14 @@ namespace APP\Model;
                         $retArr[0]['savePath'] = $config['savePath'];
 
                         //取得不带后缀名的文件名称
-                        $imgNameArr = explode('.',$file['savename']);
+                        $imgNameArr = explode('.', $file['savename']);
                         $retArr[0]['imgName'] = $imgNameArr[0];
 
-                    }else{
-                        foreach($info as $key => $file){
+                    } else {
+                        foreach ($info as $key => $file) {
 
                             $retArr[$key]['success'] = 1;
-                            $retArr[$key]['msg'] = $file['savepath'].$file['savename'];
+                            $retArr[$key]['msg'] = $file['savepath'] . $file['savename'];
                             $retArr[$key]['size'] = $file['size'];
                             $retArr[$key]['fileName'] = $file['name'];
                             $retArr[$key]['saveName'] = $file['savename'];
@@ -241,18 +247,15 @@ namespace APP\Model;
                             $retArr[$key]['savePath'] = $config['savePath'];
 
                             //取得不带后缀名的文件名称
-                            $imgNameArr = explode('.',$file['savename']);
+                            $imgNameArr = explode('.', $file['savename']);
                             $retArr[$key]['imgName'] = $imgNameArr[0];
                         }
                     }
 
                     return $retArr;
-                }else{
-                    $retArr['success'] = 0;
-                    $retArr['msg'] = $upload->getError();
-                    return $retArr;
                 }
             }
+
             return false;
         }
 

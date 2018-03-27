@@ -151,30 +151,34 @@ namespace APP\Model;
             //上传文件
             $retArrs = ToolModel::uploadImg($config);
 
-            if(!$retArrs){
-                ToolModel::goBack('上传图片错误,请重新上传');
+            //获取不到图片信息
+            if(false === $retArrs){
+                ToolModel::goBack('上传功能不可用，请重试');
                 exit;
+            }else{
+                //上传多个图片时，如果出错则显示错误
+                foreach ($retArrs as $key => $retArr){
+                    if($retArr['success'] == 0){
+                        ToolModel::goBack('上传第'.$key.'个图片错误,错误原因:'.$retArr['msg'].'请重新上传!');
+                        exit;
+                    }
+                    $imgPath = PUBLIC_PATH.'/'.$retArr['msg'];
+
+                    $ret[$key]['imgPath'] = $retArr['msg'];
+                    //判断是否需要生成缩略图
+                    if($isThumb){
+                        //设置缩略图的保存地址与原图path一致
+                        $thumbPath = PUBLIC_PATH.'/'.$retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
+
+                        ToolModel::setThumb($imgPath,$thumbPath);
+
+                        $ret[$key]['thumbPath'] = $retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
+                    }
+
+                }
+                return $ret;
             }
 
-            foreach ($retArrs as $key => $retArr){
-                if($retArr['success'] == 0){
-                    ToolModel::goBack('上传第'.$key.'个图片错误,错误原因:'.$retArr['msg'].'请重新上传!');
-                    exit;
-                }
-                $imgPath = PUBLIC_PATH.'/'.$retArr['msg'];
 
-                $ret[$key]['imgPath'] = $retArr['msg'];
-                //判断是否需要生成缩略图
-                if($isThumb){
-                    //设置缩略图的保存地址与原图path一致
-                    $thumbPath = PUBLIC_PATH.'/'.$retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
-
-                    ToolModel::setThumb($imgPath,$thumbPath);
-
-                    $ret[$key]['thumbPath'] = $retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
-                }
-
-            }
-            return $ret;
         }
     }

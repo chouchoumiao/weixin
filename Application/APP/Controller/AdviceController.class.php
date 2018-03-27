@@ -55,30 +55,33 @@ class AdviceController extends CommonController {
         //过滤参数
         $ret = $this->checkPostVal();
         if( 1 != $ret){
-            ToolModel::goBack($ret);
+            ToolModel::goToUrl($ret,__ROOT__."/APP/Advice/index/action/showView/");
             exit;
         }
 
         //通用户每天只能建言两次
-        if($this->obj->getTodayAdvicedCounts() >= 2){
-            ToolModel::goBack('每天只能建言2次!');
-            exit;
-        }
+//        if($this->obj->getTodayAdvicedCounts() >= 2){
+//            ToolModel::goToUrl('每天只能建言2次!',__ROOT__."/APP/Advice/index/action/showView/");
+//            exit;
+//        }
 
         //判断是否已经存在相同的建言了
         $advice = I('post.textinputAdvice','');
         if($this->obj->isSameAdvice($advice)){
-            ToolModel::goBack('已经有相同内容的建言了，请不要重复提交!');
+            ToolModel::goToUrl('已经有相同内容的建言了，请不要重复提交!',__ROOT__."/APP/Advice/index/action/showView/");
             exit;
         }
+
+        //追加图片 20180327
+        $ret = D('Common')->doUploadImg(FOLDER_NAME_ADVICE,true);
 
         //追加建言记录
-        if(!$this->obj->addAdvice($_POST)){
-            ToolModel::goBack('提交时出现错误，请重新提交！');
+        if(!$this->obj->addAdvice($ret[0]['thumbPath'],$ret[0]['imgPath'],$_POST)){ //追加图片 20180327
+            ToolModel::goToUrl('提交时出现错误，请重新提交！',__ROOT__."/APP/Advice/index/action/showView/");
             exit;
         }
 
-        ToolModel::goBack('感谢您的建言献策，我们会认真详读，然后审核');
+        ToolModel::goToUrl('感谢您的建言献策，我们会认真详读，然后审核',__ROOT__."/APP/Advice/index/action/showView/");
     }
 
     /**
@@ -146,6 +149,9 @@ class AdviceController extends CommonController {
      */
     private function checkPostVal(){
 
+        if($_FILES['up_img']['size'] == 0){
+            return '必须上传图片';
+        }
 
         $name = $_POST['textinputName'];
         $tel = $_POST['textinputTel'];
