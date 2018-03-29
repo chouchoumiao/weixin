@@ -7,7 +7,7 @@
 </HEAD>
 <body>
 <!--页面名称-->
-<h3>建言献策 管理</h3>
+<h3>路桥拍客 管理</h3>
 <!--列表开始-->
 <input type="hidden" id="nowPage" value="{nowPage}"/>
 <table class="table table-bordered" >
@@ -16,13 +16,9 @@
         <th>序号</th>
         <th>姓名/昵称</th>
         <th>联系方式</th>
-        <th>建言内容</th>
-        <th>回复内容</th>
-        <th>建言时间</th>
-        <th>参加活动资格</th>
+        <th>图片内容</th>
+        <th>上传时间</th>
         <th>当前状态</th>
-        <th>共有机会</th>
-        <th>已经使用</th>
         <th>编辑</th>
     </tr>
     </thead>
@@ -33,22 +29,17 @@
                 <td>{$value['id']}</td>
                 <td>{$value['ADVICE_NAME']}</td>
                 <td>{$value['ADVICE_TEL']}</td>
-                <td><textarea rows='2' cols='30'>{$value['ADVICE_ADVICE']}</textarea></td>
-                <td><textarea readonly>{$value['ADVICE_REPLY']}</textarea></td>
+                <td>{$value['ADVICE_ADVICE']}</td>
                 <td>{$value['ADVICE_CREATETIME']}</td>
-                <td>{$value['isEvent']}</td>
                 <td>{$value['isOKFlag']}</td>
-                <td>{$value['chanceCount']}</td>
-                <td>{$value['userCount']}</td>
                 <td>
                     <a href="__ROOT__/Admin/Advice/doAction/action/adviceSet/adviceID/{$value[id]}/nowPage/{$nowPage}">修改/审核</a>
-                    <a href="__ROOT__/Admin/Advice/doAction/action/adviceReply/adviceID/{$value[id]}/nowPage/{$nowPage}">回复内容</a>
                 </td>
             </tr>
 
         </foreach>
     <else/>
-        <tbody><tr><td colspan=12>无记录</td></tr></tbody>
+        <tbody><tr><td colspan=9>无记录</td></tr></tbody>
     </notempty>
     </tbody>
 </table>

@@ -8,8 +8,8 @@
 
             <!--<li class="active"><a href="./adviceInfo.php">活动介绍</a></li><-->
             <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceMain/">活动</a></li>
-            <li class="active"><a href="#">我要建言</a></li>
-            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceShow">最新建言</a></li>
+            <li class="active"><a href="#">上传照片</a></li>
+            <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceShow">精选照片</a></li>
             <!-- <li class=""><a data-ajax="false" href="__ROOT__/APP/Advice/index/action/adviceScratchcard">抽奖</a></li> -->
 
         </ul>
@@ -18,17 +18,17 @@
         <div class="advice-contents">
             <form name="customersUpdateForm" method="POST" action="__ROOT__/APP/Advice/index/action/adviced/" data-ajax="false" data-transition="flip" enctype="multipart/form-data">
                 <div>
-                    <label for="textinputName">姓名/昵称 :</label>
-                    <input id = "textinputName" name="textinputName" type="text" value= "{$_SESSION['vipInfo']['Vip_name']}" size="10">
+                    <label for="textinputName">姓名/昵称 （请控制在5个字之内）:</label>
+                    <input id = "textinputName" name="textinputName" type="text" value= "" size="10">
 
                 </div>
                 <div>
-                    <label for="textinputTel">联系方式 :</label>
-                    <input id = "textinputTel" name="textinputTel" type="text" size="20" value="{$_SESSION['vipInfo']['Vip_tel']}">
+                    <label for="textinputTel">手机号码 :</label>
+                    <input id = "textinputTel" name="textinputTel" type="text" size="20" value="">
                 </div>
                 <div  data-role="fieldcontain">
-                    <label for="textinputAdvice">您的建言 :</label>
-                    <textarea id = "textinputAdvice" name="textinputAdvice" style="min-height: 130px;" placeholder = "请输入您的建议！"></textarea>
+                    <label for="textinputAdvice">图片描述 （请控制在20个字之内）:</label>
+                    <textarea id = "textinputAdvice" name="textinputAdvice" style="min-height: 50px;" placeholder = "输入图片描述！"></textarea>
                 </div>
                 <!-- ↓↓↓↓↓ 增加图片上传 ↓↓↓↓↓-->
 
@@ -42,7 +42,6 @@
                 </div>
 
                 <!-- ↑↑↑↑↑ 增加图片上传 ↑↑↑↑↑-->
-                <br>
                 <div>
                     <p align="center" id ="submitDiv">
                         <input type="submit" name="submitUpdateCustomersForm" value="提交" onclick="return adviceCheckForm();" >

@@ -105,7 +105,7 @@ class AdviceModel {
      * @return bool|int
      */
     public function getAccessInfo(){
-//        $where['ADVICE_ISOK'] = array('in','1,3');
+        $where['ADVICE_ISOK'] = array('in','1,3');
         $where['WEIXIN_ID'] = $this->weixinID;
 
         $order = 'ADVICE_EDITETIME DESC';

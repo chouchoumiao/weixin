@@ -20,29 +20,38 @@
         </div>
         </div>
         <div class="form-group">
-        <label class="col-sm-2 control-label" for="advice_tel">联系方式：</label>
+        <label class="col-sm-2 control-label" for="advice_tel">手机号码：</label>
 <div class="col-sm-5">
         <input class="form-control" type="text" value="{$adviceInfoArr['ADVICE_TEL']}" name="advice_tel" id = "advice_tel" readonly="true">
         </div>
         </div>
         <div class="form-group">
-        <label class="col-sm-2 control-label" for="advice_advice">建言内容：</label>
-<div class="col-sm-5">
-        <textarea class="form-control" rows="9" placeholder = "" type="text" name="advice_advice" id = "advice_advice" readonly="true">{$adviceInfoArr['ADVICE_ADVICE']}</textarea>
-</div>
-</div>
+            <label class="col-sm-2 control-label" for="advice_advice">图片描述：</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" value="{$adviceInfoArr['ADVICE_ADVICE']}" name="advice_tel" id = "advice_advice" readonly="true">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="advice_advice">图片：</label>
+            <div class="col-sm-5">
+                <a target="_blank" href="__PUBLIC__{$adviceInfoArr['ADVICE_BIGIMGURL']}">
+                    <img src="__PUBLIC__{$adviceInfoArr.ADVICE_IMGURL}" width="75%" style="padding-left: 1%">
+                </a>
+            </div>
+        </div>
 <div class="form-group">
-        <label class="col-sm-2 control-label" for="advice_createTime">建言时间：</label>
+        <label class="col-sm-2 control-label" for="advice_createTime">上传时间：</label>
 <div class="col-sm-5">
         <input class="form-control" type="text" value="{$adviceInfoArr['ADVICE_CREATETIME']}" name="advice_createTime" id = "advice_createTime" readonly="true">
         </div>
         </div>
         <div class="form-group">
-        <label class="col-sm-2 control-label" for="advice_Reply">回复内容：</label>
-<div class="col-sm-5">
-        <textarea class="form-control" rows="9" placeholder = "" type="text" name="advice_Reply" id = "advice_Reply">{$adviceInfoArr['ADVICE_REPLY']}</textarea>
-</div>
-</div>
+            <label class="col-sm-2 control-label" for="advice_Reply">回复内容：</label>
+            <div class="col-sm-5">
+                    <textarea class="form-control" rows="9" placeholder = "" type="text" name="advice_Reply" id = "advice_Reply">{$adviceInfoArr['ADVICE_REPLY']}</textarea>
+            </div>
+        </div>
 <div class="form-group">
         <label class="col-sm-2 control-label"></label>
         <div class="col-sm-5">

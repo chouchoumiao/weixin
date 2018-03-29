@@ -66,11 +66,11 @@ class AdviceController extends CommonController {
 //        }
 
         //判断是否已经存在相同的建言了
-        $advice = I('post.textinputAdvice','');
-        if($this->obj->isSameAdvice($advice)){
-            ToolModel::goToUrl('已经有相同内容的建言了，请不要重复提交!',__ROOT__."/APP/Advice/index/action/showView/");
-            exit;
-        }
+//        $advice = I('post.textinputAdvice','');
+//        if($this->obj->isSameAdvice($advice)){
+//            ToolModel::goToUrl('已经有相同内容的建言了，请不要重复提交!',__ROOT__."/APP/Advice/index/action/showView/");
+//            exit;
+//        }
 
         //追加图片 20180327
         $ret = D('Common')->doUploadImg(FOLDER_NAME_ADVICE,true);
@@ -81,14 +81,16 @@ class AdviceController extends CommonController {
             exit;
         }
 
-        ToolModel::goToUrl('感谢您的建言献策，我们会认真详读，然后审核',__ROOT__."/APP/Advice/index/action/showView/");
+        ToolModel::goToUrl('感谢上传，我们会认真审核',__ROOT__."/APP/Advice/index/action/showView/");
     }
 
     /**
      * 显示建言献策页面
      */
     private function showView(){
-
+        if(isset($_GET['weixinID'])){
+            $_SESSION['weixinID'] = $_GET['weixinID'];
+        }
         $this->display('Advice');
         
     }
@@ -108,6 +110,7 @@ class AdviceController extends CommonController {
 
         //查询通过审核的记录
         $ret = D('Advice')->getAccessInfo();
+
         if( 0 == $ret){
             //无数据
             $this->assign('noData',true);
@@ -170,7 +173,7 @@ class AdviceController extends CommonController {
         }
 
         if( ('' == strval($advice)) ){
-            return '建言内容不能为空';
+            return '图片描述不能为空';
         }
 
         if(!is_mobile($tel)){

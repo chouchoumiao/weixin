@@ -170,7 +170,7 @@ namespace APP\Model;
                         //设置缩略图的保存地址与原图path一致
                         $thumbPath = PUBLIC_PATH.'/'.$retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
 
-                        ToolModel::setThumb($imgPath,$thumbPath);
+                        ToolModel::setThumb($imgPath,$thumbPath,750,750);
 
                         $ret[$key]['thumbPath'] = $retArr['savePath'].$retArr['imgName'].'_thumb.jpg';
                     }
