@@ -23,6 +23,9 @@ class AdviceController extends CommonController {
 
         //根据传入的事件进入对应各页面的显示处理
         $action = strval($_GET['action']);
+        if(isset($_GET['weixinID'])){
+            $_SESSION['weixinID'] = $_GET['weixinID'];
+        }
 
         if(isset($action) && ('' != $action)){
 
@@ -88,9 +91,7 @@ class AdviceController extends CommonController {
      * 显示建言献策页面
      */
     private function showView(){
-        if(isset($_GET['weixinID'])){
-            $_SESSION['weixinID'] = $_GET['weixinID'];
-        }
+
         $this->display('Advice');
         
     }

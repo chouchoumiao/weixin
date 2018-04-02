@@ -14,8 +14,10 @@ class AdviceModel {
 	private $openid,$weixinID;
 
 	public function __construct(){
-		$this->openid = $_SESSION['openid'];
-		$this->weixinID = $_SESSION['weixinID'];
+		$this->openid = "ow7PpjvH4W1C03q3G7AdruW426Sg";
+//		$this->openid = $_SESSION['openid'];
+//		$this->weixinID = $_SESSION['weixinID'];
+		$this->weixinID = 69;
 	}
 
 	/**
